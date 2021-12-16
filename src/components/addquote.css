@@ -1,0 +1,49 @@
+.quotation {
+    margin: 0;
+}
+
+.add-quote-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.quotation {
+    text-align : center;
+}
+
+.quote-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    align-items: center;
+}
+
+.quote-form-wrapper textarea {
+    height: 100px;
+    margin-bottom: 29px;
+    width: 70%;
+    font-size: 1.2rem;
+    
+}
+
+.quote-form-wrapper input {
+    margin-bottom: 10px;
+    width: 70%;
+    font-size: 1.2rem;
+}
+
+.submit-btn {
+    background-color:  #FE4C04;
+    color: #fff;
+    border: none;
+    font-size: 1.3rem;
+    padding: 20px 0;
+    width: 50%;
+
+}
+
+.close-btn{
+    margin-top: 10px;
+    background-color: none;
+    border: none;
+}
