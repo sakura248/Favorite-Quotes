@@ -11,13 +11,6 @@ body {
   font-family: Syncopate;
 }
 
-.quotation {
-  font-family: Lily Script One;
-}
-
-.plus {
-  background-color: #FE4C04;
-}
 
 .plus-icon-border {
   color: #F2F2F2;
@@ -37,4 +30,16 @@ body {
 
 .Modal {
   border: none;
+}
+
+.quote-ul::before {
+  content: "\"";
+  font-size: 4.5rem;
+  font-family: Lily Script One;
+  position: absolute;
+  top: 30px;
+}
+
+.trash:hover {
+  fill: #FE4C04;
 }
