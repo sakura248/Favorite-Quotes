@@ -39,27 +39,8 @@ export const quoteReducer = (state = initialState, action ) => {
             quoteLists : [...state.quoteLists, action.payload]
         }
 
-        // case EDIT_QUOTE:
-        // return {
-                //     ...state,
-            //     quoteLists : {
-            //         id: id,
-            //         quote: quote, 
-            //         character: character, 
-            //         tvShowTitle: tvShowTitle,
-            //         editing: true
-    
-            //     }
-            // }
-        // break;
-
-        
         case UPDATE_QUOTE:
             const {id, newQuote, newCharacter, newTvShowTitle} = action.payload
-            console.log("id", id)
-            console.log(newQuote)
-            console.log(newCharacter)
-            console.log(newTvShowTitle)
         return {
                     ...state,
                 quoteLists : [...state.quoteLists.map((item) => 
@@ -71,14 +52,6 @@ export const quoteReducer = (state = initialState, action ) => {
                     tvShowTitle: newTvShowTitle,
                     // editing: true
                 } : item)]
-
-                // employees: state.employees.map((content, i) => 
-                // content.id === action.payload.id ? {
-                //     ...content, 
-                //     employeeName : action.payload.employeeName ,
-                //     employeeDepartment : action.payload.employeeDepartment
-                // }    
-                // : content)   
         }
         case DELETE_QUOTE:
             return {

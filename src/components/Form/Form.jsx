@@ -2,53 +2,65 @@ import React from 'react'
 
 
 const Form = ({
-    newQuote, 
+    // // for add
+    // addQuoteHandler,
+    // // for update
+    addOrUpdateQuoteHandler,
+    quote, 
     onChangeQuote,
     onChangeCharacter,
-    newCharacter,
-    newTvShowTitle,
+    character,
+    tvShowTitle,
     onChangeTvShowTitle,
-    updateQuoteHandler,
-    value
-
-
-
-
+    value,
+    closeModal
+    
 }) => {
     return (
-        <div>
-            <textarea
-                name="quote"
-                id="quote"
-                cols="30"
-                rows="10"
-                defaultValue='Type the quote..'
-                value={newQuote}
-                onChange={onChangeQuote}
-                className="p-2 border-solid border border-black focus:border-primary-orange"    
+        <div className="add-quote-wrapper">
+            <p className="quotation text-7xl">"</p>
+            <form 
+                className="quote-form-wrapper" 
+                onSubmit={addOrUpdateQuoteHandler}
             >
-                
-            </textarea>
-            <input 
-                type="text"
-                onChange={onChangeCharacter}
-                value={newCharacter}
-                placeholder="Who said?"
-                className="p-2 border-solid border border-black focus:border-primary-orange"
-            />
-            <input 
-                type="text"
-                value={newTvShowTitle}
-                onChange={onChangeTvShowTitle}
-                placeholder="Which TV show?"
-                className="p-2 border-solid border border-black focus:border-primary-orange"
-            />
-            <button
-                type="submit"
-                onClick={updateQuoteHandler}
-                className="submit-btn"
+                <textarea
+                    name="quote"
+                    id="quote"
+                    cols="30"
+                    rows="10"
+                    defaultValue='Type the quote..'
+                    value={quote}
+                    onChange={onChangeQuote}
+                    className="p-2 border-solid border border-black focus:border-primary-orange"    
+                >
+                    
+                </textarea>
+                <input 
+                    type="text"
+                    onChange={onChangeCharacter}
+                    value={character}
+                    placeholder="Who said?"
+                    className="p-2 border-solid border border-black focus:border-primary-orange"
+                />
+                <input 
+                    type="text"
+                    value={tvShowTitle}
+                    onChange={onChangeTvShowTitle}
+                    placeholder="Which TV show?"
+                    className="p-2 border-solid border border-black focus:border-primary-orange"
+                />
+                <button
+                    type="submit"
+                    className="submit-btn"
+                >
+                    {value}
+                </button>
+            </form>
+            <button 
+                className="close-btn"
+                onClick={closeModal}
             >
-                {value}
+                close
             </button>
         </div>
     )

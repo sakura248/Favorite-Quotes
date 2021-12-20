@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
-import './addquote.css'
+import './Form/form.css'
 
-import AddQuoteForm from './AddQuoteForm'
+import AddQuoteForm from './Form/AddQuoteForm'
 // import customStyles from './Modal/modal'
 // import ModalParts from './ModalParts'
 

@@ -1,7 +1,7 @@
 import React , {useState} from 'react'
 import { connect, useSelector, useDispatch } from 'react-redux'
 import Modal from 'react-modal';
-import UpdateQuoteForm from '../UpdateQuoteForm'
+import UpdateQuoteForm from '../Form/UpdateQuoteForm'
 
 const appElement = document.getElementById('content');
 Modal.setAppElement(appElement);
@@ -45,10 +45,11 @@ const Quote = ({deleteHandler}) => {
             {quoteLists &&
                 quoteLists.map((quoteItem) => {
                     return(
-                    <div key={quoteItem.id} className="flex flex-col items-center m-8">
+                    <div key={quoteItem.id} className="flex flex-col sm:flex-row items-center m-8 sm:justify-between sm:w-10/12 sm:mt-9 sm:mb-9 sm:mx-auto sm:w-11/12" >
                         <blockquote className="mb-8 relative">
-                            <ul onClick={() => openModal(quoteItem)} className="quote-ul flex items-center flex-col hover:bg-primary-orange-hover cursor-pointer pt-24">
-                                <li className="quote quote-text my-3 text-lg text-center font-bold hover:animate-spin">
+                            <ul onClick={() => openModal(quoteItem)} className="quote-ul flex flex-col items-center sm:items-start cursor-pointer pt-24 sm:pt-8">
+                                <li className="quote quote-text my-3 text-lg text-center sm:text-left sm:text-base font-bold hover:animate-spin relative">
+                                    
                                     {quoteItem.quote}
                                 </li>
                                 <li className="quote quote-name my-1">

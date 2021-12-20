@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { quoteReducer } from '../redux/quote/quote.reducers'
 import { connect, useSelector, useDispatch } from 'react-redux'
-import UpdateQuoteForm from './UpdateQuoteForm'
+import UpdateQuoteForm from './Form/UpdateQuoteForm'
 
 import Quote from './ListItem/Quote'
 
@@ -41,17 +41,6 @@ const QuotesList = () => {
     }
 
 
-    // const [state, setState] = useState({
-    //     id: "",
-    //     quote: "",
-    //     character: "",
-    //     tvShowTitle: ""
-    //     });
-    // const [status, setStatus] = useState({
-    //     editing: false,
-        // add: false
-        // }); 
-
     const quoteLists = useSelector(state => state.quoteLists)
 
     const dispatch = useDispatch();
@@ -66,16 +55,6 @@ const QuotesList = () => {
     const editHandler = (quoteItem) => {
         console.log('supposed to open')
         openModal()
-        // dispatch(editQuote(quote))
-    //     const {id, quote, character, tvShowTitle} = quoteItem
-    //     setState({
-    //         ...state,
-    //         id: id,
-    //         quote: quote,
-    //         character: character,
-    //         tvShowTitle: tvShowTitle
-    //     });
-    //     setStatus({ ...status, editing: true });
     }
 
     const handleChange = (e) => {
@@ -93,9 +72,6 @@ const QuotesList = () => {
     }
 
     // let subtitle;
-    
-    
-
 
 
     return (
@@ -107,27 +83,6 @@ const QuotesList = () => {
             >
             </Quote>
 
-            {/* {
-                quoteLists.map((quote) => (
-                    <div key={quote.id} className="flex flex-col items-center m-8">
-                        <div onClick={openModal}>
-                            <Modal
-                                isOpen={modalIsOpen}
-                                // onAfterOpen={afterOpenModal}
-                                onRequestClose={closeModal}
-                                style={customStyles}
-                            >
-                                <UpdateQuoteForm
-                                    id={quote.id}
-                                    closeModal={closeModal}
-                                />
-                            </Modal>
-                        </div>
-                    <button onClick={() => deleteHandler(quote.id)}>Delete</button>
-
-                    </div>
-                ))
-            } */}
         </>
     )
 }

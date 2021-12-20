@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
-import { quoteReducer } from '../redux/quote/quote.reducers'
+import { quoteReducer } from '../../redux/quote/quote.reducers'
 import ReactDOM from 'react-dom';
 import { connect, useSelector } from 'react-redux'
 
-import { editQuote, updateQuote, deleteQuote } from '../redux/quote/quote.actions'
+import { editQuote, updateQuote, deleteQuote } from '../../redux/quote/quote.actions'
 import { useDispatch } from 'react-redux';
 
-import Form from './Form/Form'
+import Form from './Form'
 
 const UpdateQuoteForm = ({ closeModal, quoteItem}) => {
     // const quoteLists = useSelector(state => state.quoteLists)
@@ -38,29 +38,19 @@ const UpdateQuoteForm = ({ closeModal, quoteItem}) => {
     }
 
     return (
-        <div>
-            <div 
-            // ref={(_subtitle) => (subtitle = _subtitle) } 
-            className="add-quote-wrapper">
-                <p className="quotation text-7xl">"</p>
-                <form className="quote-form-wrapper" onSubmit={updateQuoteHandler}>
-                    {/* <label htmlFor="quote">Quote</label> */}
-                    <Form 
-                        onChangeQuote={onChangeQuote} 
-                        onChangeCharacter={onChangeCharacter}
-                        onChangeTvShowTitle={onChangeTvShowTitle}
-                        updateQuoteHandler={updateQuoteHandler}
-                        newQuote={newQuote} 
-                        newCharacter={newCharacter}
-                        newTvShowTitle={newTvShowTitle}
-                        value={"UPDATE"}
-                    
-                    />
-                    
-                </form>
-                <button className="close-btn" onClick={closeModal}>close</button>
-            </div>
-        </div>
+        <>
+            <Form 
+                addOrUpdateQuoteHandler={updateQuoteHandler}
+                onChangeQuote={onChangeQuote} 
+                onChangeCharacter={onChangeCharacter}
+                onChangeTvShowTitle={onChangeTvShowTitle}
+                quote={newQuote} 
+                character={newCharacter}
+                tvShowTitle={newTvShowTitle}
+                value={"UPDATE"}
+                closeModal={closeModal}
+            />
+        </>
     )
 }
 
