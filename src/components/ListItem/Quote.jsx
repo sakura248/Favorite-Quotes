@@ -1,5 +1,5 @@
 import React , {useState} from 'react'
-import { connect, useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Modal from 'react-modal';
 import UpdateQuoteForm from '../Form/UpdateQuoteForm'
 

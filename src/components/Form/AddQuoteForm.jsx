@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
-import ReactDOM from 'react-dom';
-import Modal from 'react-modal';
+import {useState} from 'react'
+// import ReactDOM from 'react-dom';
+// import Modal from 'react-modal';
 
 import { useDispatch } from 'react-redux';
 import { addQuote } from '../../redux/quote/quote.actions'

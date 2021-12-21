@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
-import { quoteReducer } from '../../redux/quote/quote.reducers'
-import ReactDOM from 'react-dom';
-import { connect, useSelector } from 'react-redux'
+// import { quoteReducer } from '../../redux/quote/quote.reducers'
+// import ReactDOM from 'react-dom';
+// import { connect, useSelector } from 'react-redux'
 
-import { editQuote, updateQuote, deleteQuote } from '../../redux/quote/quote.actions'
+import { updateQuote } from '../../redux/quote/quote.actions'
 import { useDispatch } from 'react-redux';
 
 import Form from './Form'
