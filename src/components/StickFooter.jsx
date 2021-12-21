@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import './Form/form.css'
 
@@ -30,10 +30,10 @@ const StickFooter = () => {
     function openModal() {
         setIsOpen(true);
     }
-    function afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        // subtitle.style.color = '#f00';
-    }
+    // function afterOpenModal() {
+    //     // references are now sync'd and can be accessed.
+    //     // subtitle.style.color = '#f00';
+    // }
     
     function closeModal() {
         setIsOpen(false);
