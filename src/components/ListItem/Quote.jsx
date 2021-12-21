@@ -19,7 +19,6 @@ export const customStyles = {
         },
     };
 
-
 const Quote = ({deleteHandler}) => {
     const quoteLists = useSelector(state => state.quoteLists)
 
@@ -39,7 +38,6 @@ const Quote = ({deleteHandler}) => {
         setIsOpen(false);
     }
 
-
     return (
         <div>
             {quoteLists &&
@@ -49,7 +47,6 @@ const Quote = ({deleteHandler}) => {
                         <blockquote className="mb-8 relative">
                             <ul onClick={() => openModal(quoteItem)} className="quote-ul flex flex-col items-center sm:items-start cursor-pointer pt-24 sm:pt-8">
                                 <li className="quote quote-text my-3 text-lg text-center sm:text-left sm:text-base font-bold hover:animate-spin relative">
-                                    
                                     {quoteItem.quote}
                                 </li>
                                 <li className="quote quote-name my-1">
@@ -59,14 +56,9 @@ const Quote = ({deleteHandler}) => {
                                     {quoteItem.tvShowTitle}
                                 </li>
                             </ul>
-                            
                         </blockquote>   
-                    {/* <button >Edit</button> */}
-                        
                     <button onClick={() => deleteHandler(quoteItem.id)}>
                     <svg className="trash" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 6v18h18v-18h-18zm5 14c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4-18v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712z"/></svg>
-
-                    {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 19c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5-17v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712zm-3 4v16h-14v-16h-2v18h18v-18h-2z"/></svg> */}
                     </button>
                     </div>
                 )})
@@ -75,11 +67,13 @@ const Quote = ({deleteHandler}) => {
                 modalIsOpen && (
                     <Modal
                         isOpen={modalIsOpen}
-                        // onAfterOpen={afterOpenModal}
                         onRequestClose={closeModal}
                         style={customStyles}
                     >
-                        <UpdateQuoteForm closeModal={closeModal} quoteItem={modalQuote}/>
+                        <UpdateQuoteForm
+                            closeModal={closeModal}
+                            quoteItem={modalQuote}
+                        />
                     </Modal>
                 )
             }
