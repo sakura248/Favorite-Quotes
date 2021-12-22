@@ -14,7 +14,7 @@ I thought the final project was a good opportunity to give form to my idea.
 
 # What reference did you use?
 
-Lots of rticles from Qiita, DEV community, or other blogs.
+Lots of articles from Qiita, DEV community, or other blogs.
 (I should have noted their URLs)
 
 # What libraries/technology/ api you used
