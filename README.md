@@ -33,3 +33,8 @@ Lots of articles from Qiita, DEV community, or other blogs.
 
 My biggest goal of this project was to understand Redux, but interestingly what I could deepen the knowledge most is about React. 
 The most challenging part is the component which is using Modal and map function. I should have understood well about rendering. 
+
+
+# materials
+
+https://iconmonstr.com/trash-can-1-svg/
