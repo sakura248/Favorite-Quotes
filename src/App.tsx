@@ -4,7 +4,7 @@ import Navigation from './components/Navigation/Navigation'
 import Hero from './components/Hero/Hero'
 import QuotesList from './components/QuotesList'
 import Login from './components/Login/Login'
-import Signup from './components/Singup/Signup'
+import SignUp from './components/SignUp/SignUp'
 import MyAccount from './components/MyAccount/MyAccount'
 import MyFavorites from './components/MyFavorites/MyFavorites'
 
@@ -29,7 +29,7 @@ function App() {
           <Route index element={<QuotesList />} />
           <Route path="MyAccount" element={<MyAccount />}/>
           <Route path="Login" element={<Login />}/>
-          <Route path="Signup" element={<Signup />}/>
+          <Route path="SignUp" element={<SignUp />}/>
           <Route path="MyFavorites" element={<MyFavorites />}/>
           <Route path="*" element={<NoMatch />} />
         </Routes>
