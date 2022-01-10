@@ -51,13 +51,13 @@ const QuotesList = () => {
     }
 
     return (
-        <>
+        <div className="container mx-auto">
             <Quote 
                 // openModal={openModal}
                 deleteHandler={deleteHandler}
             >
             </Quote>
-        </>
+        </div>
     )
 }
 

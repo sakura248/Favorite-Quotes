@@ -1,5 +1,6 @@
 import React, {useState, useRef} from 'react'
 // import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 
 const SignUp = () => {
@@ -8,16 +9,19 @@ const SignUp = () => {
   //   email: '',
   //   password: '',
   // })
-  // const auth = getAuth()
-  const emailRef = useRef(null);
-  const emailPassword = useRef(null);
+  // const emailRef = useRef(null);
+  // const emailPassword = useRef(null);
+  const auth = getAuth();
+
+
 
   const handleSubmit = (e)=>{
     e.preventDefault()
-    console.log('done')
     // const email = emailRef.current.value
     // const password = emailPassword.current.value
-    // // console.log(emailRef.current.value, emailPassword.current.value);
+    // console.log(emailRef.current.value, emailPassword.current.value);
+    const { email, password } = e.target.elements
+    console.log(email)
     // createUserWithEmailAndPassword(auth, email, password)
     // .then((userCredential) => {
     //   // Signed in 
@@ -45,15 +49,14 @@ const SignUp = () => {
           className="border py-4 px-5 inline-block box-border border-solid border-black bg-transparent"
           type="email" 
           name="email"
-          ref={emailRef}
+          // ref={emailRef}
         />
-        
         <label className="font-bold mb-2 mt-4">Password</label>
         <input
         className="border py-4 px-5 inline-block box-border border-solid border-black bg-bg-color"
           type="password"
           name="password"
-          ref={emailPassword}
+          // ref={emailPassword}
         />
         <button
           className="bg-black text-white font-bold rounded-full font-bold mb-8 mt-6 py-3"

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MyFavorites = () => {
+const MyFavoriteShows = () => {
   return (
     <div className="container mx-auto">
       
@@ -8,4 +8,4 @@ const MyFavorites = () => {
   )
 }
 
-export default MyFavorites
+export default MyFavoriteShows

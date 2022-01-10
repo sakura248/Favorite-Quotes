@@ -1,4 +1,5 @@
 import React, {useState, useRef} from 'react'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {
   Link
 } from "react-router-dom"
@@ -12,10 +13,13 @@ const Login = () => {
   // const auth = getAuth()
   const emailRef = useRef(null);
   const emailPassword = useRef(null);
+
   const handleLogin = (e)=>{
     e.preventDefault()
     console.log('done')
   }
+
+   
 
   return (
     <div className="flex flex-col items-center w-3/6 mx-auto pt-16">
