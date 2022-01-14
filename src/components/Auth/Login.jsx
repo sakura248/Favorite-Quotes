@@ -1,25 +1,35 @@
-import React, {useState, useRef} from 'react'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import {
-  Link
-} from "react-router-dom"
+import React, { useState } from 'react'
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Link } from "react-router-dom"
+import GoogleAuth from './GoogleAuth'
 
 const Login = () => {
-  const [user, setUser] = useState({
-    displayName: '',
-    email: '',
-    password: '',
-  })
-  // const auth = getAuth()
-  const emailRef = useRef(null);
-  const emailPassword = useRef(null);
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  
+  const auth = getAuth();
   const handleLogin = (e)=>{
     e.preventDefault()
-    console.log('done')
-  }
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      // console.log("Login user: ", user);
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage)
+        // ..
+      });
+    }
+  const handleEmail = (e) => {
+    setEmail(e.target.value)
+  } 
+  const handlePassword = (e) => {
+    setPassword(e.target.value)
+  } 
 
-   
 
   return (
     <div className="flex flex-col items-center w-3/6 mx-auto pt-16">
@@ -33,7 +43,8 @@ const Login = () => {
           className="border py-4 px-5 inline-block box-border border-solid border-black bg-transparent"
           type="email" 
           name="email"
-          ref={emailRef}
+          onChange={handleEmail}
+          // ref={emailRef}
         />
         
         <label className="font-bold mb-2 mt-4">Password</label>
@@ -41,7 +52,8 @@ const Login = () => {
         className="border py-4 px-5 inline-block box-border border-solid border-black bg-bg-color"
           type="password"
           name="password"
-          ref={emailPassword}
+          onChange={handlePassword}
+          // ref={emailPassword}
         />
 
 
@@ -53,15 +65,16 @@ const Login = () => {
       </button>
 
       <hr className="border-black"/>
-      <button
+      {/* <button
         className="bg-black text-white font-bold rounded-full my-8 py-3"
       >
         Continue with Google
-      </button>
+      </button> */}
+      </form>
+      <GoogleAuth />
       <Link to="/SignUp" className="text-sm text-center hover:underline">Not a member? Sign up here!</Link>
 
 
-      </form>
     </div>
   )
 }

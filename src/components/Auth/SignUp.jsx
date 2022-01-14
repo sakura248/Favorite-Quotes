@@ -1,42 +1,38 @@
-import React, {useState, useRef} from 'react'
-// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from 'react'
+import { createUserWithEmailAndPassword } from "firebase/auth";
+// import provider from '../../firebase-config'
+import GoogleAuth from './GoogleAuth'
 
+import { auth } from '../../firebase-config'
 
 const SignUp = () => {
-  // const [user, setUser] = useState({
-  //   displayName: '',
-  //   email: '',
-  //   password: '',
-  // })
-  // const emailRef = useRef(null);
-  // const emailPassword = useRef(null);
-  const auth = getAuth();
-
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e)=>{
     e.preventDefault()
-    // const email = emailRef.current.value
-    // const password = emailPassword.current.value
-    // console.log(emailRef.current.value, emailPassword.current.value);
-    const { email, password } = e.target.elements
-    console.log(email)
-    // createUserWithEmailAndPassword(auth, email, password)
-    // .then((userCredential) => {
-    //   // Signed in 
-    //   const user = userCredential.user;
-    //   // const user = userCredential.user;
-    //   // ...
-    // })
-    // .catch((error) => {
-    //   const errorCode = error.code;
-    //   const errorMessage = error.message;
-    //   // ..
-    // });
-  }
-
-
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      console.log("Registered user: ", user);
+      setEmail("");
+      setPassword("");
+    })
+    .catch((error) => {
+        // const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(error)
+      });
+    }
+  const handleEmail = (e) => {
+    // console.log(e.target.value)
+    setEmail(e.target.value)
+  } 
+  const handlePassword = (e) => {
+    // console.log(e.target.value)
+    setPassword(e.target.value)
+  } 
 
   return (
     <div className="flex flex-col items-center w-3/6 mx-auto pt-16">
@@ -49,13 +45,14 @@ const SignUp = () => {
           className="border py-4 px-5 inline-block box-border border-solid border-black bg-transparent"
           type="email" 
           name="email"
+          onChange={handleEmail}
           // ref={emailRef}
         />
         <label className="font-bold mb-2 mt-4">Password</label>
         <input
         className="border py-4 px-5 inline-block box-border border-solid border-black bg-bg-color"
           type="password"
-          name="password"
+          onChange={handlePassword}
           // ref={emailPassword}
         />
         <button
@@ -65,12 +62,13 @@ const SignUp = () => {
           Submit
         </button>
       <hr className="border-black"/>
-      <button
+      {/* <button
         className="bg-black text-white font-bold rounded-full my-8 py-3"
       >
         Continue with Google
-      </button>
+      </button> */}
       </form>
+      <GoogleAuth />
     </div>
   )
 }
