@@ -26,13 +26,13 @@ export const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
 
 export const signInWithGoogle = () => {
-  // console.log('test');
-  console.log(auth);
   signInWithPopup(auth, provider)
   .then((result) => {
-    console.log(result)
+    // let navigate = useNavigate();
+    // navigate("/")
+    console.log('result : ', result)
   }).catch((error) => {
-    console.log(error);
+    console.log('error : ',error);
   });
 }
 

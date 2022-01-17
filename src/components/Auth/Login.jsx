@@ -1,28 +1,48 @@
 import React, { useState } from 'react'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom"
+import { useNavigate, useLocation, Link } from "react-router-dom"
 import GoogleAuth from './GoogleAuth'
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+  const [errorMessage, seterrorMessage] = useState("");
   const auth = getAuth();
-  const handleLogin = (e)=>{
+  const location = useLocation()
+  
+  let navigate = useNavigate();
+
+  const handleLogin = async (e)=>{
     e.preventDefault()
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      // console.log("Login user: ", user);
-    })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage)
-        // ..
-      });
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password)
+      if(userCredential){
+
+        let from = location.state?.from?.pathname || '/'
+        navigate(from, { replace: true })
+      }
+    }catch(error){
+      seterrorMessage(error.message)
+      console.log(errorMessage)
     }
+    // const userCredential = await signInWithEmailAndPassword(auth, email, password)
+    // .then((userCredential) => {
+      // Signed in 
+      // const user = userCredential.user;
+      // let from = location.state?.from?.pathname || '/'
+      // console.log(from)
+      // navigate(from)
+      // console.log(navigate(from));
+
+    // })
+    // .catch((error) => {
+    //     // const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     console.log(errorMessage)
+    //     // ..
+    //   });
+    }
+  
   const handleEmail = (e) => {
     setEmail(e.target.value)
   } 
@@ -39,15 +59,17 @@ const Login = () => {
 
       <form onSubmit={handleLogin} className="flex flex-col my-8">
         <label className="font-bold mb-2 mt-4">Email</label>
+        {errorMessage && <p>something wrong</p>}
         <input 
           className="border py-4 px-5 inline-block box-border border-solid border-black bg-transparent"
           type="email" 
           name="email"
           onChange={handleEmail}
           // ref={emailRef}
-        />
+          />
         
         <label className="font-bold mb-2 mt-4">Password</label>
+        {errorMessage && <p>something wrong</p>}
         <input
         className="border py-4 px-5 inline-block box-border border-solid border-black bg-bg-color"
           type="password"

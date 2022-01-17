@@ -1,6 +1,5 @@
 import React from 'react'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
 import { 
   auth,
   provider,
@@ -8,7 +7,6 @@ import {
 } from '../../firebase-config'
 
   const GoogleAuth = () => {
-
   return (
     <>
       <button

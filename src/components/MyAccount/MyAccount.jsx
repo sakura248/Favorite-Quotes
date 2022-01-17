@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import Filter from '../Filtering/Filter/Filter'
 import Header from '../Header/Header'
-import QuotesList from '../QuotesList'
 import SearchBar from '../Filtering/SearchBar/SearchBar'
-import {useAuthStatus} from '../../Hooks/useAuthStatus'
-import { useNavigate } from "react-router"
+import Filter from '../Filtering/Filter/Filter'
+import QuotesList from '../QuotesList'
+import { useAuthStatus } from '../../Hooks/useAuthStatus'
+import { useNavigate } from "react-router-dom"
 // import { auth } from '../../firebase-config'
 // import { onAuthStateChanged } from 'firebase/auth'
 
@@ -12,7 +12,7 @@ const MyAccount = () => {
 
   let navigate = useNavigate();
   const {loggedIn} = useAuthStatus()
-  if(!loggedIn) return navigate('/Login')
+  // if(!loggedIn) return navigate('/Login')
 
 
   return (
@@ -21,7 +21,6 @@ const MyAccount = () => {
       <div className="flex flex-row">
         <SearchBar />
         <Filter />
-
       </div>
       <QuotesList />
     </div>

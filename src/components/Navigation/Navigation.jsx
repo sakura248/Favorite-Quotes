@@ -10,6 +10,7 @@ const Navigation = () => {
 
   const auth = getAuth()
   const {loggedIn} = useAuthStatus()
+  const navigate = useNavigate()
 
 
   return (
@@ -17,19 +18,22 @@ const Navigation = () => {
         <div className="flex">
             <Link to="/" className="title text-5xl font-bold text-right">FAVORITE<br />QUOTES</Link>
             <nav className="flex items-center">
-              <Link to="/Login" className="m-4 hover:underline">Login</Link>
+              {/* <Link to="/Login" className="m-4 hover:underline">Login</Link> */}
+              {/* <Link to="/Signup" className="m-4 hover:underline">Sign Up</Link> */}
               <Link to="/MyAccount" className="m-4 hover:underline">Account</Link>
               <Link to="/MyFavorites" className="m-4 hover:underline">Favorites</Link>
               {loggedIn && 
                 <Link
                   to='/'
                   onClick={() => {
-                    signOut(auth).then(() => {
-                      // Sign-out successful.
-                      console.log('signed out')
-                    }).catch((error) => {
-                      // An error happened.
-                    });
+                    signOut(auth);
+                    navigate("/")
+                    // .then(() => {
+                    //   // Sign-out successful.
+                    //   console.log('signed out')
+                    // }).catch((error) => {
+                    //   // An error happened.
+                    // });
                   }}
                 >
                   Sign Out

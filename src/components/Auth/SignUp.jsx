@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import { createUserWithEmailAndPassword } from "firebase/auth";
 // import provider from '../../firebase-config'
 import GoogleAuth from './GoogleAuth'
-
 import { auth } from '../../firebase-config'
+import { useNavigate, useLocation } from "react-router-dom"
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  let navigate = useNavigate();
+  const location = useLocation()
 
   const handleSubmit = (e)=>{
     e.preventDefault()
@@ -15,9 +17,11 @@ const SignUp = () => {
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
-      console.log("Registered user: ", user);
       setEmail("");
       setPassword("");
+      let from = location.state?.from?.pathname || '/'
+      console.log(from)
+      navigate(from, { replace: true })
     })
     .catch((error) => {
         // const errorCode = error.code;
