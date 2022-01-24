@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import {ADD_QUOTE, UPDATE_QUOTE, DELETE_QUOTE } from './quote.actions'
+import dayjs from 'dayjs';
 
 const initialState = {
     quoteLists: [
@@ -10,19 +11,19 @@ const initialState = {
             tvShowTitle: "Brooklyn 99",
             // editing: false,
         },
-        {
-            quote: "When Life Gives You Lemonade, Make Lemons. Life Will Be All Like 'What?!'",
-            character: "Phil Dunphy",
-            tvShowTitle: "Modern Family",
-            // editing: false,
-        },
-        {
-            id: uuidv4(),
-            quote: "Sometimes I’ll start a sentence and I don’t even know where it’s going. I just hope I find it along the way.",
-            character: "Michael Scott",
-            tvShowTitle: "The Office(US)",
-            // editing: false,
-        },
+        // {
+        //     quote: "When Life Gives You Lemonade, Make Lemons. Life Will Be All Like 'What?!'",
+        //     character: "Phil Dunphy",
+        //     tvShowTitle: "Modern Family",
+        //     // editing: false,
+        // },
+        // {
+        //     id: uuidv4(),
+        //     quote: "Sometimes I’ll start a sentence and I don’t even know where it’s going. I just hope I find it along the way.",
+        //     character: "Michael Scott",
+        //     tvShowTitle: "The Office(US)",
+        //     // editing: false,
+        // },
 
     ],
 }
@@ -31,11 +32,13 @@ export const quoteReducer = (state = initialState, action ) => {
     switch(action.type) {
         case ADD_QUOTE:
         action.payload.id = uuidv4()
-        // action.payload.editing=false
         return {
             ...state, 
             quoteLists : [...state.quoteLists, action.payload]
         }
+
+
+
 
         case UPDATE_QUOTE:
             const {id, newQuote, newCharacter, newTvShowTitle} = action.payload
@@ -61,11 +64,4 @@ export const quoteReducer = (state = initialState, action ) => {
             return state;
     }
     }
-
-
-
-
-
-    // console.log(quoteReducer)
-
 

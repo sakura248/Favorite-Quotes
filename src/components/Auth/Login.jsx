@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import {auth} from '../../firebase-config'
 import { useNavigate, useLocation, Link } from "react-router-dom"
 import GoogleAuth from './GoogleAuth'
 
@@ -7,7 +8,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, seterrorMessage] = useState("");
-  const auth = getAuth();
+  // const auth = getAuth();
   const location = useLocation()
   
   let navigate = useNavigate();
@@ -17,7 +18,6 @@ const Login = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password)
       if(userCredential){
-
         let from = location.state?.from?.pathname || '/'
         navigate(from, { replace: true })
       }
@@ -87,11 +87,6 @@ const Login = () => {
       </button>
 
       <hr className="border-black"/>
-      {/* <button
-        className="bg-black text-white font-bold rounded-full my-8 py-3"
-      >
-        Continue with Google
-      </button> */}
       </form>
       <GoogleAuth />
       <Link to="/SignUp" className="text-sm text-center hover:underline">Not a member? Sign up here!</Link>

@@ -1,7 +1,7 @@
-import React from 'react';
+// import React from 'react';
 import './App.css';
 import Navigation from './components/Navigation/Navigation'
-import Hero from './components/Hero/Hero'
+// import Hero from './components/Hero/Hero'
 import QuotesList from './components/QuotesList'
 import Login from './components/Auth/Login'
 import SignUp from './components/Auth/SignUp'
@@ -12,7 +12,7 @@ import MyFavoriteQuotes from './components/MyFavorites/MyFavoriteQuotes'
 import StickFooter from './components/StickFooter'
 import NotFound from './components/NotFound/NotFound'
 
-import { auth } from './firebase-config'
+// import { auth } from './firebase-config'
 import PrivateRoute from './components/routes/PrivateRoute'
 
 import {
@@ -20,8 +20,8 @@ import {
   Routes,
   Route,
   // Link,
-  useLocation,
-  Navigate
+  // useLocation,
+  // Navigate
 } from "react-router-dom";
 
 function App() {
@@ -29,20 +29,13 @@ function App() {
 
   return (
     <Router>
+      <PrivateRoute>
       <div className="App">
         <StickFooter  />
         <Navigation />
         <Routes>
           <Route index element={<QuotesList />} />
-          {/* <Route path="MyAccount" element={<MyAccount />}/> */}
-          <Route
-            path="MyAccount"
-            element={
-              <PrivateRoute>
-                <MyAccount />
-              </PrivateRoute>
-            }
-          />
+          <Route path="MyAccount" element={ <MyAccount />} />
           <Route path="Login" element={<Login />}/>
           <Route path="SignUp" element={<SignUp />}/>
           <Route path="MyFavorites" element={<MyFavorites />}>
@@ -58,6 +51,7 @@ function App() {
           <Route path="*" element={<NotFound />} /> 
         </Routes>
       </div>
+    </PrivateRoute>
     </Router>
   );
 }

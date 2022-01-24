@@ -16,7 +16,7 @@ const SignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in 
-      const user = userCredential.user;
+      // const user = userCredential.user;
       setEmail("");
       setPassword("");
       let from = location.state?.from?.pathname || '/'
@@ -25,7 +25,7 @@ const SignUp = () => {
     })
     .catch((error) => {
         // const errorCode = error.code;
-        const errorMessage = error.message;
+        // const errorMessage = error.message;
         console.log(error)
       });
     }

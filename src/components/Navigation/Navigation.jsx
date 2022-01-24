@@ -5,10 +5,11 @@ import {
 } from "react-router-dom";
 import {useAuthStatus} from '../../Hooks/useAuthStatus'
 import { getAuth, signOut } from 'firebase/auth'
+import { auth } from '../../firebase-config'
 
 const Navigation = () => {
 
-  const auth = getAuth()
+  // const auth = getAuth()
   const {loggedIn} = useAuthStatus()
   const navigate = useNavigate()
 

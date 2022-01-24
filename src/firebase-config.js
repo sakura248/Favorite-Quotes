@@ -1,5 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from '@firebase/firestore'
+import { getFirestore } from "firebase/firestore"
+
+import { collection, doc, setDoc, getDocs } from "firebase/firestore";
+
+
+// for auth
 import { 
   getAuth,
   signInWithPopup,
@@ -7,7 +12,6 @@ import {
   signInWithRedirect,
   onAuthStateChanged
 } from 'firebase/auth'
-// Import the functions you need from the SDKs you need
 
 const firebaseConfig = { 
   apiKey: process.env.REACT_APP_apiKey,
@@ -20,13 +24,14 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app)
-export const db = getFirestore(app)
+// export const db = getFirestore(app)
 
 export const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
 
 export const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
+  // signInWithRedirect(auth, provider)
   .then((result) => {
     // let navigate = useNavigate();
     // navigate("/")
@@ -36,5 +41,18 @@ export const signInWithGoogle = () => {
   });
 }
 
+//  ----- firestore test --------
+
+export const db = getFirestore();
+
+export const quotesRef = collection(db, "quotes");
+export const tvShowRef = collection(db, "tvshow");
+export const favTvShowRef = collection(db, "favorites_tvshow");
+
+export const queryQuotes = getDocs(quotesRef);
+export const queryTvShow = getDocs(tvShowRef);
+export const queryFavTvShow = getDocs(favTvShowRef);
+
+// export declare class Timestamp
 
 // export default firebaseApp

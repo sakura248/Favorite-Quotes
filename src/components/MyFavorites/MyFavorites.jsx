@@ -4,12 +4,7 @@ import Header from '../Header/Header'
 // import MyFavoritesQuote from './MyFavoritesQuote'
 
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
   Link,
-  useLocation,
-  Navigate,
   Outlet
 } from "react-router-dom";
 
@@ -18,7 +13,6 @@ const MyFavorites = () => {
     <div className="container mx-auto">
       <Header header={"Your Favorites"}/>
       <p>Favs...</p>
-      {/* <MyFavoriteShows /> */}
       <Link 
         to='/Myfavorites/MyFavoriteShows'
         className="hover:underline"

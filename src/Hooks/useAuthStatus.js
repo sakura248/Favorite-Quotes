@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase-config'
 
@@ -13,11 +13,11 @@ export const useAuthStatus = () => {
         // https://firebase.google.com/docs/reference/js/firebase.User
         // const uid = user.uid;
         setLoggedIn(true)
-        console.log('logged in : ', loggedIn)
+        // console.log('logged in : ', loggedIn)
         // ...
       } else {
         setLoggedIn(false)
-        console.log('logged in : ', loggedIn)
+        // console.log('logged in : ', loggedIn)
         // User is signed out
         // ...
       }

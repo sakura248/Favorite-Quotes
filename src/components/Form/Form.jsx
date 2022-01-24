@@ -1,4 +1,4 @@
-// import React from 'react'
+// import React, {useEffect} from 'react'
 
 
 const Form = ({
@@ -13,9 +13,13 @@ const Form = ({
     tvShowTitle,
     onChangeTvShowTitle,
     value,
-    closeModal
+    closeModal,
+    onChangeEpisodeTitle
+    // firestoreTest // test
     
 }) => {
+
+
     return (
         <div className="add-quote-wrapper">
             <p className="quotation text-7xl">"</p>
@@ -31,7 +35,8 @@ const Form = ({
                     defaultValue='Type the quote..'
                     value={quote}
                     onChange={onChangeQuote}
-                    className="p-2 border-solid border border-black focus:border-primary-orange"    
+                    className="p-2 border-solid border border-black focus:border-primary-orange"
+                    required="required"
                 >
                     
                 </textarea>
@@ -41,12 +46,21 @@ const Form = ({
                     value={character}
                     placeholder="Who said?"
                     className="p-2 border-solid border border-black focus:border-primary-orange"
+                    required="required"
                 />
                 <input 
                     type="text"
                     value={tvShowTitle}
                     onChange={onChangeTvShowTitle}
                     placeholder="Which TV show?"
+                    className="p-2 border-solid border border-black focus:border-primary-orange"
+                    required="required"
+                />
+                <input 
+                    type="text"
+                    value={tvShowTitle}
+                    onChange={onChangeEpisodeTitle}
+                    placeholder="Which episode?"
                     className="p-2 border-solid border border-black focus:border-primary-orange"
                 />
                 <button
@@ -55,6 +69,7 @@ const Form = ({
                 >
                     {value}
                 </button>
+                {/* <button onClick={firestoreTest}>firestore test</button> */}
             </form>
             <button 
                 className="close-btn"

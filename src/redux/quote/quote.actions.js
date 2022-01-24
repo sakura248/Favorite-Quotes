@@ -3,9 +3,9 @@ export const ADD_QUOTE = "ADD_QUOTE"
 export const UPDATE_QUOTE = "UPDATE_QUOTE"
 export const DELETE_QUOTE = "DELETE_QUOTE"
 
-export const addQuote = ({quote, character, tvShowTitle}) => ({
+export const addQuote = ({quote, character, tvShowTitle, episodeTitle}) => ({
     type: ADD_QUOTE,
-    payload:{quote, character, tvShowTitle}
+    payload:{quote, character, tvShowTitle, episodeTitle}
 })
 
 // export const editQuote = ({id, quote, character, tvShowTitle}) => ({
