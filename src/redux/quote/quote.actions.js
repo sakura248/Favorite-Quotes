@@ -15,7 +15,7 @@ export const addQuote = ({quote, character, tvShowTitle, episodeTitle}) => ({
 
 export const updateQuote = ({id, newQuote, newCharacter, newTvShowTitle}) => ({
     type: UPDATE_QUOTE,
-    payload:{id, newQuote, newCharacter, newTvShowTitle}
+        payload:{id, newQuote, newCharacter, newTvShowTitle}
 })
 
 export const deleteQuote = (id) => ({
