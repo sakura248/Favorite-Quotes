@@ -4,7 +4,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-} from '@reduxjs/toolkit';
+} from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation';
 import QuotesList from './components/QuotesList';
 import Login from './components/Auth/Login';
@@ -19,7 +19,6 @@ import NotFound from './components/NotFound/NotFound';
 // import { auth } from './firebase-config'
 import PrivateRoute from './components/routes/PrivateRoute';
 
-
 function App() {
   return (
     <Router>
@@ -33,8 +32,8 @@ function App() {
             <Route path="Login" element={<Login />} />
             <Route path="SignUp" element={<SignUp />} />
             <Route path="MyFavorites" element={<MyFavorites />}>
-              <Route path="MyFavoriteShows" element={<MyFavoriteShows />}/>
-              <Route path="MyFavoriteQuotes" element={<MyFavoriteQuotes />}/>
+              <Route path="MyFavoriteShows" element={<MyFavoriteShows />} />
+              <Route path="MyFavoriteQuotes" element={<MyFavoriteQuotes />} />
             </Route>
             {/* Loading prepare */}
             {/* <React.Suspense fallback={<>...</>}>

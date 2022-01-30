@@ -1,9 +1,9 @@
-import React from 'react'
-import SearchBar from '../Filtering/SearchBar/SearchBar'
-import Filter from '../Filtering/Filter/Filter'
-import QuotesList from '../QuotesList'
+import React from "react";
+import SearchBar from "../Filtering/SearchBar/SearchBar";
+import Filter from "../Filtering/Filter/Filter";
+import QuotesList from "../QuotesList";
 
-const MyFavoriteQuotes = () => {
+function MyFavoriteQuotes() {
   return (
     <div className="container mx-auto bg-white">
       <p>favorite quote ...</p>
@@ -13,7 +13,7 @@ const MyFavoriteQuotes = () => {
       </div>
       <QuotesList />
     </div>
-  )
-}
+  );
+};
 
-export default MyFavoriteQuotes
+export default MyFavoriteQuotes;

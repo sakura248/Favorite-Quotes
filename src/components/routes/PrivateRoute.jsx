@@ -1,23 +1,30 @@
-import { useLocation, Navigate } from 'react-router-dom'
-import { useAuthStatus } from '../../Hooks/useAuthStatus'
+import { useLocation, Navigate } from "react-router-dom";
+import PropTypes from 'prop-types';
+import useAuthStatus from "../../hooks/useAuthStatus";
 
-const inPrivatePaths = ['/MyAccount', 'MyFavorites', 'NewPrivatePage']
+const inPrivatePaths = ["/MyAccount", "MyFavorites", "NewPrivatePage"];
 
-const PrivateRoute = ({ children }) => {
-  const location = useLocation()
-  const { loggedIn } = useAuthStatus()
-  const current = location.pathname
+function PrivateRoute({ children }) {
+  const location = useLocation();
+  const { loggedIn } = useAuthStatus();
+  const current = location.pathname;
 
-  const isPrivate = inPrivatePaths.includes(current)
+  const isPrivate = inPrivatePaths.includes(current);
 
-  if(isPrivate && current !== '/Login' && !loggedIn ) {
-    return <Navigate to='/Login' state={{ from: location }} />
+  if (isPrivate && current !== "/Login" && !loggedIn) {
+    // eslint-disable-next-line react/react-in-jsx-scope
+    return <Navigate to="/Login" state={{ from: location }} />;
   }
   // if(((current === '/MyAccount' || current === '/MyFavorites') && current !== '/Login') && !loggedIn ) {
   //   return <Navigate to='/Login' state={{ from: location }} />
   // }
-  
-  return children
+
+  return children;
 }
 
-export default PrivateRoute
+PrivateRoute.propTypes = {
+  children : PropTypes.string.isRequired,
+}
+
+
+export default PrivateRoute;

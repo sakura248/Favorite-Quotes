@@ -1,19 +1,18 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore"
+import { getFirestore } from "firebase/firestore";
 
-import { collection, doc, setDoc, getDocs } from "firebase/firestore";
-
+import { collection, getDocs } from "firebase/firestore";
 
 // for auth
-import { 
+import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
-  signInWithRedirect,
-  onAuthStateChanged
-} from 'firebase/auth'
+  // signInWithRedirect,
+  // onAuthStateChanged,
+} from "firebase/auth";
 
-const firebaseConfig = { 
+const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
   authDomain: process.env.REACT_APP_authDomain,
   projectId: process.env.REACT_APP_projectId,
@@ -23,23 +22,24 @@ const firebaseConfig = {
 };
 
 export const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app)
+export const auth = getAuth(app);
 // export const db = getFirestore(app)
 
 export const provider = new GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
+provider.setCustomParameters({ prompt: "select_account" });
 
 export const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
-  // signInWithRedirect(auth, provider)
-  .then((result) => {
-    // let navigate = useNavigate();
-    // navigate("/")
-    console.log('result : ', result)
-  }).catch((error) => {
-    console.log('error : ',error);
-  });
-}
+    // signInWithRedirect(auth, provider)
+    .then((result) => {
+      // let navigate = useNavigate();
+      // navigate("/")
+      Console.log("result : ", result);
+    })
+    .catch((error) => {
+      Console.log("error : ", error);
+    });
+};
 
 //  ----- firestore test --------
 
