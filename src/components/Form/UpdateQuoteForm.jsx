@@ -62,8 +62,8 @@ function UpdateQuoteForm({ closeModal, quoteItem }) {
 }
 
 UpdateQuoteForm.propTypes = {
-  closeModal: PropTypes.string.isRequired,
-  quoteItem: PropTypes.string.isRequired
+  closeModal: PropTypes.func.isRequired,
+  quoteItem: PropTypes.func.isRequired
 }
 
 export default UpdateQuoteForm;

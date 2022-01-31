@@ -7,7 +7,7 @@ import {
   // firebaseReducer,
 } from "react-redux-firebase";
 import { createStore } from 'redux'
-import { rrfProps } from './redux/quote/quote.reducers'
+import { rrfProps } from './redux/root/root.reducers'
 import App from './App';
 // import store from './app/store';
 import rootReducer from './redux/root/root.reducers';

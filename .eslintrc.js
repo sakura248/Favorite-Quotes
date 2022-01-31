@@ -7,13 +7,11 @@ module.exports = {
     "plugin:react/recommended",
     "airbnb",
     "airbnb/hooks",
-    "prettier",
     "plugin:import/errors",
     "plugin:import/warnings",
-    // "plugin:import/typescript",
-    // "plugin:@typescript-eslint/recommended",
-    // "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier",
   ],
+
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
@@ -24,7 +22,7 @@ module.exports = {
     sourceType: "module",
     tsconfigRootDir: __dirname,
   },
-  plugins: ["react", "@typescript-eslint", "import", "react-hooks", "jsx-a11y"],
+  plugins: ["@typescript-eslint", "import", "jsx-a11y", "react", "react-hooks"],
   rules: {
     // note you must disable the base rule as it can report incorrect errors
     "no-use-before-define": "off",
@@ -32,13 +30,21 @@ module.exports = {
       "error",
       { allow: ["__REDUX_DEVTOOLS_EXTENSION__"] },
     ],
+    "react/function-component-definition": [
+      2,
+      {
+        namedComponents: "function-declaration",
+      },
+    ],
   },
   overrides: [
     {
-      files: ["**/*.ts"],
+      files: ["**/*.ts", "**/*.tsx"],
       extends: [
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
+        "plugin:import/typescript",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
       ],
       parser: "@typescript-eslint/parser",
       parserOptions: {
@@ -52,4 +58,9 @@ module.exports = {
       },
     },
   ],
+
+  // include: [
+  //   ".eslintrc.js",
+  //   // ...
+  // ],
 };

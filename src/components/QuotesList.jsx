@@ -1,11 +1,10 @@
 import React from 'react'
 // import { quoteReducer } from '../redux/quote/quote.reducers'
 import { useDispatch } from "react-redux";
-// import UpdateQuoteForm from './Form/UpdateQuoteForm'
 
 import Modal from "react-modal";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import "firebase/firestore";
 import Quote from "./ListItem/Quote";
 import { deleteQuote } from "../redux/quote/quote.actions";
 import useAuthStatus from "../hooks/useAuthStatus";

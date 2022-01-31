@@ -12,7 +12,7 @@ import {
   // onAuthStateChanged,
 } from "firebase/auth";
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
   authDomain: process.env.REACT_APP_authDomain,
   projectId: process.env.REACT_APP_projectId,
@@ -23,7 +23,7 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-// export const db = getFirestore(app)
+export const db = getFirestore();
 
 export const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
@@ -43,8 +43,6 @@ export const signInWithGoogle = () => {
 
 //  ----- firestore test --------
 
-export const db = getFirestore();
-
 export const quotesRef = collection(db, "quotes");
 export const tvShowRef = collection(db, "tvshow");
 export const favTvShowRef = collection(db, "favorites_tvshow");
@@ -56,3 +54,5 @@ export const queryFavTvShow = getDocs(favTvShowRef);
 // export declare class Timestamp
 
 // export default firebaseApp
+
+//  ----- rrf test --------

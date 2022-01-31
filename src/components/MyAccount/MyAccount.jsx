@@ -4,8 +4,8 @@ import SearchBar from "../Filtering/SearchBar/SearchBar";
 import Filter from "../Filtering/Filter/Filter";
 import QuotesList from "../QuotesList";
 
-const MyAccount = () => {
-
+function MyAccount() {
+  return (
     <div className="container mx-auto">
       <Header header="Your post" />
       <div className="flex flex-row">
@@ -14,6 +14,7 @@ const MyAccount = () => {
       </div>
       <QuotesList />
     </div>
-};
 
+  )
+}
 export default MyAccount;

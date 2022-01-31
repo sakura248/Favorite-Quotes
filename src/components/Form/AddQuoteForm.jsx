@@ -1,13 +1,12 @@
 import React from 'react';
 import { useState } from "react";
-// import ReactDOM from 'react-dom';
-// import Modal from 'react-modal';
 // import dayjs from "dayjs";
 import PropTypes from 'prop-types';
 import { useDispatch } from "react-redux";
-// import { collection, addDoc } from "firebase/firestore";
+
 import { addQuote } from "../../redux/quote/quote.actions";
-// import { db } from "../../firebase-config";
+
+import AddRrfTest from "../../app/operations"
 
 import Form from "./Form";
 
@@ -50,24 +49,6 @@ function AddQuoteForm({ closeModal }) {
     // }
   };
 
-  // const firestoreTest = async () => {
-  //   try {
-  //     const docRef = await addDoc(collection(db, "quotes"), {
-  //       createdDate: new Date(),
-  //       id_character: "weoVhelmDWFXmN9YzauN",
-  //       id_episodes: "Article 2",
-  //       id_tvshow: "YbEsCp1veKajaO40R6HJ",
-  //       id_user: "",
-  //       quote:
-  //         "One time my refrigerator stopped working. I didn’t know what to do. I just moved.",
-  //       updatedDate: new Date(),
-  //     });
-  //     console.log("Document written with ID: ", docRef);
-  //   } catch (e) {
-  //     console.error("Error adding document: ", e);
-  //   }
-  // };
-
   return (
       <Form
         addOrUpdateQuoteHandler={addQuoteHandler}
@@ -78,16 +59,18 @@ function AddQuoteForm({ closeModal }) {
         quote={quote}
         character={character}
         tvShowTitle={tvShowTitle}
+        episodeTitle={episodeTitle}
         value="ADD"
         closeModal={closeModal}
 
-        // firestoreTest={firestoreTest}
+        AddRrfTest={AddRrfTest}
+        // saveQuote={saveQuote}
       />
   );
 };
 
 AddQuoteForm.propTypes = {
-  closeModal: PropTypes.string.isRequired,
+  closeModal: PropTypes.func.isRequired
 }
 
 export default AddQuoteForm;

@@ -18,9 +18,10 @@ export const updateQuote = ({
   newQuote,
   newCharacter,
   newTvShowTitle,
+  episodeTitle,
 }) => ({
   type: UPDATE_QUOTE,
-  payload: { id, newQuote, newCharacter, newTvShowTitle },
+  payload: { id, newQuote, newCharacter, newTvShowTitle, episodeTitle },
 });
 
 export const deleteQuote = (id) => ({

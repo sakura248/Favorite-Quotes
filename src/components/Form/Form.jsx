@@ -8,8 +8,10 @@ function Form({
   onChangeCharacter,
   character,
   tvShowTitle,
+  episodeTitle,
   onChangeTvShowTitle,
   value,
+  AddRrfTest,
   closeModal,
   onChangeEpisodeTitle,
 }) {
@@ -46,7 +48,7 @@ function Form({
         />
         <input
           type="text"
-          value={tvShowTitle}
+          value={episodeTitle}
           onChange={onChangeEpisodeTitle}
           placeholder="Which episode?"
           className="p-2 border-solid border border-black focus:border-primary-orange"
@@ -54,7 +56,7 @@ function Form({
         <button type="submit" className="submit-btn">
           {value}
         </button>
-        {/* <button onClick={firestoreTest}>firestore test</button> */}
+        <button type="submit" onClick={AddRrfTest}>firestore test</button>
       </form>
       <button type="button" className="close-btn" onClick={closeModal}>
         close
@@ -64,15 +66,17 @@ function Form({
 };
 
 Form.propTypes = {
-  addOrUpdateQuoteHandler: PropTypes.string.isRequired,
+  addOrUpdateQuoteHandler: PropTypes.func.isRequired,
   quote: PropTypes.string.isRequired,
-  onChangeQuote: PropTypes.string.isRequired,
-  onChangeCharacter: PropTypes.string.isRequired,
+  onChangeQuote: PropTypes.func.isRequired,
+  onChangeCharacter: PropTypes.func.isRequired,
   character: PropTypes.string.isRequired,
   tvShowTitle: PropTypes.string.isRequired,
-  onChangeTvShowTitle: PropTypes.string.isRequired,
+  episodeTitle: PropTypes.string.isRequired,
+  onChangeTvShowTitle: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
-  closeModal: PropTypes.string.isRequired,
+  AddRrfTest: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
   onChangeEpisodeTitle: PropTypes.string.isRequired,
 }
 

@@ -23,7 +23,11 @@ function PrivateRoute({ children }) {
 }
 
 PrivateRoute.propTypes = {
-  children : PropTypes.string.isRequired,
+  children : PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.func
+  ]).isRequired,
 }
 
 

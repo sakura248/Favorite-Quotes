@@ -4,7 +4,7 @@ import Filter from "../Filtering/Filter/Filter";
 import QuotesList from "../QuotesList";
 
 function MyFavoriteQuotes() {
-  return (
+  return(
     <div className="container mx-auto bg-white">
       <p>favorite quote ...</p>
       <div className="flex flex-row">
@@ -12,8 +12,8 @@ function MyFavoriteQuotes() {
         <Filter />
       </div>
       <QuotesList />
-    </div>
-  );
+    </div>)
+
 };
 
 export default MyFavoriteQuotes;
