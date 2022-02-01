@@ -23,11 +23,9 @@ function PrivateRoute({ children }) {
 }
 
 PrivateRoute.propTypes = {
-  children : PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.func
-  ]).isRequired,
+  // children : PropTypes.objectOf(PropTypes.object).isRequired,
+  children : PropTypes.shape.isRequired
+  // PropTypes.object() is not callable.
 }
 
 

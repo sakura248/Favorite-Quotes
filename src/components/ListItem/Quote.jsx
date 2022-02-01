@@ -1,10 +1,12 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import Modal from "react-modal";
 import PropTypes from 'prop-types';
 
+// import { quotesRef } from '../../firebase-config'
 import UpdateQuoteForm from "../Form/UpdateQuoteForm";
+// import { getDocs } from "firebase/firestore";
 
 const appElement = document.getElementById("content");
 Modal.setAppElement(appElement);
@@ -26,8 +28,16 @@ function Quote({
   // favHandler, 
   deleteHandler }) {
 
-  const quoteLists = useSelector(async(state) => state.firebase.quotes)
-  console.log(quoteLists)
+  const quoteLists = [1,2,3]
+  
+  // if (quotesRef.exists()) {
+  //   console.log("Document data:", quotesRef.data());
+  // } else {
+  //   // doc.data() will be undefined in this case
+  //   console.log("No such document!");
+  // }
+  
+  // console.log(quoteLists)
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalQuote, setModalQuote] = useState();

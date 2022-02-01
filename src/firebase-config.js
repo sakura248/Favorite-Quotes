@@ -44,12 +44,18 @@ export const signInWithGoogle = () => {
 //  ----- firestore test --------
 
 export const quotesRef = collection(db, "quotes");
+
 export const tvShowRef = collection(db, "tvshow");
 export const favTvShowRef = collection(db, "favorites_tvshow");
 
-export const queryQuotes = getDocs(quotesRef);
 export const queryTvShow = getDocs(tvShowRef);
 export const queryFavTvShow = getDocs(favTvShowRef);
+
+// const getQuery = () => {
+//   try {
+//     const
+//   }
+// }
 
 // export declare class Timestamp
 

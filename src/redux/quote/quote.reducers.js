@@ -35,13 +35,6 @@ const initialState = {
       tvShowTitle: "Modern Family",
       episodeTitle: "test",
     },
-    // {
-    //     id: uuidv4(),
-    //     quote: "Sometimes I’ll start a sentence and I don’t even know where it’s going. I just hope I find it along the way.",
-    //     character: "Michael Scott",
-    //     tvShowTitle: "The Office(US)",
-    // editing: false,
-    // },
   ],
 };
 
