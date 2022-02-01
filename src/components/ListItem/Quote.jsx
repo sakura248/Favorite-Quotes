@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-no-bind */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import { useSelector } from "react-redux";
 import Modal from "react-modal";
 import PropTypes from 'prop-types';
 
-// import { quotesRef } from '../../firebase-config'
+import { queryQuotes } from '../../firebase-config'
 import UpdateQuoteForm from "../Form/UpdateQuoteForm";
 // import { getDocs } from "firebase/firestore";
 
@@ -30,14 +30,16 @@ function Quote({
 
   const quoteLists = [1,2,3]
   
-  // if (quotesRef.exists()) {
-  //   console.log("Document data:", quotesRef.data());
-  // } else {
-  //   // doc.data() will be undefined in this case
-  //   console.log("No such document!");
-  // }
-  
-  // console.log(quoteLists)
+  useEffect(() => {
+    async function fetch(){
+      const data = await queryQuotes()
+      data.forEach((doc) => {
+        console.log(doc.id, ' => ', doc.data());
+    })
+
+    }
+    fetch()
+  },[])
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalQuote, setModalQuote] = useState();
