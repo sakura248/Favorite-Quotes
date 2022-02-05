@@ -48,9 +48,9 @@ export const quotesRef = collection(db, "quotes");
 export const tvShowRef = collection(db, "tvshow");
 export const favTvShowRef = collection(db, "favorites_tvshow");
 
-export const queryQuotes = () => getDocs(quotesRef);
-export const queryTvShow = () => getDocs(tvShowRef);
-export const queryFavTvShow = () => getDocs(favTvShowRef);
+export const quoteSnapShot = () => getDocs(quotesRef);
+export const tvShowSnapShot = () => getDocs(tvShowRef);
+export const favSnapShot = () => getDocs(favTvShowRef);
 
 // export declare class Timestamp
 
