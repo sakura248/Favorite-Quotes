@@ -24,6 +24,7 @@ export const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore();
+export const user = auth.currentUser;
 
 export const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
@@ -49,6 +50,7 @@ export const tvShowRef = collection(db, "tvshow");
 export const favTvShowRef = collection(db, "favorites_tvshow");
 
 export const quoteSnapShot = () => getDocs(quotesRef);
+
 export const tvShowSnapShot = () => getDocs(tvShowRef);
 export const favSnapShot = () => getDocs(favTvShowRef);
 

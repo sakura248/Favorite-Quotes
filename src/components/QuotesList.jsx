@@ -1,13 +1,15 @@
-import React from 'react'
+import React from "react";
 // import { quoteReducer } from '../redux/quote/quote.reducers'
 import { useDispatch } from "react-redux";
 
 import Modal from "react-modal";
 import { useNavigate, useLocation } from "react-router-dom";
 import "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import Quote from "./ListItem/Quote";
-import { deleteQuote } from "../redux/quote/quote.actions";
+// import { deleteQuote } from "../redux/quote/quote.actions";
 import useAuthStatus from "../hooks/useAuthStatus";
+import { quotesRef } from "../firebase-config";
 
 const appElement = document.getElementById("content");
 Modal.setAppElement(appElement);
@@ -35,7 +37,10 @@ function QuotesList() {
   const deleteHandler = (id) => {
     if (loggedIn) {
       if (window.confirm("Are you sure?")) {
-        dispatch(deleteQuote(id));
+        const targetRef = doc(quotesRef, id);
+        deleteDoc(targetRef);
+
+        dispatch({ type: "DELETE_QUOTE", id });
       }
     } else {
       Console.log(location);
@@ -46,7 +51,7 @@ function QuotesList() {
   // const favHandler = (id) => {
   //   if (loggedIn) {
   //     console.log("fave!");
-      // setIsOpen(true);
+  // setIsOpen(true);
   //   } else {
   //     console.log(location);
   //     navigate("/Login", { from: location });

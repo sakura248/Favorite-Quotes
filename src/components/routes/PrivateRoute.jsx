@@ -1,8 +1,8 @@
 import { useLocation, Navigate } from "react-router-dom";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import useAuthStatus from "../../hooks/useAuthStatus";
 
-const inPrivatePaths = ["/MyAccount", "MyFavorites", "NewPrivatePage"];
+const inPrivatePaths = ["/MyAccount", "/MyFavorites", "NewPrivatePage"];
 
 function PrivateRoute({ children }) {
   const location = useLocation();
@@ -15,18 +15,14 @@ function PrivateRoute({ children }) {
     // eslint-disable-next-line react/react-in-jsx-scope
     return <Navigate to="/Login" state={{ from: location }} />;
   }
-  // if(((current === '/MyAccount' || current === '/MyFavorites') && current !== '/Login') && !loggedIn ) {
-  //   return <Navigate to='/Login' state={{ from: location }} />
-  // }
 
   return children;
 }
 
 PrivateRoute.propTypes = {
   // children : PropTypes.objectOf(PropTypes.object).isRequired,
-  children : PropTypes.shape.isRequired
+  children: PropTypes.shape.isRequired,
   // PropTypes.object() is not callable.
-}
-
+};
 
 export default PrivateRoute;

@@ -36,7 +36,6 @@ function Quote({
   useEffect(() => {
     async function fetch() {
       const data = await quoteSnapShot();
-      console.log(data.docs);
       setQuoteLists(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     }
     fetch();
@@ -60,7 +59,6 @@ function Quote({
 
   return (
     <div>
-      {console.log(quoteLists)}
       {quoteLists &&
         quoteLists.map((quoteItem) => (
           <div
@@ -74,10 +72,10 @@ function Quote({
                     {quoteItem.quote}
                   </li>
                   <li className="quote quote-name my-1">
-                    {quoteItem.character}
+                    {quoteItem.id_character}
                   </li>
                   <li className="quote quote-show my-1">
-                    &quot;{quoteItem.tvShowTitle}&quot;
+                    &quot;{quoteItem.id_tvShowTitle}&quot;
                   </li>
                 </ul>
               </button>

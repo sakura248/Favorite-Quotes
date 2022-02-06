@@ -1,5 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 function Form({
   addOrUpdateQuoteHandler,
@@ -11,7 +11,6 @@ function Form({
   episodeTitle,
   onChangeTvShowTitle,
   value,
-  AddRrfTest,
   closeModal,
   onChangeEpisodeTitle,
 }) {
@@ -24,7 +23,7 @@ function Form({
           id="quote"
           cols="30"
           rows="10"
-          defaultValue="Type the quote.."
+          // defaultValue="Type the quote.."
           value={quote}
           onChange={onChangeQuote}
           className="p-2 border-solid border border-black focus:border-primary-orange"
@@ -56,14 +55,13 @@ function Form({
         <button type="submit" className="submit-btn">
           {value}
         </button>
-        <button type="submit" onClick={AddRrfTest}>firestore test</button>
       </form>
       <button type="button" className="close-btn" onClick={closeModal}>
         close
       </button>
     </div>
   );
-};
+}
 
 Form.propTypes = {
   addOrUpdateQuoteHandler: PropTypes.func.isRequired,
@@ -75,10 +73,8 @@ Form.propTypes = {
   episodeTitle: PropTypes.string.isRequired,
   onChangeTvShowTitle: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
-  AddRrfTest: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  onChangeEpisodeTitle: PropTypes.string.isRequired,
-}
-
+  onChangeEpisodeTitle: PropTypes.func.isRequired,
+};
 
 export default Form;

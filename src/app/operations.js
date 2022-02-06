@@ -1,10 +1,22 @@
-// import React from 'react'
-import { useFirebase } from "react-redux-firebase";
+// import React from "react";
+import { addDoc } from "firebase/firestore";
+import { quotesRef } from "../firebase-config";
+import useAuthStatus from "../hooks/useAuthStatus";
 
-function AddRrfTest() {
-  const firebase = useFirebase();
-  const sampleQuote = { quote: "Sample", character: "Andy" };
-  return firebase.push("quotes", sampleQuote);
+function SaveProduct() {
+  const { uid } = useAuthStatus();
+
+  const data = {
+    createdDate: new Date(),
+    id_character: "",
+    id_episode: "",
+    id_tvshow: "",
+    id_user: uid,
+    quote: "hoge",
+    updatedDate: new Date(),
+  };
+  addDoc(quotesRef, data);
+  console.log(data);
 }
 
-export default AddRrfTest;
+export default SaveProduct;
