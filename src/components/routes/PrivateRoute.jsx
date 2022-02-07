@@ -20,9 +20,7 @@ function PrivateRoute({ children }) {
 }
 
 PrivateRoute.propTypes = {
-  // children : PropTypes.objectOf(PropTypes.object).isRequired,
   children: PropTypes.shape.isRequired,
-  // PropTypes.object() is not callable.
 };
 
 export default PrivateRoute;

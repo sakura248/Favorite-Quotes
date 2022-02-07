@@ -5,9 +5,17 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
 
-import { quoteSnapShot } from "../../firebase-config";
+import { onSnapshot, query, where } from "firebase/firestore";
+
+// eslint-disable-next-line import/named
+import {
+  quoteSnapShot,
+  // quotesRef,
+  favoriteQuotesRef,
+  // db,
+  favoriteQuoteSnapShot,
+} from "../../firebase-config";
 import UpdateQuoteForm from "../Form/UpdateQuoteForm";
-// import { getDocs } from "firebase/firestore";
 
 const appElement = document.getElementById("content");
 Modal.setAppElement(appElement);
@@ -26,17 +34,30 @@ export const customStyles = {
 };
 
 function Quote({
-  // favHandler,
+  // isLiked,
+  favHandler,
   deleteHandler,
 }) {
   const [quoteLists, setQuoteLists] = useState([]);
+  const [likedList, setLikedLists] = useState([]);
+  // const [isLiked, setIsLiked] = useState(false);
 
-  // const quoteLists = [1, 2, 3];
-
+  // const unsub = onSnapshot(quoteSnapShot(), (data) => {
+  //   console.log("Current data: ", data);
+  // });
   useEffect(() => {
     async function fetch() {
       const data = await quoteSnapShot();
       setQuoteLists(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+
+      const q = query(
+        favoriteQuotesRef,
+        where("id_quote", "==", "UDrBdfJr57d6U77eOqWr")
+      );
+      const likedData = await favoriteQuoteSnapShot(q);
+      setLikedLists(
+        likedData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
     }
     fetch();
   }, []);
@@ -59,6 +80,7 @@ function Quote({
 
   return (
     <div>
+      {console.log(likedList)}
       {quoteLists &&
         quoteLists.map((quoteItem) => (
           <div
@@ -81,10 +103,8 @@ function Quote({
               </button>
             </blockquote>
             <div key={quoteItem.id} className="edit-area flex flex-row">
-              <button
-                type="button"
-                // onClick={() => favHandler(quoteItem.id)}
-              >
+              <button type="button" onClick={() => favHandler(quoteItem.id)}>
+                {/* {isThisLiked(quoteItem.id)} */}
                 <svg
                   className="pre-fav  m-2"
                   xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +143,8 @@ function Quote({
 }
 
 Quote.propTypes = {
-  // favHandler : PropTypes.func.isRequired,
+  // isLiked: PropTypes.bool.isRequired,
+  favHandler: PropTypes.func.isRequired,
   deleteHandler: PropTypes.func.isRequired,
 };
 

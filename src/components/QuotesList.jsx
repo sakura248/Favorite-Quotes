@@ -28,9 +28,11 @@ export const customStyles = {
 };
 
 function QuotesList() {
-  const { loggedIn } = useAuthStatus();
+  const { loggedIn, uid } = useAuthStatus();
   const location = useLocation();
   const navigate = useNavigate();
+
+  // const [isLiked, setIsLiked] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -48,21 +50,29 @@ function QuotesList() {
     }
   };
 
-  // const favHandler = (id) => {
-  //   if (loggedIn) {
-  //     console.log("fave!");
-  // setIsOpen(true);
-  //   } else {
-  //     console.log(location);
-  //     navigate("/Login", { from: location });
-  //   }
-  // };
+  const favHandler = (quoteId) => {
+    if (loggedIn) {
+      console.log("fave!", quoteId, uid);
+      // const data = favoriteQuoteSnapShot();
+      // console.log(data.quoteId);
+      // if(quoteId === id)
+      // setIsLiked(true);
+      // setIsFaved(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    }
+
+    // setIsOpen(true);
+    // } else {
+    //   console.log(location);
+    //   navigate("/Login", { from: location });
+    // }
+  };
 
   return (
     <div className="container mx-auto">
       <Quote
         // openModal={openModal}
-        // favHandler={favHandler}
+        // isLiked={isLiked}
+        favHandler={favHandler}
         deleteHandler={deleteHandler}
       />
     </div>

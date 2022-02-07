@@ -45,11 +45,13 @@ export const signInWithGoogle = () => {
 //  ----- firestore test --------
 
 export const quotesRef = collection(db, "quotes");
+export const favoriteQuotesRef = collection(db, "favorites_quote");
 
 export const tvShowRef = collection(db, "tvshow");
 export const favTvShowRef = collection(db, "favorites_tvshow");
 
 export const quoteSnapShot = () => getDocs(quotesRef);
+export const favoriteQuoteSnapShot = () => getDocs(favoriteQuotesRef);
 
 export const tvShowSnapShot = () => getDocs(tvShowRef);
 export const favSnapShot = () => getDocs(favTvShowRef);
