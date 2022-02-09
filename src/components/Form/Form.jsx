@@ -13,6 +13,10 @@ function Form({
   value,
   closeModal,
   onChangeEpisodeTitle,
+  makeList,
+  showList,
+  titleSuggestList,
+  handleSetValue,
 }) {
   return (
     <div className="add-quote-wrapper">
@@ -45,6 +49,18 @@ function Form({
           className="p-2 border-solid border border-black focus:border-primary-orange"
           required="required"
         />
+        {makeList([1, 2, 3])}
+        <ul>
+          {titleSuggestList &&
+            titleSuggestList.map((item) => (
+              <li key={item.id}>
+                <button type="submit" onClick={handleSetValue}>
+                  {item.name}
+                </button>
+              </li>
+            ))}
+        </ul>
+        {showList && <p>list appear</p>}
         <input
           type="text"
           value={episodeTitle}
@@ -75,6 +91,10 @@ Form.propTypes = {
   value: PropTypes.string.isRequired,
   closeModal: PropTypes.func.isRequired,
   onChangeEpisodeTitle: PropTypes.func.isRequired,
+  showList: PropTypes.bool.isRequired,
+  makeList: PropTypes.func.isRequired,
+  titleSuggestList: PropTypes.func.isRequired,
+  handleSetValue: PropTypes.func.isRequired,
 };
 
 export default Form;

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 // import { useSelector } from "react-redux";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
-
+import ReactLoading from "react-loading";
 import { onSnapshot, query, where } from "firebase/firestore";
 
 // eslint-disable-next-line import/named
@@ -39,7 +39,7 @@ function Quote({
   deleteHandler,
 }) {
   const [quoteLists, setQuoteLists] = useState([]);
-  const [likedList, setLikedLists] = useState([]);
+  // const [likedList, setLikedLists] = useState([]);
   // const [isLiked, setIsLiked] = useState(false);
 
   // const unsub = onSnapshot(quoteSnapShot(), (data) => {
@@ -50,14 +50,14 @@ function Quote({
       const data = await quoteSnapShot();
       setQuoteLists(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
 
-      const q = query(
-        favoriteQuotesRef,
-        where("id_quote", "==", "UDrBdfJr57d6U77eOqWr")
-      );
-      const likedData = await favoriteQuoteSnapShot(q);
-      setLikedLists(
-        likedData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      );
+      // const q = query(
+      //   favoriteQuotesRef,
+      //   where("id_quote", "==", "UDrBdfJr57d6U77eOqWr")
+      // );
+      // const likedData = await favoriteQuoteSnapShot(q);
+      // setLikedLists(
+      //   likedData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      // );
     }
     fetch();
   }, []);
@@ -80,7 +80,8 @@ function Quote({
 
   return (
     <div>
-      {console.log(likedList)}
+      {/* {console.log(likedList)} */}
+      {/* <ReactLoading /> */}
       {quoteLists &&
         quoteLists.map((quoteItem) => (
           <div

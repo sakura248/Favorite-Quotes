@@ -1,9 +1,21 @@
 import React from "react";
 
 function SearchBar() {
+  // const [searchWord, setSearchWord] = useState("");
+
+  // const onChangeSearch = (e) => {
+  //   setSearchWord(e.target.value);
+  // };
+  // const searchHandler = (e) => {
+  //   console.log(e.target.value);
+  // };
+
   return (
     <div className="w-60">
-      <form className="flex flex-row border-b border-black justify-between">
+      <form
+        // onSubmit={searchHandler}
+        className="flex flex-row border-b border-black justify-between"
+      >
         <input type="text" className="bg-transparent" />
         <svg
           className=""
@@ -17,6 +29,6 @@ function SearchBar() {
       </form>
     </div>
   );
-};
+}
 
 export default SearchBar;

@@ -1,10 +1,7 @@
 import React from "react";
 import { useState } from "react";
-// import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-// import { addQuote } from "../../redux/quote/quote.actions";
-// import SaveProduct from "../../app/operations";
 
 import { addDoc } from "firebase/firestore";
 import Form from "./Form";
@@ -16,6 +13,9 @@ function AddQuoteForm({ closeModal }) {
   const [character, setCharacter] = useState("");
   const [tvShowTitle, setTvShowTitle] = useState("");
   const [episodeTitle, setEpisodeTitle] = useState("");
+  const [titleSuggestList, setTitleSuggestList] = useState([]);
+
+  const [showList, setShowList] = useState(false);
 
   const { uid } = useAuthStatus();
 
@@ -25,14 +25,41 @@ function AddQuoteForm({ closeModal }) {
   const onChangeCharacter = (e) => {
     setCharacter(e.target.value);
   };
-  const onChangeTvShowTitle = (e) => {
-    setTvShowTitle(e.target.value);
-  };
   const onChangeEpisodeTitle = (e) => {
     setEpisodeTitle(e.target.value);
   };
 
   const dispatch = useDispatch();
+
+  // API SuggestList FUNCTIONS
+  const API_KEY = process.env.REACT_APP_movieApi;
+
+  const onChangeTvShowTitle = async (e) => {
+    setTvShowTitle(e.target.value);
+    setShowList(true);
+    const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${tvShowTitle}`;
+    await fetch(url)
+      .then((result) => result.json())
+      // .then((result) => console.log('log', result.results))
+      // .then((data) => data.results.map((item) => console.log(item.name)))
+      .then((result) => {
+        // const titleSuggestData = result;
+        setTitleSuggestList(result.results);
+        console.log("titleSuggestList", titleSuggestList);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleSetValue = (e) => {
+    console.log(e.target.value);
+  };
+
+  const makeList = (list) => {
+    const newList = list;
+    console.log("newList", newList);
+    // if (newList.length > 0) return newList.map((item) => <li>{item}</li>);
+    return <li>No Match!</li>;
+  };
 
   const addQuoteHandler = async (e) => {
     e.preventDefault();
@@ -67,9 +94,12 @@ function AddQuoteForm({ closeModal }) {
       character={character}
       tvShowTitle={tvShowTitle}
       episodeTitle={episodeTitle}
+      titleSuggestList={titleSuggestList}
+      makeList={makeList}
       value="ADD"
       closeModal={closeModal}
-      // saveProduct={saveProduct}
+      showList={showList}
+      handleSetValue={handleSetValue}
     />
   );
 }
