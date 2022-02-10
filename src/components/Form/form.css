@@ -1,47 +1,44 @@
 .quotation {
-    margin: 0;
+  margin: 0;
 }
 
 .add-quote-wrapper {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .quotation {
-    text-align : center;
+  text-align: center;
 }
 
 .quote-form-wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 90%;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  align-items: center;
 }
 
 .quote-form-wrapper textarea {
-    height: 100px;
-    margin-bottom: 29px;
-    width: 70%;
-    
+  height: 100px;
+  margin-bottom: 29px;
+  width: 70%;
 }
 
 .quote-form-wrapper input {
-    margin-bottom: 10px;
-    width: 70%;
+  width: 70%;
+  margin-top: 10px;
 }
 
-.submit-btn {
-    background-color:  #FE4C04;
-    color: #fff;
-    border: none;
-    font-size: 1.3rem;
-    padding: 20px 0;
-    width: 50%;
-
+.suggest-wrapper {
+  width: 70%;
 }
 
-.close-btn{
-    margin-top: 10px;
-    background-color: none;
-    border: none;
+.title-suggest-list:not(:first-child) {
+  border-top: 1px solid rgba(107, 114, 128, var(--tw-border-opacity));
+}
+
+.close-btn {
+  margin-top: 10px;
+  background-color: none;
+  border: none;
 }

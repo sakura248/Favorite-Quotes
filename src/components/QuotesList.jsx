@@ -45,7 +45,7 @@ function QuotesList() {
         dispatch({ type: "DELETE_QUOTE", id });
       }
     } else {
-      Console.log(location);
+      console.log(location);
       navigate("/Login", { from: location });
     }
   };

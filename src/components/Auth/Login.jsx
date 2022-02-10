@@ -28,7 +28,7 @@ function Login() {
       }
     } catch (error) {
       seterrorMessage(error.message);
-      Console.log(errorMessage);
+      console.log(errorMessage);
     }
     // const userCredential = await signInWithEmailAndPassword(auth, email, password)
     // .then((userCredential) => {
@@ -62,26 +62,26 @@ function Login() {
       <form onSubmit={handleLogin} className="flex flex-col my-8">
         <label className="font-bold mb-2 mt-4" htmlFor="email">
           Email
-        {errorMessage && <p>something wrong</p>}
-        <input
-          className="border py-4 px-5 inline-block box-border border-solid border-black bg-transparent"
-          type="email"
-          name="email"
-          onChange={handleEmail}
-          // ref={emailRef}
-        />
+          {errorMessage && <p>something wrong</p>}
+          <input
+            className="border py-4 px-5 inline-block box-border border-solid border-black bg-transparent"
+            type="email"
+            name="email"
+            onChange={handleEmail}
+            // ref={emailRef}
+          />
         </label>
 
         <label className="font-bold mb-2 mt-4" htmlFor="password">
           Password
-        {errorMessage && <p>something wrong</p>}
-        <input
-          className="border py-4 px-5 inline-block box-border border-solid border-black bg-bg-color"
-          type="password"
-          name="password"
-          onChange={handlePassword}
-          // ref={emailPassword}
-        />
+          {errorMessage && <p>something wrong</p>}
+          <input
+            className="border py-4 px-5 inline-block box-border border-solid border-black bg-bg-color"
+            type="password"
+            name="password"
+            onChange={handlePassword}
+            // ref={emailPassword}
+          />
         </label>
 
         <button

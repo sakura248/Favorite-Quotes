@@ -35,10 +35,10 @@ export const signInWithGoogle = () => {
     .then((result) => {
       // let navigate = useNavigate();
       // navigate("/")
-      Console.log("result : ", result);
+      console.log("result : ", result);
     })
     .catch((error) => {
-      Console.log("error : ", error);
+      console.log("error : ", error);
     });
 };
 

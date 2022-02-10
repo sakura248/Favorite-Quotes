@@ -9,21 +9,28 @@ import { quotesRef } from "../../firebase-config";
 import useAuthStatus from "../../hooks/useAuthStatus";
 
 function AddQuoteForm({ closeModal }) {
-  const [quote, setQuote] = useState("");
-  const [character, setCharacter] = useState("");
-  const [tvShowTitle, setTvShowTitle] = useState("");
-  const [episodeTitle, setEpisodeTitle] = useState("");
-  const [titleSuggestList, setTitleSuggestList] = useState([]);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const [showList, setShowList] = useState(false);
+  const [quote, setQuote] = useState("");
+
+  // FOR TITLE
+  const [tvShowTitle, setTvShowTitle] = useState("");
+  const [tvShowTitleId, setTvShowTitleId] = useState("");
+  const [titleSuggestList, setTitleSuggestList] = useState([]);
+  const [showTitleList, setShowTitleList] = useState(false);
+
+  // FOR CHATACTER
+  const [character, setCharacter] = useState("");
+  const [characterId, setCharacterId] = useState("");
+  const [characterSuggestList, setCharacterSuggestList] = useState([]);
+  const [showCharacterList, setShowCharacterList] = useState(false);
+
+  const [episodeTitle, setEpisodeTitle] = useState("");
 
   const { uid } = useAuthStatus();
 
   const onChangeQuote = (e) => {
     setQuote(e.target.value);
-  };
-  const onChangeCharacter = (e) => {
-    setCharacter(e.target.value);
   };
   const onChangeEpisodeTitle = (e) => {
     setEpisodeTitle(e.target.value);
@@ -34,41 +41,70 @@ function AddQuoteForm({ closeModal }) {
   // API SuggestList FUNCTIONS
   const API_KEY = process.env.REACT_APP_movieApi;
 
+  // TITLE
   const onChangeTvShowTitle = async (e) => {
     setTvShowTitle(e.target.value);
-    setShowList(true);
-    const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${tvShowTitle}`;
+    setShowTitleList(true);
+    const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${tvShowTitle}&include_adult=false`;
     await fetch(url)
       .then((result) => result.json())
-      // .then((result) => console.log('log', result.results))
-      // .then((data) => data.results.map((item) => console.log(item.name)))
+      .then((result) => setTitleSuggestList(result.results))
+      .catch((err) => {
+        console.error(err);
+        setErrorMsg("API response error", err);
+      });
+  };
+
+  const handleTitleSetValue = (e) => {
+    setTvShowTitle(e.name);
+    setTvShowTitleId(e.id);
+
+    // CLOSE LIST
+    setShowTitleList(false);
+  };
+
+  // CHARACTER
+  const onChangeCharacter = async (e) => {
+    setCharacter(e.target.value);
+    console.log(character);
+    setShowCharacterList(true);
+    const url = `https://api.themoviedb.org/3/tv/${tvShowTitleId}/credits?api_key=${API_KEY}&language=en-US`;
+    await fetch(url)
+      .then((result) => result.json())
       .then((result) => {
-        // const titleSuggestData = result;
-        setTitleSuggestList(result.results);
-        console.log("titleSuggestList", titleSuggestList);
+        const newList = result.filter(
+          (item) => item.toLowerCase().indexOf(character.toLowerCase()) >= 0
+        );
+
+        if (newList.length) {
+          console.log(newList, character);
+          setCharacterSuggestList(newList);
+          console.log("new list", characterSuggestList);
+        }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setErrorMsg("API response error", err);
+      });
   };
 
-  const handleSetValue = (e) => {
-    console.log(e.target.value);
-  };
+  // makeList(["jake", "andy", "terry"], character);
 
-  const makeList = (list) => {
-    const newList = list;
-    console.log("newList", newList);
-    // if (newList.length > 0) return newList.map((item) => <li>{item}</li>);
-    return <li>No Match!</li>;
+  const handleCharacterSetValue = (e) => {
+    setCharacter(e.character);
+    setCharacterId(e.id);
+
+    setShowTitleList(false);
   };
 
   const addQuoteHandler = async (e) => {
     e.preventDefault();
-    if (quote && character && tvShowTitle) {
+    if (quote && characterId && tvShowTitleId) {
       const data = {
         createdDate: new Date(),
         id_character: "",
         id_episode: "",
-        id_tvshow: "",
+        id_tvshow: tvShowTitleId,
         id_user: uid,
         quote,
         updatedDate: new Date(),
@@ -85,6 +121,7 @@ function AddQuoteForm({ closeModal }) {
 
   return (
     <Form
+      errorMsg={errorMsg}
       addOrUpdateQuoteHandler={addQuoteHandler}
       onChangeQuote={onChangeQuote}
       onChangeCharacter={onChangeCharacter}
@@ -95,11 +132,14 @@ function AddQuoteForm({ closeModal }) {
       tvShowTitle={tvShowTitle}
       episodeTitle={episodeTitle}
       titleSuggestList={titleSuggestList}
-      makeList={makeList}
       value="ADD"
       closeModal={closeModal}
-      showList={showList}
-      handleSetValue={handleSetValue}
+      showTitleList={showTitleList}
+      showCharacterList={showCharacterList}
+      characterSuggestList={characterSuggestList}
+      handleTitleSetValue={handleTitleSetValue}
+      handleCharacterSetValue={handleCharacterSetValue}
+      // makeList={makeList}
     />
   );
 }

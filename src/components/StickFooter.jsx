@@ -38,7 +38,6 @@ function StickFooter() {
     if (loggedIn) {
       setIsOpen(true);
     } else {
-      console.log(location);
       navigate("/Login", { from: location });
     }
   }
