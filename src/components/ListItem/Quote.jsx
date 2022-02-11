@@ -1,18 +1,19 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-bind */
 import React, { useState, useEffect } from "react";
-// import { useSelector } from "react-redux";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
 import ReactLoading from "react-loading";
-import { onSnapshot, query, where } from "firebase/firestore";
+import { onSnapshot, query, where, doc } from "firebase/firestore";
+
+import useAuthStatus from "../../hooks/useAuthStatus";
 
 // eslint-disable-next-line import/named
 import {
   quoteSnapShot,
-  // quotesRef,
+  quotesRef,
   favoriteQuotesRef,
-  // db,
+  db,
   favoriteQuoteSnapShot,
 } from "../../firebase-config";
 import UpdateQuoteForm from "../Form/UpdateQuoteForm";
@@ -39,28 +40,41 @@ function Quote({
   deleteHandler,
 }) {
   const [quoteLists, setQuoteLists] = useState([]);
-  // const [likedList, setLikedLists] = useState([]);
-  // const [isLiked, setIsLiked] = useState(false);
+  const [likedLists, setLikedLists] = useState([]);
 
-  // const unsub = onSnapshot(quoteSnapShot(), (data) => {
-  //   console.log("Current data: ", data);
-  // });
+  const { uid } = useAuthStatus();
+
   useEffect(() => {
     async function fetch() {
-      const data = await quoteSnapShot();
-      setQuoteLists(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      await onSnapshot(quotesRef, (document) => {
+        setQuoteLists(
+          document.docs.map((item) => ({ ...item.data(), id: item.id }))
+        );
+      });
 
-      // const q = query(
-      //   favoriteQuotesRef,
-      //   where("id_quote", "==", "UDrBdfJr57d6U77eOqWr")
-      // );
-      // const likedData = await favoriteQuoteSnapShot(q);
-      // setLikedLists(
-      //   likedData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      // );
+      await onSnapshot(favoriteQuotesRef, (document) => {
+        setLikedLists(
+          document.docs.map((item) => ({ ...item.data(), id: item.id }))
+        );
+      });
     }
     fetch();
   }, []);
+  // console.log("Current data: ", quoteLists, likedLists);
+
+  // 各quoteをループで回す
+  quoteLists.forEach((item) => {
+    // quoteごとのfavを配列で取得
+    console.log(item.id);
+    const isLikedList = likedLists.filter((fav) => (fav.id_quote === item.id && fav.id_user === uid));
+    if(isLikedList.length > 0) {
+      item.isLiked = true
+    } else {
+      item.isliked = false
+    }
+    // quote に上で取得した配列をセット
+    
+  });
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalQuote, setModalQuote] = useState();

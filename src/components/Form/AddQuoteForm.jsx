@@ -72,22 +72,18 @@ function AddQuoteForm({ closeModal }) {
   // CHARACTER
   const onChangeCharacter = async (e) => {
     setCharacter(e.target.value);
-    console.log(character);
     setShowCharacterList(true);
     const url = `https://api.themoviedb.org/3/tv/${tvShowTitleId}/credits?api_key=${API_KEY}&language=en-US`;
     await fetch(url)
       .then((result) => result.json())
       .then((result) => {
-        console.log(url);
         const newList = result.cast.filter(
           (item) =>
             item.character.toLowerCase().indexOf(character.toLowerCase()) >= 0
         );
 
         if (newList.length) {
-          console.log("newList", newList);
           setCharacterSuggestList(newList);
-          console.log("new list", characterSuggestList);
         }
       })
       .catch((err) => {
@@ -113,6 +109,7 @@ function AddQuoteForm({ closeModal }) {
       id_episode: "",
       id_user: uid,
       quote,
+      isLiked: false,
       updatedDate: new Date(),
       id_tvshow: tvShowTitleId,
       // id_character: characterId,
@@ -122,7 +119,6 @@ function AddQuoteForm({ closeModal }) {
       data.id_character = characterId;
 
       // ADD DATA TO FIRESTORE
-      addDoc(quotesRef, data);
       setDoc(doc(db, "character", characterId.toString()), {
         name: character,
         id_tvshow: tvShowTitleId,
@@ -130,9 +126,21 @@ function AddQuoteForm({ closeModal }) {
       setDoc(doc(db, "tvshow", tvShowTitleId.toString()), {
         title: tvShowTitle,
       });
+      addDoc(quotesRef, data);
     }
-    if (quote && tvShowTitleId) {
-      console.log("part 2");
+
+    // FOR IF THERE'S NO CHARACTER DATA IN API
+    else if (quote && tvShowTitleId) {
+      addDoc();
+
+      setDoc(doc(db, "tvshow", tvShowTitleId.toString()), {
+        title: tvShowTitle,
+      });
+
+      addDoc(quotesRef, data);
+
+      addDoc(quotesRef, data);
+      // console.log("part 2");
     }
 
     dispatch({ type: "ADD_QUOTE", data });
