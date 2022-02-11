@@ -3,9 +3,14 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 
-import { addDoc } from "firebase/firestore";
+import { addDoc, setDoc, doc } from "firebase/firestore";
 import Form from "./Form";
-import { quotesRef } from "../../firebase-config";
+import {
+  quotesRef,
+  // tvShowRef,
+  // tvCharacterRef,
+  db,
+} from "../../firebase-config";
 import useAuthStatus from "../../hooks/useAuthStatus";
 
 function AddQuoteForm({ closeModal }) {
@@ -56,9 +61,10 @@ function AddQuoteForm({ closeModal }) {
   };
 
   const handleTitleSetValue = (e) => {
-    setTvShowTitle(e.name);
-    setTvShowTitleId(e.id);
-
+    if (e.name && e.id) {
+      setTvShowTitle(e.name);
+      setTvShowTitleId(e.id);
+    }
     // CLOSE LIST
     setShowTitleList(false);
   };
@@ -72,12 +78,14 @@ function AddQuoteForm({ closeModal }) {
     await fetch(url)
       .then((result) => result.json())
       .then((result) => {
-        const newList = result.filter(
-          (item) => item.toLowerCase().indexOf(character.toLowerCase()) >= 0
+        console.log(url);
+        const newList = result.cast.filter(
+          (item) =>
+            item.character.toLowerCase().indexOf(character.toLowerCase()) >= 0
         );
 
         if (newList.length) {
-          console.log(newList, character);
+          console.log("newList", newList);
           setCharacterSuggestList(newList);
           console.log("new list", characterSuggestList);
         }
@@ -91,29 +99,44 @@ function AddQuoteForm({ closeModal }) {
   // makeList(["jake", "andy", "terry"], character);
 
   const handleCharacterSetValue = (e) => {
-    setCharacter(e.character);
-    setCharacterId(e.id);
-
-    setShowTitleList(false);
+    if (e.character && e.id) {
+      setCharacter(e.character);
+      setCharacterId(e.id);
+    }
+    setShowCharacterList(false);
   };
 
   const addQuoteHandler = async (e) => {
     e.preventDefault();
+    const data = {
+      createdDate: new Date(),
+      id_episode: "",
+      id_user: uid,
+      quote,
+      updatedDate: new Date(),
+      id_tvshow: tvShowTitleId,
+      // id_character: characterId,
+    };
+
     if (quote && characterId && tvShowTitleId) {
-      const data = {
-        createdDate: new Date(),
-        id_character: "",
-        id_episode: "",
-        id_tvshow: tvShowTitleId,
-        id_user: uid,
-        quote,
-        updatedDate: new Date(),
-      };
+      data.id_character = characterId;
+
+      // ADD DATA TO FIRESTORE
       addDoc(quotesRef, data);
-      console.log(data);
-      dispatch({ type: "ADD_QUOTE", data });
-      closeModal();
+      setDoc(doc(db, "character", characterId.toString()), {
+        name: character,
+        id_tvshow: tvShowTitleId,
+      });
+      setDoc(doc(db, "tvshow", tvShowTitleId.toString()), {
+        title: tvShowTitle,
+      });
     }
+    if (quote && tvShowTitleId) {
+      console.log("part 2");
+    }
+
+    dispatch({ type: "ADD_QUOTE", data });
+    closeModal();
     // else {
     //     alert('please fill in all fields!')
     // }

@@ -107,6 +107,15 @@ function Form({
                 </button>
               </li>
             ))}
+            <li>
+              <button
+                type="submit"
+                onClick={() => handleCharacterSetValue("other")}
+                className="hover:bg-red-100 flex justify-start items-center w-full"
+              >
+                <p>other than above</p>
+              </button>
+            </li>
           </ul>
         )}
 

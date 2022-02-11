@@ -50,6 +50,8 @@ export const favoriteQuotesRef = collection(db, "favorites_quote");
 export const tvShowRef = collection(db, "tvshow");
 export const favTvShowRef = collection(db, "favorites_tvshow");
 
+export const tvCharacterRef = collection(db, "character");
+
 export const quoteSnapShot = () => getDocs(quotesRef);
 export const favoriteQuoteSnapShot = () => getDocs(favoriteQuotesRef);
 
