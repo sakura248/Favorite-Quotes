@@ -1,20 +1,17 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-bind */
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
-import ReactLoading from "react-loading";
-import { onSnapshot, query, where, doc } from "firebase/firestore";
+// import ReactLoading from "react-loading";
+import { onSnapshot } from "firebase/firestore";
 
 import useAuthStatus from "../../hooks/useAuthStatus";
 
-// eslint-disable-next-line import/named
 import {
-  quoteSnapShot,
   quotesRef,
   favoriteQuotesRef,
-  db,
-  favoriteQuoteSnapShot,
+  tvShowRef,
+  tvCharacterRef,
 } from "../../firebase-config";
 import UpdateQuoteForm from "../Form/UpdateQuoteForm";
 
@@ -41,6 +38,8 @@ function Quote({
 }) {
   const [quoteLists, setQuoteLists] = useState([]);
   const [likedLists, setLikedLists] = useState([]);
+  const [tvShowList, setTvShowList] = useState([]);
+  const [characterList, setCharacterList] = useState([]);
 
   const { uid } = useAuthStatus();
 
@@ -57,23 +56,44 @@ function Quote({
           document.docs.map((item) => ({ ...item.data(), id: item.id }))
         );
       });
+
+      await onSnapshot(tvShowRef, (document) => {
+        setTvShowList(
+          document.docs.map((item) => ({ ...item.data(), id: item.id }))
+        );
+      });
+
+      await onSnapshot(tvCharacterRef, (document) => {
+        setCharacterList(
+          document.docs.map((item) => ({ ...item.data(), id: item.id }))
+        );
+      });
     }
     fetch();
   }, []);
-  // console.log("Current data: ", quoteLists, likedLists);
 
-  // 各quoteをループで回す
+  // ADJUSTING FOR RENDERING THE LIST
   quoteLists.forEach((item) => {
-    // quoteごとのfavを配列で取得
-    console.log(item.id);
-    const isLikedList = likedLists.filter((fav) => (fav.id_quote === item.id && fav.id_user === uid));
-    if(isLikedList.length > 0) {
-      item.isLiked = true
-    } else {
-      item.isliked = false
-    }
-    // quote に上で取得した配列をセット
-    
+    const element = item;
+
+    // TV SHOW
+    const tvShowData = tvShowList.filter(
+      (tvshow) => tvshow.id === item.id_tvshow.toString()
+    );
+    element.tvShow = tvShowData.map((el) => el.title);
+
+    // CHARACTER
+    const characterData = characterList.filter(
+      (character) => character.id === item.id_character.toString()
+    );
+    element.character = characterData.map((el) => el.name);
+
+    // LIKE BUTTON
+    const isLikedData = likedLists.filter(
+      (fav) => fav.id_quote === item.id && fav.id_user === uid
+    );
+
+    element.isLiked = isLikedData;
   });
 
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -83,10 +103,6 @@ function Quote({
     setIsOpen(true);
     setModalQuote(quote);
   }
-  // function afterOpenModal() {
-  // references are now sync'd and can be accessed.
-  // subtitle.style.color = '#f00';
-  // }
 
   function closeModal() {
     setIsOpen(false);
@@ -94,8 +110,6 @@ function Quote({
 
   return (
     <div>
-      {/* {console.log(likedList)} */}
-      {/* <ReactLoading /> */}
       {quoteLists &&
         quoteLists.map((quoteItem) => (
           <div
@@ -109,26 +123,35 @@ function Quote({
                     {quoteItem.quote}
                   </li>
                   <li className="quote quote-name my-1">
-                    {quoteItem.id_character}
+                    {quoteItem.character}
                   </li>
                   <li className="quote quote-show my-1">
-                    &quot;{quoteItem.id_tvShowTitle}&quot;
+                    &quot;{quoteItem.tvShow}&quot;
                   </li>
                 </ul>
               </button>
             </blockquote>
             <div key={quoteItem.id} className="edit-area flex flex-row">
-              <button type="button" onClick={() => favHandler(quoteItem.id)}>
-                {/* {isThisLiked(quoteItem.id)} */}
-                <svg
-                  className="pre-fav  m-2"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M19.5 10c-2.483 0-4.5 2.015-4.5 4.5s2.017 4.5 4.5 4.5 4.5-2.015 4.5-4.5-2.017-4.5-4.5-4.5zm2.5 5h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1zm-6.527 4.593c-1.108 1.086-2.275 2.219-3.473 3.407-6.43-6.381-12-11.147-12-15.808 0-4.005 3.098-6.192 6.281-6.192 2.197 0 4.434 1.042 5.719 3.248 1.279-2.195 3.521-3.238 5.726-3.238 3.177 0 6.274 2.171 6.274 6.182 0 .746-.156 1.496-.423 2.253-.527-.427-1.124-.768-1.769-1.014.122-.425.192-.839.192-1.239 0-2.873-2.216-4.182-4.274-4.182-3.257 0-4.976 3.475-5.726 5.021-.747-1.54-2.484-5.03-5.72-5.031-2.315-.001-4.28 1.516-4.28 4.192 0 3.442 4.742 7.85 10 13l2.109-2.064c.376.557.839 1.048 1.364 1.465z" />
-                </svg>
+              <button type="button" onClick={() => favHandler(quoteItem)}>
+                {quoteItem.isLiked.length > 0 ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M19.5 10c-2.483 0-4.5 2.015-4.5 4.5s2.017 4.5 4.5 4.5 4.5-2.015 4.5-4.5-2.017-4.5-4.5-4.5zm2.5 5h-5v-1h5v1zm-6.527 4.593c-1.108 1.086-2.275 2.219-3.473 3.407-6.43-6.381-12-11.147-12-15.808 0-6.769 8.852-8.346 12-2.944 3.125-5.362 12-3.848 12 2.944 0 .746-.156 1.496-.423 2.253-1.116-.902-2.534-1.445-4.077-1.445-3.584 0-6.5 2.916-6.5 6.5 0 2.063.97 3.901 2.473 5.093z" />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M19.5 10c-2.483 0-4.5 2.015-4.5 4.5s2.017 4.5 4.5 4.5 4.5-2.015 4.5-4.5-2.017-4.5-4.5-4.5zm2.5 5h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1zm-6.527 4.593c-1.108 1.086-2.275 2.219-3.473 3.407-6.43-6.381-12-11.147-12-15.808 0-4.005 3.098-6.192 6.281-6.192 2.197 0 4.434 1.042 5.719 3.248 1.279-2.195 3.521-3.238 5.726-3.238 3.177 0 6.274 2.171 6.274 6.182 0 .746-.156 1.496-.423 2.253-.527-.427-1.124-.768-1.769-1.014.122-.425.192-.839.192-1.239 0-2.873-2.216-4.182-4.274-4.182-3.257 0-4.976 3.475-5.726 5.021-.747-1.54-2.484-5.03-5.72-5.031-2.315-.001-4.28 1.516-4.28 4.192 0 3.442 4.742 7.85 10 13l2.109-2.064c.376.557.839 1.048 1.364 1.465z" />
+                  </svg>
+                )}
               </button>
               <button type="button" onClick={() => deleteHandler(quoteItem.id)}>
                 <svg
@@ -158,7 +181,6 @@ function Quote({
 }
 
 Quote.propTypes = {
-  // isLiked: PropTypes.bool.isRequired,
   favHandler: PropTypes.func.isRequired,
   deleteHandler: PropTypes.func.isRequired,
 };

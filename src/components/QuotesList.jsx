@@ -1,15 +1,22 @@
-import React from "react";
-// import { quoteReducer } from '../redux/quote/quote.reducers'
+/* eslint-disable no-unused-vars */
+import React from "react"; // useState
 import { useDispatch } from "react-redux";
 
 import Modal from "react-modal";
 import { useNavigate, useLocation } from "react-router-dom";
 import "firebase/firestore";
-import { deleteDoc, doc } from "firebase/firestore";
+import {
+  addDoc,
+  setDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+  query,
+  where,
+} from "firebase/firestore";
 import Quote from "./ListItem/Quote";
-// import { deleteQuote } from "../redux/quote/quote.actions";
 import useAuthStatus from "../hooks/useAuthStatus";
-import { quotesRef } from "../firebase-config";
+import { quotesRef, favoriteQuotesRef } from "../firebase-config";
 
 const appElement = document.getElementById("content");
 Modal.setAppElement(appElement);
@@ -32,8 +39,6 @@ function QuotesList() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // const [isLiked, setIsLiked] = useState(false);
-
   const dispatch = useDispatch();
 
   const deleteHandler = (id) => {
@@ -45,36 +50,44 @@ function QuotesList() {
         dispatch({ type: "DELETE_QUOTE", id });
       }
     } else {
-      console.log(location);
       navigate("/Login", { from: location });
     }
   };
 
-  const favHandler = (quoteId) => {
+  const favHandler = async (quoteItem) => {
     if (loggedIn) {
-      console.log("fave!", quoteId, uid);
-      // const data = favoriteQuoteSnapShot();
-      // console.log(data.quoteId);
-      // if(quoteId === id)
-      // setIsLiked(true);
-      // setIsFaved(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      if (quoteItem.isLiked.length === 0) {
+        const data = {
+          id_user: uid,
+          id_quote: quoteItem.id,
+        };
+        addDoc(favoriteQuotesRef, data);
+        setDoc(quotesRef, { isLiked: uid }, { merge: true });
+      } else {
+        const targetQuery = query(
+          favoriteQuotesRef,
+          where("id_quote", "==", quoteItem.id)
+        );
+        const querySnapShot = await getDocs(targetQuery);
+        const id = querySnapShot.docs.map((item) => item.id).toString();
+        const targetRef = doc(favoriteQuotesRef, id);
+        await deleteDoc(targetRef);
+
+        setDoc(quotesRef, { isLiked: "" }, { merge: true });
+      }
+    } else {
+      navigate("/Login", { from: location });
     }
 
     // setIsOpen(true);
     // } else {
-    //   console.log(location);
     //   navigate("/Login", { from: location });
     // }
   };
 
   return (
     <div className="container mx-auto">
-      <Quote
-        // openModal={openModal}
-        // isLiked={isLiked}
-        favHandler={favHandler}
-        deleteHandler={deleteHandler}
-      />
+      <Quote favHandler={favHandler} deleteHandler={deleteHandler} />
     </div>
   );
 }

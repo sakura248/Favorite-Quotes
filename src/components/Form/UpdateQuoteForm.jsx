@@ -13,7 +13,6 @@ import { quotesRef } from "../../firebase-config";
 import Form from "./Form";
 
 function UpdateQuoteForm({ closeModal, quoteItem }) {
-  // const quoteLists = useSelector(state => state.quoteLists)
   const [newQuote, setNewQuote] = useState(quoteItem.quote);
   const [newCharacter, setNewCharacter] = useState(quoteItem.character);
   const [newTvShowTitle, setNewTvShowTitle] = useState(quoteItem.tvShowTitle);

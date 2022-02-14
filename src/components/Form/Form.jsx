@@ -22,7 +22,6 @@ function Form({
   handleTitleSetValue,
   characterSuggestList,
   handleCharacterSetValue,
-  // makeList,
 }) {
   return (
     <div className="add-quote-wrapper">
@@ -86,7 +85,6 @@ function Form({
         />
 
         {/* CHRACTER */}
-        {/* {console.log(makeList(["jake", "andy", "terry"], "t"))} */}
         {characterSuggestList && showCharacterList && (
           <ul className="suggest-wrapper border-solid border border-gray-500 overflow-auto h-80">
             {characterSuggestList.map((item) => (
@@ -118,8 +116,6 @@ function Form({
             </li>
           </ul>
         )}
-
-        {/* {makeList(characterSuggestList, "x")} */}
 
         <input
           type="text"
@@ -160,7 +156,6 @@ Form.propTypes = {
   titleSuggestList: PropTypes.shape,
   handleTitleSetValue: PropTypes.func.isRequired,
   handleCharacterSetValue: PropTypes.func.isRequired,
-  // makeList: PropTypes.func.isRequired,
   characterSuggestList: PropTypes.shape,
 };
 

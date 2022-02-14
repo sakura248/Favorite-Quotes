@@ -1,12 +1,10 @@
-import React from 'react'
+// not using now
 
-const Hero = () => {
-    return (
-        <>
-            
+import React from "react";
 
-        </>
-    )
+function Hero() {
+  // eslint-disable-next-line react/jsx-filename-extension
+  return <>test</>;
 }
 
-export default Hero
+export default Hero;

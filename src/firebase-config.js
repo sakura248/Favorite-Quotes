@@ -4,13 +4,7 @@ import { getFirestore } from "firebase/firestore";
 import { collection, getDocs } from "firebase/firestore";
 
 // for auth
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  // signInWithRedirect,
-  // onAuthStateChanged,
-} from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 export const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
@@ -58,8 +52,4 @@ export const favoriteQuoteSnapShot = () => getDocs(favoriteQuotesRef);
 export const tvShowSnapShot = () => getDocs(tvShowRef);
 export const favSnapShot = () => getDocs(favTvShowRef);
 
-// export declare class Timestamp
-
 // export default firebaseApp
-
-//  ----- rrf test --------

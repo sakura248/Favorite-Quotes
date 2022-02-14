@@ -1,3 +1,5 @@
+// not using
+
 // import React from "react";
 import { addDoc } from "firebase/firestore";
 import { quotesRef } from "../firebase-config";
@@ -8,9 +10,9 @@ function SaveProduct() {
 
   const data = {
     createdDate: new Date(),
-    id_character: "",
+    id_character: Number,
     id_episode: "",
-    id_tvshow: "",
+    id_tvshow: Number,
     id_user: uid,
     quote: "hoge",
     updatedDate: new Date(),
