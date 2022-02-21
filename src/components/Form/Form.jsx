@@ -28,11 +28,16 @@ function Form({ errorMsg, form, value, onChange, onSubmit, onClose }) {
       onChange({ ...form, tvshow: e });
     }
   };
+  const onSelectCharacter = (e) => {
+    if (e.name & e.id) {
+      onChange({ ...form, character: e });
+    }
+  };
 
   return (
-    <div className="add-quote-wrapper">
+    <div className="add-quote-wrapper"> 
       <p className="quotation text-7xl">&quot;</p>
-      <form className="quote-form-wrapper" onSubmit={addOrUpdateQuoteHandler}>
+      <form className="quote-form-wrapper" onSubmit={onSubmit}>
         <textarea
           name="quote"
           id="quote"

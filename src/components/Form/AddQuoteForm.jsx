@@ -8,7 +8,7 @@ import { quotesRef, db } from "../../firebase-config";
 import useAuthStatus from "../../hooks/useAuthStatus";
 
 function AddQuoteForm({ closeModal }) {
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg] = useState("");
   // const [quote, setQuote] = useState("");
 
   // FOR TITLE
@@ -36,13 +36,6 @@ function AddQuoteForm({ closeModal }) {
   const { uid } = useAuthStatus();
 
   const dispatch = useDispatch();
-
-  // const onChangeQuote = (e) => {
-  //   setRegistration({ ...form, quote: e.target.value });
-  // };
-  // const onChangeEpisodeTitle = (e) => {
-  //   setRegistration({ ...form, episodeTitle: e.target.value });
-  // };
 
   // API SuggestList FUNCTIONS
   // const API_KEY = process.env.REACT_APP_movieApi;
