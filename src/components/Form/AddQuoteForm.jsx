@@ -14,97 +14,97 @@ function AddQuoteForm({ closeModal }) {
   // FOR TITLE
   const [form, setRegistration] = useState({
     quote: "",
-    tvShowTitle: "",
-    character: "",
     episodeTitle: "",
+    tvShow: {},
+    character: {},
   });
 
-  const [suggest, setSuggestList] = useState({
+  const [suggest] = useState({
     titleSuggestList: [],
     characterSuggestList: [],
   });
 
-  const [tvShowTitleId, setTvShowTitleId] = useState("");
-  // const [titleSuggestList, setTitleSuggestList] = useState([]);
-  const [showTitleList, setShowTitleList] = useState(false);
+  // const [tvShowTitleId, setTvShowTitleId] = useState("");
+  // // const [titleSuggestList, setTitleSuggestList] = useState([]);
+  // const [showTitleList, setShowTitleList] = useState(false);
 
-  // FOR CHATACTER
-  const [characterId, setCharacterId] = useState("");
-  // const [characterSuggestList, setCharacterSuggestList] = useState([]);
-  const [showCharacterList, setShowCharacterList] = useState(false);
+  // // FOR CHATACTER
+  // const [characterId, setCharacterId] = useState("");
+  // // const [characterSuggestList, setCharacterSuggestList] = useState([]);
+  // const [showCharacterList, setShowCharacterList] = useState(false);
 
   const { uid } = useAuthStatus();
 
   const dispatch = useDispatch();
 
-  const onChangeQuote = (e) => {
-    setRegistration({ ...form, quote: e.target.value });
-  };
-  const onChangeEpisodeTitle = (e) => {
-    setRegistration({ ...form, episodeTitle: e.target.value });
-  };
+  // const onChangeQuote = (e) => {
+  //   setRegistration({ ...form, quote: e.target.value });
+  // };
+  // const onChangeEpisodeTitle = (e) => {
+  //   setRegistration({ ...form, episodeTitle: e.target.value });
+  // };
 
   // API SuggestList FUNCTIONS
-  const API_KEY = process.env.REACT_APP_movieApi;
+  // const API_KEY = process.env.REACT_APP_movieApi;
 
-  // TITLE
-  const onChangeTvShowTitle = async (e) => {
-    setRegistration({ ...form, tvShowTitle: e.target.value });
-    setShowTitleList(true);
-    const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${form.tvShowTitle}&include_adult=false`;
-    await fetch(url)
-      .then((result) => result.json())
-      .then((result) =>
-        setSuggestList({ ...suggest, titleSuggestList: result.results })
-      )
-      .catch((err) => {
-        console.error(err);
-        setErrorMsg("API response error", err);
-      });
-  };
+  // // TITLE
+  // const onChangeTvShowTitle = async (e) => {
+  //   setRegistration({ ...form, tvShowTitle: e.target.value });
+  //   setShowTitleList(true);
+  //   const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${form.tvShowTitle}&include_adult=false`;
+  //   await fetch(url)
+  //     .then((result) => result.json())
+  //     .then((result) =>
+  //       setSuggestList({ ...suggest, titleSuggestList: result.results })
+  //     )
+  //     .catch((err) => {
+  //       console.error(err);
+  //       setErrorMsg("API response error", err);
+  //     });
+  // };
 
-  const handleTitleSetValue = (e) => {
-    if (e.name && e.id) {
-      setRegistration({ ...form, tvShowTitle: e.name });
-      setTvShowTitleId(e.id);
-    }
-    // CLOSE LIST
-    setShowTitleList(false);
-  };
+  // const handleTitleSetValue = (e) => {
+  //   if (e.name && e.id) {
+  //     setRegistration({ ...form, tvShowTitle: e.name });
+  //     setTvShowTitleId(e.id);
+  //   }
+  //   // CLOSE LIST
+  //   setShowTitleList(false);
+  // };
 
-  // CHARACTER
-  const onChangeCharacter = async (e) => {
-    setRegistration({ ...form, character: e.target.value });
-    setShowCharacterList(true);
-    const url = `https://api.themoviedb.org/3/tv/${tvShowTitleId}/credits?api_key=${API_KEY}&language=en-US`;
-    await fetch(url)
-      .then((result) => result.json())
-      .then((result) => {
-        const newList = result.cast.filter(
-          (item) =>
-            item.character
-              .toLowerCase()
-              .indexOf(form.character.toLowerCase()) >= 0
-        );
+  // // CHARACTER
+  // const onChangeCharacter = async (e) => {
+  //   setRegistration({ ...form, character: e.target.value });
+  //   setShowCharacterList(true);
+  //   const url = `https://api.themoviedb.org/3/tv/${tvShowTitleId}/credits?api_key=${API_KEY}&language=en-US`;
+  //   await fetch(url)
+  //     .then((result) => result.json())
+  //     .then((result) => {
+  //       const newList = result.cast.filter(
+  //         (item) =>
+  //           item.character
+  //             .toLowerCase()
+  //             .indexOf(form.character.toLowerCase()) >= 0
+  //       );
 
-        if (newList.length) {
-          // setCharacterSuggestList(newList);
-          setSuggestList({ ...suggest, characterSuggestList: newList });
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        setErrorMsg("API response error", err);
-      });
-  };
+  //       if (newList.length) {
+  //         // setCharacterSuggestList(newList);
+  //         setSuggestList({ ...suggest, characterSuggestList: newList });
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       setErrorMsg("API response error", err);
+  //     });
+  // };
 
-  const handleCharacterSetValue = (e) => {
-    if (e.character && e.id) {
-      setRegistration({ ...form, character: e.character });
-      setCharacterId(e.id);
-    }
-    setShowCharacterList(false);
-  };
+  // const handleCharacterSetValue = (e) => {
+  //   if (e.character && e.id) {
+  //     setRegistration({ ...form, character: e.character });
+  //     setCharacterId(e.id);
+  //   }
+  //   setShowCharacterList(false);
+  // };
 
   const addQuoteHandler = async (e) => {
     e.preventDefault();
@@ -150,23 +150,27 @@ function AddQuoteForm({ closeModal }) {
   return (
     <Form
       errorMsg={errorMsg}
-      addOrUpdateQuoteHandler={addQuoteHandler}
-      onChangeQuote={onChangeQuote}
-      onChangeCharacter={onChangeCharacter}
-      onChangeTvShowTitle={onChangeTvShowTitle}
-      onChangeEpisodeTitle={onChangeEpisodeTitle}
-      quote={form.quote}
-      character={form.character}
-      tvShowTitle={form.tvShowTitle}
-      episodeTitle={form.episodeTitle}
-      titleSuggestList={suggest.titleSuggestList}
+      form={form}
+      // addOrUpdateQuoteHandler={addQuoteHandler}
+      // onChangeQuote={onChangeQuote}
+      // onChangeCharacter={onChangeCharacter}
+      // onChangeTvShowTitle={onChangeTvShowTitle}
+      // onChangeEpisodeTitle={onChangeEpisodeTitle}
+      // quote={form.quote}
+      // character={form.character}
+      // tvShowTitle={form.tvShowTitle}
+      // episodeTitle={form.episodeTitle}
+      // titleSuggestList={suggest.titleSuggestList}
       value="ADD"
-      closeModal={closeModal}
-      showTitleList={showTitleList}
-      showCharacterList={showCharacterList}
-      characterSuggestList={suggest.characterSuggestList}
-      handleTitleSetValue={handleTitleSetValue}
-      handleCharacterSetValue={handleCharacterSetValue}
+      onChange={setRegistration}
+      onSubmit={addQuoteHandler}
+      titleSuggestList={suggest.titleSuggestList}
+      onClose={closeModal}
+      // showTitleList={showTitleList}
+      // showCharacterList={showCharacterList}
+      // characterSuggestList={suggest.characterSuggestList}
+      // handleTitleSetValue={handleTitleSetValue}
+      // handleCharacterSetValue={handleCharacterSetValue}
     />
   );
 }

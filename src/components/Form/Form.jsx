@@ -1,28 +1,34 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/require-default-props */
 import React from "react";
 import PropTypes from "prop-types";
 
-function Form({
-  errorMsg,
-  addOrUpdateQuoteHandler,
-  quote,
-  onChangeQuote,
-  onChangeCharacter,
-  character,
-  tvShowTitle,
-  episodeTitle,
-  onChangeTvShowTitle,
-  value,
-  closeModal,
-  onChangeEpisodeTitle,
-  showTitleList,
-  showCharacterList,
-  titleSuggestList,
-  handleTitleSetValue,
-  characterSuggestList,
-  handleCharacterSetValue,
-}) {
+const API_KEY = process.env.REACT_APP_movieApi;
+function Form({ errorMsg, form, value, onChange, onSubmit, onClose }) {
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const onChangeQuote = (e) => {
+    onChange({ ...form, quote: e.target.value });
+  };
+  const onChangeEpisodeTitle = (e) => {
+    onChange({ ...form, episodeTitle: e.target.value });
+  };
+  const onChangeTvShowTitle = (e) => {
+    onChange({ ...form, tvShow: { ...form.tvShow, name: e.target.value } });
+  };
+  const onChangeCharacter = (e) => {
+    onChange({
+      ...form,
+      character: { ...form.character, name: e.target.value },
+    });
+  };
+  const onSelectTitle = (e) => {
+    if (e.name & e.id) {
+      onChange({ ...form, tvshow: e });
+    }
+  };
+
   return (
     <div className="add-quote-wrapper">
       <p className="quotation text-7xl">&quot;</p>
