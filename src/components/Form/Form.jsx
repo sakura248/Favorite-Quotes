@@ -34,8 +34,10 @@ function Form({ errorMsg, form, value, onChange, onSubmit, onClose }) {
     }
   };
 
+  const { quote, episodeTitle, character, tvShow } = form;
+
   return (
-    <div className="add-quote-wrapper"> 
+    <div className="add-quote-wrapper">
       <p className="quotation text-7xl">&quot;</p>
       <form className="quote-form-wrapper" onSubmit={onSubmit}>
         <textarea
@@ -52,39 +54,25 @@ function Form({ errorMsg, form, value, onChange, onSubmit, onClose }) {
 
         <input
           type="text"
-          value={tvShowTitle}
+          value={tvShow.name}
           onChange={onChangeTvShowTitle}
+          onFetchlist={async () => {
+            const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${form.tvShowTitle}&include_adult=false`;
+            const result = await fetch(url);
+            try {
+              const json = await result.json();
+              return json.results;
+            } catch (err) {
+              console.error(err);
+              setErrorMsg("API response error", err);
+              return [];
+            }
+          }}
+          onSelect={onSelectTitle}
+          onSelectOther={() => {}}
           placeholder="Which TV show?"
-          className="p-2 border-solid border border-black focus:border-primary-orange"
-          required="required"
         />
-        {titleSuggestList && showTitleList && (
-          <ul className="suggest-wrapper border-solid border border-gray-500 overflow-auto h-80">
-            {titleSuggestList.map((item) => (
-              <li key={item.id} className="title-suggest-list">
-                <button
-                  type="submit"
-                  onClick={() => handleTitleSetValue(item)}
-                  className="hover:bg-red-100 flex justify-start items-center w-full"
-                >
-                  {item.poster_path && (
-                    <img
-                      src={`https://image.tmdb.org/t/p/w200/${item.poster_path}`}
-                      alt="item"
-                      className="mx-5 w-14"
-                    />
-                  )}
-                  {item.name}
-                  {item.origin_country.length > 0 &&
-                    ` (${item.origin_country})`}
-                  <span className="text-sm text-gray-500">
-                    {item.first_air_date && item.first_air_date}
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
+
         {errorMsg.length > 0 && <p>{errorMsg}</p>}
         <input
           type="text"
@@ -95,7 +83,6 @@ function Form({ errorMsg, form, value, onChange, onSubmit, onClose }) {
           required="required"
         />
 
-        {/* CHRACTER */}
         {characterSuggestList && showCharacterList && (
           <ul className="suggest-wrapper border-solid border border-gray-500 overflow-auto h-80">
             {characterSuggestList.map((item) => (
@@ -133,7 +120,7 @@ function Form({ errorMsg, form, value, onChange, onSubmit, onClose }) {
           value={episodeTitle}
           onChange={onChangeEpisodeTitle}
           placeholder="Which episode?"
-          className="p-2 border-solid border border-black focus:border-primary-orange"
+          // className="p-2 border-solid border border-black focus:border-primary-orange"
         />
         <button
           type="submit"
@@ -142,7 +129,7 @@ function Form({ errorMsg, form, value, onChange, onSubmit, onClose }) {
           {value}
         </button>
       </form>
-      <button type="button" className="close-btn" onClick={closeModal}>
+      <button type="button" className="close-btn" onClick={onClose}>
         close
       </button>
     </div>

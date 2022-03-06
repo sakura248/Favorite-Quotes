@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { addDoc, setDoc, doc } from "firebase/firestore";
@@ -9,29 +9,13 @@ import useAuthStatus from "../../hooks/useAuthStatus";
 
 function AddQuoteForm({ closeModal }) {
   const [errorMsg] = useState("");
-  // const [quote, setQuote] = useState("");
 
-  // FOR TITLE
   const [form, setRegistration] = useState({
     quote: "",
     episodeTitle: "",
     tvShow: {},
     character: {},
   });
-
-  const [suggest] = useState({
-    titleSuggestList: [],
-    characterSuggestList: [],
-  });
-
-  // const [tvShowTitleId, setTvShowTitleId] = useState("");
-  // // const [titleSuggestList, setTitleSuggestList] = useState([]);
-  // const [showTitleList, setShowTitleList] = useState(false);
-
-  // // FOR CHATACTER
-  // const [characterId, setCharacterId] = useState("");
-  // // const [characterSuggestList, setCharacterSuggestList] = useState([]);
-  // const [showCharacterList, setShowCharacterList] = useState(false);
 
   const { uid } = useAuthStatus();
 
@@ -102,6 +86,7 @@ function AddQuoteForm({ closeModal }) {
   const addQuoteHandler = async (e) => {
     e.preventDefault();
     const quoteContent = form.quote;
+
     const data = {
       createdDate: new Date(),
       id_episode: "",
@@ -110,6 +95,13 @@ function AddQuoteForm({ closeModal }) {
       updatedDate: new Date(),
       id_tvshow: tvShowTitleId,
     };
+
+    const [suggest, setSuggestList] = useState({
+      titleSuggestList: [],
+      characterSuggestList: [],
+    });
+    const [tvShowTitleId, setTvShowTitleId] = useState("");
+    const [characterId, setCharacterId] = useState("");
 
     if (quoteContent && characterId && tvShowTitleId) {
       data.id_character = characterId;
@@ -135,9 +127,6 @@ function AddQuoteForm({ closeModal }) {
 
     dispatch({ type: "ADD_QUOTE", data });
     closeModal();
-    // else {
-    //     alert('please fill in all fields!')
-    // }
   };
 
   return (
