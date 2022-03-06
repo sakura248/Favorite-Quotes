@@ -55,7 +55,7 @@ function StickFooter() {
     <>
       <button
         id="add-button"
-        className="fixed bg-primary-orange hover:primary-orange-hover w-16 h-16 right-8 bottom-8 rounded-full"
+        className="fixed bg-primary-orange hover:bg-primary-orange-hover w-16 h-16 right-8 bottom-8 rounded-full transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300"
         onClick={openModalHandle}
         type="button"
       >
