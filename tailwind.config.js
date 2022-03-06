@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "bg-color": "#f2f2f2",
-        "primary-orange": "#FE4C04",
+        "bg-color": "#eff0f3",
+        "primary-orange": "#ff8e3c",
         "primary-orange-hover": "rgb(255,73,0,0.6)",
       },
     },

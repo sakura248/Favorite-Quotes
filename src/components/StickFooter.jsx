@@ -24,7 +24,6 @@ export const customStyles = {
 };
 
 function StickFooter() {
-  // let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
   const { loggedIn } = useAuthStatus();
   const location = useLocation();
@@ -42,8 +41,8 @@ function StickFooter() {
     }
   }
   // function afterOpenModal() {
-  //     // references are now sync'd and can be accessed.
-  //     // subtitle.style.color = '#f00';
+  // references are now sync'd and can be accessed.
+  // subtitle.style.color = '#f00';
   // }
 
   function closeModal() {
@@ -56,11 +55,11 @@ function StickFooter() {
     <>
       <button
         id="add-button"
-        className="fixed bg-primary-orange hover:primary-orange-hover w-20 h-20 right-8 bottom-8 rounded-full"
+        className="fixed bg-primary-orange hover:primary-orange-hover w-16 h-16 right-8 bottom-8 rounded-full"
         onClick={openModalHandle}
         type="button"
       >
-        <span className="plus-icon-border relative inline-block align-middle leading-none w-12 h-1 z-50 bg-current" />
+        <span className="plus-icon-border relative inline-block align-middle leading-none w-9 h-1 z-50 bg-current" />
       </button>
 
       <Modal

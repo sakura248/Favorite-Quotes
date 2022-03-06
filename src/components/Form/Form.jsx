@@ -1,35 +1,43 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable react/no-unused-prop-types */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/require-default-props */
-import React from "react";
+import React from "react"; //  { useState }
 import PropTypes from "prop-types";
+import Input from "./Input";
+import InputSuggest from "./InputSuggest";
 
 const API_KEY = process.env.REACT_APP_movieApi;
-function Form({ errorMsg, form, value, onChange, onSubmit, onClose }) {
-  const [errorMsg, setErrorMsg] = useState("");
-
+function Form({ errorMsg, onChange, form, value, onSubmit, onClose }) {
   const onChangeQuote = (e) => {
     onChange({ ...form, quote: e.target.value });
   };
+
   const onChangeEpisodeTitle = (e) => {
     onChange({ ...form, episodeTitle: e.target.value });
   };
-  const onChangeTvShowTitle = (e) => {
+
+  const onChangeTvShowTitle = async (e) => {
     onChange({ ...form, tvShow: { ...form.tvShow, name: e.target.value } });
   };
-  const onChangeCharacter = (e) => {
+
+  const onChangeCharacter = async (e) => {
     onChange({
       ...form,
       character: { ...form.character, name: e.target.value },
     });
   };
+
   const onSelectTitle = (e) => {
-    if (e.name & e.id) {
-      onChange({ ...form, tvshow: e });
+    if (e.name && e.id) {
+      onChange({ ...form, tvShow: e });
     }
   };
+
+  // CHARACTER
   const onSelectCharacter = (e) => {
-    if (e.name & e.id) {
+    if (e.character && e.id) {
       onChange({ ...form, character: e });
     }
   };
@@ -52,8 +60,9 @@ function Form({ errorMsg, form, value, onChange, onSubmit, onClose }) {
           required="required"
         />
 
-        <input
+        <InputSuggest
           type="text"
+          required
           value={tvShow.name}
           onChange={onChangeTvShowTitle}
           onFetchlist={async () => {
@@ -64,7 +73,7 @@ function Form({ errorMsg, form, value, onChange, onSubmit, onClose }) {
               return json.results;
             } catch (err) {
               console.error(err);
-              setErrorMsg("API response error", err);
+              // setErrorMsg("API response error", err);
               return [];
             }
           }}
@@ -74,53 +83,33 @@ function Form({ errorMsg, form, value, onChange, onSubmit, onClose }) {
         />
 
         {errorMsg.length > 0 && <p>{errorMsg}</p>}
-        <input
-          type="text"
+
+        <InputSuggest
+          required
+          value={character.name}
           onChange={onChangeCharacter}
-          value={character}
-          placeholder="Who said?"
-          className="p-2 border-solid border border-black focus:border-primary-orange"
-          required="required"
+          onFetchlist={async () => {
+            const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${form.tvShowTitle}&include_adult=false`;
+            const result = await fetch(url);
+            try {
+              const json = await result.json();
+              return json.results;
+            } catch (err) {
+              console.error(err);
+              // setErrorMsg("API response error", err);
+              return [];
+            }
+          }}
+          onSelect={onSelectCharacter}
+          onSelectOther={() => {}}
+          placeholder="Which character?"
         />
+        {errorMsg.length > 0 && <p>{errorMsg}</p>}
 
-        {characterSuggestList && showCharacterList && (
-          <ul className="suggest-wrapper border-solid border border-gray-500 overflow-auto h-80">
-            {characterSuggestList.map((item) => (
-              <li key={item.id} className="title-suggest-list">
-                <button
-                  type="submit"
-                  onClick={() => handleCharacterSetValue(item)}
-                  className="hover:bg-red-100 flex justify-start items-center w-full"
-                >
-                  {item.profile_path && (
-                    <img
-                      src={`https://image.tmdb.org/t/p/w200/${item.profile_path}`}
-                      alt="item"
-                      className="mx-5 w-14"
-                    />
-                  )}
-                  {item.character}
-                </button>
-              </li>
-            ))}
-            <li>
-              <button
-                type="submit"
-                onClick={() => handleCharacterSetValue("other")}
-                className="hover:bg-red-100 flex justify-start items-center w-full"
-              >
-                <p>other than above</p>
-              </button>
-            </li>
-          </ul>
-        )}
-
-        <input
-          type="text"
+        <Input
           value={episodeTitle}
           onChange={onChangeEpisodeTitle}
           placeholder="Which episode?"
-          // className="p-2 border-solid border border-black focus:border-primary-orange"
         />
         <button
           type="submit"

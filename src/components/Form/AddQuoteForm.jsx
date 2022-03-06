@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
@@ -21,68 +22,6 @@ function AddQuoteForm({ closeModal }) {
 
   const dispatch = useDispatch();
 
-  // API SuggestList FUNCTIONS
-  // const API_KEY = process.env.REACT_APP_movieApi;
-
-  // // TITLE
-  // const onChangeTvShowTitle = async (e) => {
-  //   setRegistration({ ...form, tvShowTitle: e.target.value });
-  //   setShowTitleList(true);
-  //   const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${form.tvShowTitle}&include_adult=false`;
-  //   await fetch(url)
-  //     .then((result) => result.json())
-  //     .then((result) =>
-  //       setSuggestList({ ...suggest, titleSuggestList: result.results })
-  //     )
-  //     .catch((err) => {
-  //       console.error(err);
-  //       setErrorMsg("API response error", err);
-  //     });
-  // };
-
-  // const handleTitleSetValue = (e) => {
-  //   if (e.name && e.id) {
-  //     setRegistration({ ...form, tvShowTitle: e.name });
-  //     setTvShowTitleId(e.id);
-  //   }
-  //   // CLOSE LIST
-  //   setShowTitleList(false);
-  // };
-
-  // // CHARACTER
-  // const onChangeCharacter = async (e) => {
-  //   setRegistration({ ...form, character: e.target.value });
-  //   setShowCharacterList(true);
-  //   const url = `https://api.themoviedb.org/3/tv/${tvShowTitleId}/credits?api_key=${API_KEY}&language=en-US`;
-  //   await fetch(url)
-  //     .then((result) => result.json())
-  //     .then((result) => {
-  //       const newList = result.cast.filter(
-  //         (item) =>
-  //           item.character
-  //             .toLowerCase()
-  //             .indexOf(form.character.toLowerCase()) >= 0
-  //       );
-
-  //       if (newList.length) {
-  //         // setCharacterSuggestList(newList);
-  //         setSuggestList({ ...suggest, characterSuggestList: newList });
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //       setErrorMsg("API response error", err);
-  //     });
-  // };
-
-  // const handleCharacterSetValue = (e) => {
-  //   if (e.character && e.id) {
-  //     setRegistration({ ...form, character: e.character });
-  //     setCharacterId(e.id);
-  //   }
-  //   setShowCharacterList(false);
-  // };
-
   const addQuoteHandler = async (e) => {
     e.preventDefault();
     const quoteContent = form.quote;
@@ -95,13 +34,6 @@ function AddQuoteForm({ closeModal }) {
       updatedDate: new Date(),
       id_tvshow: tvShowTitleId,
     };
-
-    const [suggest, setSuggestList] = useState({
-      titleSuggestList: [],
-      characterSuggestList: [],
-    });
-    const [tvShowTitleId, setTvShowTitleId] = useState("");
-    const [characterId, setCharacterId] = useState("");
 
     if (quoteContent && characterId && tvShowTitleId) {
       data.id_character = characterId;
@@ -118,12 +50,12 @@ function AddQuoteForm({ closeModal }) {
     }
 
     // 🚧 Modifying🚧 FOR IF THERE'S NO CHARACTER DATA IN API
-    else if (quoteContent && tvShowTitleId) {
-      setDoc(doc(db, "tvshow", tvShowTitleId.toString()), {
-        title: form.tvShowTitle,
-      });
-      addDoc(quotesRef, data);
-    }
+    // else if (quoteContent && tvShowTitleId) {
+    //   setDoc(doc(db, "tvshow", tvShowTitleId.toString()), {
+    //     title: form.tvShowTitle,
+    //   });
+    //   addDoc(quotesRef, data);
+    // }
 
     dispatch({ type: "ADD_QUOTE", data });
     closeModal();
@@ -133,26 +65,11 @@ function AddQuoteForm({ closeModal }) {
     <Form
       errorMsg={errorMsg}
       form={form}
-      // addOrUpdateQuoteHandler={addQuoteHandler}
-      // onChangeQuote={onChangeQuote}
-      // onChangeCharacter={onChangeCharacter}
-      // onChangeTvShowTitle={onChangeTvShowTitle}
-      // onChangeEpisodeTitle={onChangeEpisodeTitle}
-      // quote={form.quote}
-      // character={form.character}
-      // tvShowTitle={form.tvShowTitle}
-      // episodeTitle={form.episodeTitle}
-      // titleSuggestList={suggest.titleSuggestList}
       value="ADD"
       onChange={setRegistration}
       onSubmit={addQuoteHandler}
       titleSuggestList={suggest.titleSuggestList}
       onClose={closeModal}
-      // showTitleList={showTitleList}
-      // showCharacterList={showCharacterList}
-      // characterSuggestList={suggest.characterSuggestList}
-      // handleTitleSetValue={handleTitleSetValue}
-      // handleCharacterSetValue={handleCharacterSetValue}
     />
   );
 }
