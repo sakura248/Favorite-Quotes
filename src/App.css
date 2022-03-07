@@ -1,8 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=IM+Fell+French+Canon&family=Libre+Baskerville:wght@400;700&family=Lily+Script+One&family=Syncopate:wght@400;700&display=swap");
 
 body {
   font-family: Libre Baskerville;
-  background-color: #f9f4ef;
+  background-color: #f3f3f3;
   /* color: #716040; */
   margin: 0;
   padding: 0;

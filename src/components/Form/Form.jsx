@@ -56,7 +56,7 @@ function Form({ errorMsg, onChange, form, value, onSubmit, onClose }) {
           // defaultValue="Type the quote.."
           value={quote}
           onChange={onChangeQuote}
-          className="p-2 border-solid border border-black focus:border-primary-orange"
+          className="p-2 border-solid border border-black focus:border-primary"
           required="required"
         />
 
@@ -113,7 +113,7 @@ function Form({ errorMsg, onChange, form, value, onSubmit, onClose }) {
         />
         <button
           type="submit"
-          className="submit-btn border-none text-white bg-primary-orange text-lg w-2/5 my-4 py-4"
+          className="submit-btn border-none text-white bg-primary text-lg w-2/5 my-4 py-4"
         >
           {value}
         </button>
