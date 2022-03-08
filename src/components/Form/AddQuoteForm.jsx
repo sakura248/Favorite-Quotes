@@ -18,6 +18,11 @@ function AddQuoteForm({ closeModal }) {
     character: {},
   });
 
+  const [suggest] = useState({
+    titleSuggestList: [],
+    characterSuggestList: [],
+  });
+
   const { uid } = useAuthStatus();
 
   const dispatch = useDispatch();

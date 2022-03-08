@@ -71,7 +71,8 @@ function UpdateQuoteForm({ closeModal, quoteItem }) {
 
 UpdateQuoteForm.propTypes = {
   closeModal: PropTypes.func.isRequired,
-  quoteItem: PropTypes.shape.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  quoteItem: PropTypes.shape,
 };
 
 export default UpdateQuoteForm;
