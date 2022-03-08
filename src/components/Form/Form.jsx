@@ -1,6 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/no-unused-prop-types */
-/* eslint-disable react/prop-types */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/require-default-props */
 import React from "react"; //  { useState }
@@ -9,7 +9,14 @@ import Input from "./Input";
 import InputSuggest from "./InputSuggest";
 
 const API_KEY = process.env.REACT_APP_movieApi;
-function Form({ errorMsg, onChange, form, value, onSubmit, onClose }) {
+function Form({
+  // errorMsg,
+  onChange,
+  form,
+  value,
+  onSubmit,
+  onClose,
+}) {
   const onChangeQuote = (e) => {
     onChange({ ...form, quote: e.target.value });
   };
@@ -35,14 +42,13 @@ function Form({ errorMsg, onChange, form, value, onSubmit, onClose }) {
     }
   };
 
-  // CHARACTER
   const onSelectCharacter = (e) => {
     if (e.character && e.id) {
       onChange({ ...form, character: e });
     }
   };
 
-  const { quote, episodeTitle, character, tvShow } = form;
+  const { quote, episodeTitle, tvShow, character } = form || {};
 
   return (
     <div className="add-quote-wrapper">
@@ -60,10 +66,10 @@ function Form({ errorMsg, onChange, form, value, onSubmit, onClose }) {
           required="required"
         />
 
-        <InputSuggest
+        {/* <InputSuggest
           type="text"
           required
-          value={tvShow.name}
+          // value={tvShow.name}
           onChange={onChangeTvShowTitle}
           onFetchlist={async () => {
             const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${form.tvShowTitle}&include_adult=false`;
@@ -80,13 +86,13 @@ function Form({ errorMsg, onChange, form, value, onSubmit, onClose }) {
           onSelect={onSelectTitle}
           onSelectOther={() => {}}
           placeholder="Which TV show?"
-        />
+        /> */}
 
-        {errorMsg.length > 0 && <p>{errorMsg}</p>}
+        {/* {errorMsg.length > 0 && <p>{errorMsg}</p>} */}
 
-        <InputSuggest
+        {/* <InputSuggest
           required
-          value={character.name}
+          // value={character.name}
           onChange={onChangeCharacter}
           onFetchlist={async () => {
             const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${form.tvShowTitle}&include_adult=false`;
@@ -104,7 +110,7 @@ function Form({ errorMsg, onChange, form, value, onSubmit, onClose }) {
           onSelectOther={() => {}}
           placeholder="Which character?"
         />
-        {errorMsg.length > 0 && <p>{errorMsg}</p>}
+        {errorMsg.length > 0 && <p>{errorMsg}</p>} */}
 
         <Input
           value={episodeTitle}
@@ -126,24 +132,12 @@ function Form({ errorMsg, onChange, form, value, onSubmit, onClose }) {
 }
 
 Form.propTypes = {
-  errorMsg: PropTypes.string.isRequired,
-  addOrUpdateQuoteHandler: PropTypes.func.isRequired,
-  quote: PropTypes.string.isRequired,
-  onChangeQuote: PropTypes.func.isRequired,
-  onChangeCharacter: PropTypes.func.isRequired,
-  character: PropTypes.string.isRequired,
-  tvShowTitle: PropTypes.string.isRequired,
-  episodeTitle: PropTypes.string.isRequired,
-  onChangeTvShowTitle: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
-  closeModal: PropTypes.func.isRequired,
-  onChangeEpisodeTitle: PropTypes.func.isRequired,
-  showTitleList: PropTypes.bool.isRequired,
-  showCharacterList: PropTypes.bool.isRequired,
-  titleSuggestList: PropTypes.shape,
-  handleTitleSetValue: PropTypes.func.isRequired,
-  handleCharacterSetValue: PropTypes.func.isRequired,
-  characterSuggestList: PropTypes.shape,
+  onChange: PropTypes.func,
+  form: PropTypes.objectOf(PropTypes.any),
+  value: PropTypes.string,
+  // value: PropTypes.objectOf(PropTypes.any),
+  onSubmit: PropTypes.func,
+  onClose: PropTypes.func,
 };
 
 export default Form;

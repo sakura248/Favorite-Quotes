@@ -1,5 +1,7 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 
 function Input({ value, required, onChange, placeholder }) {
   return (
@@ -13,5 +15,13 @@ function Input({ value, required, onChange, placeholder }) {
     />
   );
 }
+
+Input.propTypes = {
+  value: PropTypes.string,
+  // value: PropTypes.objectOf(PropTypes.any),
+  placeholder: PropTypes.string,
+  required: PropTypes.bool,
+  onChange: PropTypes.func,
+};
 
 export default Input;
