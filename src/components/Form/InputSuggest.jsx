@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/require-default-props */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/prop-types */
@@ -20,6 +21,8 @@ function InputSuggest({
   const [list, setList] = useState([]);
 
   const _onChange = async (e) => {
+    // eslint-disable-next-line no-debugger
+    debugger;
     setShowSuggest(true);
     onChange(e);
     const res = await onFetchList();
@@ -27,11 +30,15 @@ function InputSuggest({
   };
 
   const _onSelect = (item) => {
+    // eslint-disable-next-line no-debugger
+    debugger;
     onSelect(item);
     setShowSuggest(false);
   };
 
   const _onSelectOther = () => {
+    // eslint-disable-next-line no-debugger
+    debugger;
     onSelectOther();
     setShowSuggest(false);
   };
@@ -39,12 +46,12 @@ function InputSuggest({
   return (
     <div>
       <Input
-        value={value}
+        value=""
         onChange={_onChange}
         placeholder={placeholder}
         required={required}
       />
-      {showSuggest && (
+      {/* {showSuggest && (
         <ul className="suggest-wrapper border-solid border border-gray-500 overflow-auto h-80">
           {list.map((item) => (
             <li key={item.id} className="title-suggest-list">
@@ -74,7 +81,7 @@ function InputSuggest({
             </button>
           </li>
         </ul>
-      )}
+      )} */}
     </div>
   );
 }

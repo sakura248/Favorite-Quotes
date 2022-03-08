@@ -18,18 +18,26 @@ function Form({
   onClose,
 }) {
   const onChangeQuote = (e) => {
+    // eslint-disable-next-line no-debugger
+    debugger;
     onChange({ ...form, quote: e.target.value });
   };
 
   const onChangeEpisodeTitle = (e) => {
+    // eslint-disable-next-line no-debugger
+    debugger;
     onChange({ ...form, episodeTitle: e.target.value });
   };
 
   const onChangeTvShowTitle = async (e) => {
+    // eslint-disable-next-line no-debugger
+    debugger;
     onChange({ ...form, tvShow: { ...form.tvShow, name: e.target.value } });
   };
 
   const onChangeCharacter = async (e) => {
+    // eslint-disable-next-line no-debugger
+    debugger;
     onChange({
       ...form,
       character: { ...form.character, name: e.target.value },
@@ -50,6 +58,9 @@ function Form({
 
   const { quote, episodeTitle, tvShow, character } = form || {};
 
+  // eslint-disable-next-line no-debugger
+  debugger;
+
   return (
     <div className="add-quote-wrapper">
       <p className="quotation text-7xl">&quot;</p>
@@ -66,7 +77,7 @@ function Form({
           required="required"
         />
 
-        {/* <InputSuggest
+        <InputSuggest
           type="text"
           required
           // value={tvShow.name}
@@ -86,7 +97,7 @@ function Form({
           onSelect={onSelectTitle}
           onSelectOther={() => {}}
           placeholder="Which TV show?"
-        /> */}
+        />
 
         {/* {errorMsg.length > 0 && <p>{errorMsg}</p>} */}
 
@@ -107,10 +118,9 @@ function Form({
             }
           }}
           onSelect={onSelectCharacter}
-          onSelectOther={() => {}}
+          // onSelectOther={() => {}}
           placeholder="Which character?"
-        />
-        {errorMsg.length > 0 && <p>{errorMsg}</p>} */}
+        /> */}
 
         <Input
           value={episodeTitle}
