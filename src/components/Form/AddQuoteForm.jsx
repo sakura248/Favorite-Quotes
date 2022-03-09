@@ -40,16 +40,16 @@ function AddQuoteForm({ closeModal }) {
       id_tvshow: tvShowTitleId,
     };
 
-    if (quoteContent && characterId && tvShowTitleId) {
+    if (quoteContent && characterId && form.tvShow.id) {
       data.id_character = characterId;
 
       // ADD DATA TO FIRESTORE
       setDoc(doc(db, "character", characterId.toString()), {
         name: form.character,
-        id_tvshow: form.tvShowTitleId,
+        id_tvshow: form.tvShow.id,
       });
-      setDoc(doc(db, "tvshow", tvShowTitleId.toString()), {
-        title: form.tvShowTitle,
+      setDoc(doc(db, "tvshow", form.tvShow.id.toString()), {
+        title: form.tvShow.name,
       });
       addDoc(quotesRef, data);
     }
