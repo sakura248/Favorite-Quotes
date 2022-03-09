@@ -40,6 +40,7 @@ function InputSuggest({
     setShowSuggest(false);
   };
 
+  // console.log(isCharacter);
   return (
     <div>
       <Input
