@@ -32,12 +32,7 @@ function InputSuggest({
 
   const _onSelect = (item) => {
     onSelect(item);
-    console.log("item", item);
     setShowSuggest(false);
-
-    if (!isCharacter) {
-      onChangeId(item.id);
-    }
   };
 
   const _onSelectOther = () => {

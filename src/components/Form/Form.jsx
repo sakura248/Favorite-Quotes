@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/no-unused-prop-types */
@@ -18,6 +19,8 @@ function Form({
   onSubmit,
   onClose,
 }) {
+  const { quote, episodeTitle, tvShow, character } = form || {};
+
   const onChangeQuote = (e) => {
     onChange({ ...form, quote: e.target.value });
   };
@@ -33,13 +36,6 @@ function Form({
     });
   };
 
-  const onSelectTvShowId = async (el) => {
-    onChange({
-      ...form,
-      tvShow: { ...form.tvShow, id: el },
-    });
-  };
-
   const onChangeCharacter = async (e) => {
     onChange({
       ...form,
@@ -47,12 +43,14 @@ function Form({
     });
   };
 
-  const onSelectTitle = (e) => {
-    console.log("e", e);
-    onChange({
-      ...form,
-      tvShow: { ...form.tvShow, name: e.name },
-    });
+  const onSelectTitle = async (e) => {
+    console.log("e.name", e.name);
+    if (e.name && e.id) {
+      onChange({
+        ...form,
+        tvShow: { ...form.tvShow, name: e.name, id: e.id },
+      });
+    }
   };
 
   const onSelectCharacter = (e) => {
@@ -60,11 +58,6 @@ function Form({
       onChange({ ...form, character: e });
     }
   };
-
-  const { quote, episodeTitle, tvShow, character } = form || {};
-  console.log("form", form);
-  console.log("tvShow", tvShow);
-  console.log("character", character);
 
   return (
     <div className="add-quote-wrapper">
@@ -87,7 +80,6 @@ function Form({
           required
           value={tvShow.name}
           onChange={onChangeTvShowTitle}
-          onChangeId={onSelectTvShowId}
           onSelect={onSelectTitle}
           onFetchList={async () => {
             const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${tvShow.name}&include_adult=false`;
