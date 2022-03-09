@@ -63,6 +63,8 @@ function Form({
 
   const { quote, episodeTitle, tvShow, character } = form || {};
   console.log("form", form);
+  console.log("tvShow", tvShow);
+  console.log("character", character);
 
   return (
     <div className="add-quote-wrapper">
