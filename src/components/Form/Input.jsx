@@ -24,4 +24,7 @@ Input.propTypes = {
   onChange: PropTypes.func,
 };
 
-export default Input;
+export default React.memo(
+  Input,
+  (prevProps, nextProps) => prevProps.value === nextProps.value
+);
