@@ -1,3 +1,4 @@
+/* eslint-disable import/default */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-cycle */
@@ -19,13 +20,11 @@ function Form({
   onSubmit,
   onClose,
 }) {
-  const { quote, episodeTitle, tvShow, character } = form || {};
-
-  const onChangeQuote = (e) => {
+  const onChangeQuote = async (e) => {
     onChange({ ...form, quote: e.target.value });
   };
 
-  const onChangeEpisodeTitle = (e) => {
+  const onChangeEpisodeTitle = async (e) => {
     onChange({ ...form, episodeTitle: e.target.value });
   };
 
@@ -44,7 +43,6 @@ function Form({
   };
 
   const onSelectTitle = async (e) => {
-    console.log("e.name", e.name);
     if (e.name && e.id) {
       onChange({
         ...form,
@@ -58,6 +56,8 @@ function Form({
       onChange({ ...form, character: e });
     }
   };
+
+  const { quote, episodeTitle, tvShow, character } = form;
 
   return (
     <div className="add-quote-wrapper">
@@ -103,11 +103,20 @@ function Form({
           value={character.name}
           onChange={onChangeCharacter}
           onFetchList={async () => {
+            // tvShow.id = 8592;
             const url = `https://api.themoviedb.org/3/tv/${tvShow.id}/credits?api_key=${API_KEY}&language=en-US`;
             const result = await fetch(url);
             try {
               const json = await result.json();
-              return json.results;
+              const newList = json.cast.filter(
+                (item) =>
+                  item.character
+                    .toLowerCase()
+                    .indexOf(form.character.name.toLowerCase()) >= 0
+              );
+              console.log(newList);
+              return newList;
+              // return json.results;
             } catch (err) {
               console.error(err);
               // setErrorMsg("API response error", err);
