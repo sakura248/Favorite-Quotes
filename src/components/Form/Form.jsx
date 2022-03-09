@@ -3,9 +3,10 @@
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/require-default-props */
-import React from "react"; //  { useState }
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Input from "./Input";
+// eslint-disable-next-line import/namespace
 import InputSuggest from "./InputSuggest";
 
 const API_KEY = process.env.REACT_APP_movieApi;
@@ -18,26 +19,28 @@ function Form({
   onClose,
 }) {
   const onChangeQuote = (e) => {
-    // eslint-disable-next-line no-debugger
-    debugger;
     onChange({ ...form, quote: e.target.value });
   };
 
   const onChangeEpisodeTitle = (e) => {
-    // eslint-disable-next-line no-debugger
-    debugger;
     onChange({ ...form, episodeTitle: e.target.value });
   };
 
   const onChangeTvShowTitle = async (e) => {
-    // eslint-disable-next-line no-debugger
-    debugger;
-    onChange({ ...form, tvShow: { ...form.tvShow, name: e.target.value } });
+    onChange({
+      ...form,
+      tvShow: { ...form.tvShow, name: e.target.value },
+    });
+  };
+
+  const onSelectTvShowId = async (el) => {
+    onChange({
+      ...form,
+      tvShow: { ...form.tvShow, id: el },
+    });
   };
 
   const onChangeCharacter = async (e) => {
-    // eslint-disable-next-line no-debugger
-    debugger;
     onChange({
       ...form,
       character: { ...form.character, name: e.target.value },
@@ -45,9 +48,11 @@ function Form({
   };
 
   const onSelectTitle = (e) => {
-    if (e.name && e.id) {
-      onChange({ ...form, tvShow: e });
-    }
+    console.log("e", e);
+    onChange({
+      ...form,
+      tvShow: { ...form.tvShow, name: e.name },
+    });
   };
 
   const onSelectCharacter = (e) => {
@@ -57,9 +62,7 @@ function Form({
   };
 
   const { quote, episodeTitle, tvShow, character } = form || {};
-
-  // eslint-disable-next-line no-debugger
-  debugger;
+  console.log("form", form);
 
   return (
     <div className="add-quote-wrapper">
@@ -80,10 +83,12 @@ function Form({
         <InputSuggest
           type="text"
           required
-          // value={tvShow.name}
+          value={tvShow.name}
           onChange={onChangeTvShowTitle}
-          onFetchlist={async () => {
-            const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${form.tvShowTitle}&include_adult=false`;
+          onChangeId={onSelectTvShowId}
+          onSelect={onSelectTitle}
+          onFetchList={async () => {
+            const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${tvShow.name}&include_adult=false`;
             const result = await fetch(url);
             try {
               const json = await result.json();
@@ -94,19 +99,17 @@ function Form({
               return [];
             }
           }}
-          onSelect={onSelectTitle}
-          onSelectOther={() => {}}
+          isCharacter={false}
+          // onSelectOther={() => {}}
           placeholder="Which TV show?"
         />
-
         {/* {errorMsg.length > 0 && <p>{errorMsg}</p>} */}
-
-        {/* <InputSuggest
+        <InputSuggest
           required
-          // value={character.name}
+          value={character.name}
           onChange={onChangeCharacter}
-          onFetchlist={async () => {
-            const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${form.tvShowTitle}&include_adult=false`;
+          onFetchList={async () => {
+            const url = `https://api.themoviedb.org/3/tv/${tvShow.id}/credits?api_key=${API_KEY}&language=en-US`;
             const result = await fetch(url);
             try {
               const json = await result.json();
@@ -117,10 +120,11 @@ function Form({
               return [];
             }
           }}
+          isCharacter
           onSelect={onSelectCharacter}
-          // onSelectOther={() => {}}
+          onSelectOther={() => {}}
           placeholder="Which character?"
-        /> */}
+        />
 
         <Input
           value={episodeTitle}
