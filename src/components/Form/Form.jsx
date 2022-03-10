@@ -146,11 +146,11 @@ function Form({
           onChange={onChangeEpisodeTitle}
           placeholder="Which episode?"
         />
-        {/* <Input
+        <Input
           value={episodeTitle}
           onChange={onChangeEpisodeTitle}
           placeholder="Which episode?"
-        /> */}
+        />
 
         <button
           type="submit"
