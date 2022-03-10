@@ -58,6 +58,7 @@ function Form({
   };
 
   const { quote, episodeTitle, tvShow, character } = form;
+  console.log("form ", form);
 
   return (
     <div className="add-quote-wrapper">
