@@ -27,6 +27,7 @@ function AddQuoteForm({ closeModal }) {
 
   const dispatch = useDispatch();
 
+  // Adding to Firebase
   const addQuoteHandler = async (e) => {
     e.preventDefault();
     const quoteContent = form.quote;
