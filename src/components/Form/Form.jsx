@@ -7,7 +7,7 @@
 /* eslint-disable react/require-default-props */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Input from "./Input";
+import TextField from "./TextField";
 // eslint-disable-next-line import/namespace
 import InputSuggest from "./InputSuggest";
 
@@ -68,7 +68,6 @@ function Form({
   };
 
   const { quote, episodeTitle, tvShow, character } = form;
-  console.log("form ", form);
 
   return (
     <div className="add-quote-wrapper">
@@ -140,17 +139,17 @@ function Form({
           placeholder="Which character?"
         />
 
-        <input
+        {/* <input
           type="text"
           value={episodeTitle}
           onChange={onChangeEpisodeTitle}
           placeholder="Which episode?"
-        />
-        {/* <Input
+        /> */}
+        <TextField
           value={episodeTitle}
           onChange={onChangeEpisodeTitle}
           placeholder="Which episode?"
-        /> */}
+        />
 
         <button
           type="submit"

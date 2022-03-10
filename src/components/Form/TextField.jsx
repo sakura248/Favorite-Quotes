@@ -4,12 +4,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Input({ value, required, onChange, placeholder }) {
+function TextField({ value, required, onChange, placeholder }) {
   return (
     <input
       type="text"
       value={value}
-      // onChange={onChange}
+      onChange={onChange}
       placeholder={placeholder}
       className="p-2 border-solid border border-black focus:border-primary-orange"
       required={required}
@@ -17,7 +17,7 @@ function Input({ value, required, onChange, placeholder }) {
   );
 }
 
-Input.propTypes = {
+TextField.propTypes = {
   value: PropTypes.string,
   // value: PropTypes.objectOf(PropTypes.any),
   placeholder: PropTypes.string,
@@ -25,7 +25,4 @@ Input.propTypes = {
   onChange: PropTypes.func,
 };
 
-export default React.memo(
-  Input,
-  (prevProps, nextProps) => prevProps.value === nextProps.value
-);
+export default TextField;
