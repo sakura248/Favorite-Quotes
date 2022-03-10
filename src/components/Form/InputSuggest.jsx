@@ -7,7 +7,7 @@
 
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Input from "./Input";
+import TextField from "./TextField";
 
 function InputSuggest({
   value,
@@ -49,12 +49,12 @@ function InputSuggest({
         placeholder={placeholder}
         required={required}
       />
-      <Input
+      {/* <TextField
         value={value}
         onChange={_onChange}
         placeholder={placeholder}
         required={required}
-      />
+      /> */}
 
       {showSuggest && (
         <ul className="suggest-wrapper border-solid border border-gray-500 overflow-auto h-80">
