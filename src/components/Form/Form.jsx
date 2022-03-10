@@ -60,7 +60,10 @@ function Form({
 
   const onSelectCharacter = (e) => {
     if (e.character && e.id) {
-      onChange({ ...form, character: e });
+      onChange({
+        ...form,
+        character: { ...form.character, name: e.character, id: e.id },
+      });
     }
   };
 
@@ -143,11 +146,11 @@ function Form({
           onChange={onChangeEpisodeTitle}
           placeholder="Which episode?"
         />
-        <Input
+        {/* <Input
           value={episodeTitle}
           onChange={onChangeEpisodeTitle}
           placeholder="Which episode?"
-        />
+        /> */}
 
         <button
           type="submit"

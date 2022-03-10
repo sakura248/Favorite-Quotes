@@ -38,15 +38,15 @@ function AddQuoteForm({ closeModal }) {
       id_user: uid,
       quoteContent,
       updatedDate: new Date(),
-      id_tvshow: tvShowTitleId,
+      id_tvshow: form.tvShow.id,
     };
 
-    if (quoteContent && characterId && form.tvShow.id) {
-      data.id_character = characterId;
+    if (quoteContent && form.character.id && form.tvShow.id) {
+      data.id_character = form.character.id;
 
       // ADD DATA TO FIRESTORE
-      setDoc(doc(db, "character", characterId.toString()), {
-        name: form.character,
+      setDoc(doc(db, "character", form.character.id.toString()), {
+        name: form.character.name,
         id_tvshow: form.tvShow.id,
       });
       setDoc(doc(db, "tvshow", form.tvShow.id.toString()), {

@@ -42,19 +42,19 @@ function InputSuggest({
   // console.log(isCharacter);
   return (
     <div>
-      {/* <input
+      <input
         type="text"
         value={value}
         onChange={_onChange}
         placeholder={placeholder}
         required={required}
-      /> */}
-      <Input
+      />
+      {/* <Input
         value={value}
         onChange={_onChange}
         placeholder={placeholder}
         required={required}
-      />
+      /> */}
 
       {showSuggest && (
         <ul className="suggest-wrapper border-solid border border-gray-500 overflow-auto h-80">

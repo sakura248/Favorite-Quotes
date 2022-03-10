@@ -120,7 +120,7 @@ function Quote({
               <button type="button" onClick={() => openModal(quoteItem)}>
                 <ul className="quote-ul flex flex-col items-center sm:items-start cursor-pointer pt-24 sm:pt-8">
                   <li className="quote quote-text my-3 text-lg text-center sm:text-left sm:text-base font-bold hover:animate-spin relative text-headline">
-                    {quoteItem.quote}
+                    {quoteItem.quoteContent}
                   </li>
                   <li className="quote quote-name my-1">
                     {quoteItem.character}

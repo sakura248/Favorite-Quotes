@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/prop-types */
 import React from "react";
@@ -8,7 +9,7 @@ function Input({ value, required, onChange, placeholder }) {
     <input
       type="text"
       value={value}
-      onChange={onChange}
+      // onChange={onChange}
       placeholder={placeholder}
       className="p-2 border-solid border border-black focus:border-primary-orange"
       required={required}
