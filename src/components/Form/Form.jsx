@@ -20,12 +20,11 @@ function Form({
   onSubmit,
   onClose,
 }) {
-  const onChangeQuote = async (e) => {
-    onChange({ ...form, quote: e.target.value });
-  };
-
-  const onChangeEpisodeTitle = async (e) => {
-    onChange({ ...form, episodeTitle: e.target.value });
+  const onChangeQuote = (e) => {
+    onChange({
+      ...form,
+      quote: e.target.value,
+    });
   };
 
   const onChangeTvShowTitle = async (e) => {
@@ -36,9 +35,17 @@ function Form({
   };
 
   const onChangeCharacter = async (e) => {
+    console.log("onChangeCharacter");
     onChange({
       ...form,
       character: { ...form.character, name: e.target.value },
+    });
+  };
+
+  const onChangeEpisodeTitle = (e) => {
+    onChange({
+      ...form,
+      episodeTitle: e.target.value,
     });
   };
 
@@ -53,11 +60,15 @@ function Form({
 
   const onSelectCharacter = (e) => {
     if (e.character && e.id) {
-      onChange({ ...form, character: e });
+      onChange({
+        ...form,
+        character: { ...form.character, name: e.character, id: e.id },
+      });
     }
   };
 
   const { quote, episodeTitle, tvShow, character } = form;
+  console.log("form ", form);
 
   return (
     <div className="add-quote-wrapper">
@@ -129,11 +140,18 @@ function Form({
           placeholder="Which character?"
         />
 
-        <Input
+        <input
+          type="text"
           value={episodeTitle}
           onChange={onChangeEpisodeTitle}
           placeholder="Which episode?"
         />
+        {/* <Input
+          value={episodeTitle}
+          onChange={onChangeEpisodeTitle}
+          placeholder="Which episode?"
+        /> */}
+
         <button
           type="submit"
           className="submit-btn border-none text-white bg-primary text-lg w-2/5 my-4 py-4"

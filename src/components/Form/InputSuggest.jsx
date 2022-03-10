@@ -14,7 +14,6 @@ function InputSuggest({
   placeholder,
   required,
   onChange,
-  onChangeId,
   onSelect,
   onSelectOther,
   onFetchList,
@@ -43,12 +42,20 @@ function InputSuggest({
   // console.log(isCharacter);
   return (
     <div>
-      <Input
+      <input
+        type="text"
         value={value}
         onChange={_onChange}
         placeholder={placeholder}
         required={required}
       />
+      {/* <Input
+        value={value}
+        onChange={_onChange}
+        placeholder={placeholder}
+        required={required}
+      /> */}
+
       {showSuggest && (
         <ul className="suggest-wrapper border-solid border border-gray-500 overflow-auto h-80">
           {list.map(
