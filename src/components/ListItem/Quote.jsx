@@ -36,9 +36,10 @@ function Quote({
   // isLiked,
   favHandler,
   deleteHandler,
+  isPrivate,
 }) {
   const [quoteLists, setQuoteLists] = useState([]);
-  const [quoteLists2, setQuoteLists2] = useState([]);
+  // const [quoteLists2, setQuoteLists2] = useState([]);
   const [likedLists, setLikedLists] = useState([]);
   const [tvShowList, setTvShowList] = useState([]);
   const [characterList, setCharacterList] = useState([]);
@@ -48,16 +49,19 @@ function Quote({
 
   useEffect(() => {
     async function fetch() {
-      await onSnapshot(quotesRef, (document) => {
-        setQuoteLists(
-          document.docs.map((item) => ({ ...item.data(), id: item.id }))
-        );
-      });
-      await onSnapshot(q, (document) => {
-        setQuoteLists2(
-          document.docs.map((item) => ({ ...item.data(), id: item.id }))
-        );
-      });
+      if (isPrivate) {
+        await onSnapshot(q, (document) => {
+          setQuoteLists(
+            document.docs.map((item) => ({ ...item.data(), id: item.id }))
+          );
+        });
+      } else {
+        await onSnapshot(quotesRef, (document) => {
+          setQuoteLists(
+            document.docs.map((item) => ({ ...item.data(), id: item.id }))
+          );
+        });
+      }
 
       await await onSnapshot(favoriteQuotesRef, (document) => {
         setLikedLists(
@@ -80,7 +84,7 @@ function Quote({
     fetch();
   }, []);
 
-  console.log(quoteLists2);
+  console.log("quoteLists", quoteLists);
 
   // ADJUSTING FOR RENDERING THE LIST
   quoteLists.forEach((item) => {
@@ -193,6 +197,7 @@ function Quote({
 Quote.propTypes = {
   favHandler: PropTypes.func.isRequired,
   deleteHandler: PropTypes.func.isRequired,
+  isPrivate: PropTypes.bool.isRequired,
 };
 
 export default Quote;
