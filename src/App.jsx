@@ -22,7 +22,7 @@ function App() {
           <StickFooter />
           <Navigation />
           <Routes>
-            <Route index element={<QuotesList />} />
+            <Route index element={<QuotesList isPrivate={false} />} />
             <Route path="MyAccount" element={<MyAccount />} />
             <Route path="Login" element={<Login />} />
             <Route path="SignUp" element={<SignUp />} />

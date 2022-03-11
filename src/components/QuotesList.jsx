@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react"; // useState
 import { useDispatch } from "react-redux";
-
+import PropTypes from "prop-types";
 import Modal from "react-modal";
 import { useNavigate, useLocation } from "react-router-dom";
 import "firebase/firestore";
@@ -34,12 +34,14 @@ export const customStyles = {
   },
 };
 
-function QuotesList() {
+function QuotesList({ isPrivate }) {
   const { loggedIn, uid } = useAuthStatus();
   const location = useLocation();
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
+  console.log("isPrivate", isPrivate);
 
   const deleteHandler = (id) => {
     if (loggedIn) {
@@ -87,9 +89,17 @@ function QuotesList() {
 
   return (
     <div className="container mx-auto">
-      <Quote favHandler={favHandler} deleteHandler={deleteHandler} />
+      <Quote
+        favHandler={favHandler}
+        deleteHandler={deleteHandler}
+        isPrivate={isPrivate}
+      />
     </div>
   );
 }
+
+QuotesList.propTypes = {
+  isPrivate: PropTypes.bool.isRequired,
+};
 
 export default QuotesList;
