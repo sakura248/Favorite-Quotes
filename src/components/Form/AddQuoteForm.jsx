@@ -45,6 +45,7 @@ function AddQuoteForm({ closeModal }) {
       data.id_character = form.character.id;
 
       // ADD DATA TO FIRESTORE
+      addDoc(quotesRef, data);
       setDoc(doc(db, "character", form.character.id.toString()), {
         name: form.character.name,
         id_tvshow: form.tvShow.id,
@@ -52,7 +53,6 @@ function AddQuoteForm({ closeModal }) {
       setDoc(doc(db, "tvshow", form.tvShow.id.toString()), {
         title: form.tvShow.name,
       });
-      addDoc(quotesRef, data);
     }
 
     // 🚧 Modifying🚧 FOR IF THERE'S NO CHARACTER DATA IN API

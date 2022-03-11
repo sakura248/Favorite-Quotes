@@ -2,33 +2,23 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { useDispatch } from "react-redux";
-import { updateDoc, doc, serverTimestamp } from "firebase/firestore";
+import { updateDoc, setDoc, doc, serverTimestamp } from "firebase/firestore";
 import useAuthStatus from "../../hooks/useAuthStatus";
-import { quotesRef } from "../../firebase-config";
+import { quotesRef, db } from "../../firebase-config";
 
 import Form from "./Form";
 
 function UpdateQuoteForm({ closeModal, quoteItem }) {
   const [errorMsg] = useState("");
-  // const [newQuote, setNewQuote] = useState(quoteItem.quote);
-  // const [newCharacter, setNewCharacter] = useState(quoteItem.character);
-  // const [newTvShowTitle, setNewTvShowTitle] = useState(quoteItem.tvShowTitle);
-
-  // const onChangeQuote = (e) => {
-  //   setNewQuote(e.target.value);
-  // };
-  // const onChangeCharacter = (e) => {
-  //   setNewCharacter(e.target.value);
-  // };
-  // const onChangeTvShowTitle = (e) => {
-  //   setNewTvShowTitle(e.target.value);
-  // };
 
   const [form, setRegistration] = useState({
     quote: quoteItem.quoteContent,
     episodeTitle: "",
-    tvShow: { name: quoteItem.tvShow },
-    character: { name: quoteItem.character },
+    tvShow: { name: quoteItem.tvShow, id: quoteItem.id_tvshow },
+    character: {
+      name: quoteItem.character,
+      id: quoteItem.id_character,
+    },
   });
 
   console.log("quoteItem ", quoteItem);
@@ -43,23 +33,35 @@ function UpdateQuoteForm({ closeModal, quoteItem }) {
 
   const dispatch = useDispatch();
 
-  const updateQuoteHandler = (e) => {
+  // Updating firebase
+  const updateQuoteHandler = async (e) => {
     e.preventDefault();
-    const quoteContent = form.quote;
+    // const quoteContent = form.quote;
 
-    if (quoteContent && form.character.id && form.tvShow.id) {
+    if (
+      form.quote
+      // && form.character.id
+      // && form.tvShow.id
+    ) {
       const data = {
-        id_character: "",
+        id_character: form.character.id,
         id_episode: "",
-        id_tvshow: "",
+        id_tvshow: form.tvShow.id,
         id_user: uid,
-        quoteContent,
+        quoteContent: form.quote,
         updatedDate: serverTimestamp(),
       };
 
       const targetRef = doc(quotesRef, quoteItem.id);
 
       updateDoc(targetRef, data, { merge: true });
+      setDoc(doc(db, "character", form.character.id.toString()), {
+        name: form.character.name,
+        id_tvshow: form.tvShow.id,
+      });
+      setDoc(doc(db, "tvshow", form.tvShow.id.toString()), {
+        title: form.tvShow.name,
+      });
       dispatch({ type: "ADD_QUOTE", data });
       closeModal();
     }
@@ -77,13 +79,6 @@ function UpdateQuoteForm({ closeModal, quoteItem }) {
       onSubmit={updateQuoteHandler}
       titleSuggestList={suggest.titleSuggestList}
       onClose={closeModal}
-      // addOrUpdateQuoteHandler={updateQuoteHandler}
-      // onChangeQuote={onChangeQuote}
-      // onChangeCharacter={onChangeCharacter}
-      // onChangeTvShowTitle={onChangeTvShowTitle}
-      // quote={newQuote}
-      // character={newCharacter}
-      // tvShowTitle={newTvShowTitle}
     />
   );
 }
