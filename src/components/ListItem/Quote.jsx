@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-bind */
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
 // import ReactLoading from "react-loading";
-import { onSnapshot } from "firebase/firestore";
+import { onSnapshot, query, where } from "firebase/firestore";
 
 import useAuthStatus from "../../hooks/useAuthStatus";
 
@@ -37,11 +38,13 @@ function Quote({
   deleteHandler,
 }) {
   const [quoteLists, setQuoteLists] = useState([]);
+  const [quoteLists2, setQuoteLists2] = useState([]);
   const [likedLists, setLikedLists] = useState([]);
   const [tvShowList, setTvShowList] = useState([]);
   const [characterList, setCharacterList] = useState([]);
 
   const { uid } = useAuthStatus();
+  const q = query(quotesRef, where("id_user", "==", uid));
 
   useEffect(() => {
     async function fetch() {
@@ -50,8 +53,13 @@ function Quote({
           document.docs.map((item) => ({ ...item.data(), id: item.id }))
         );
       });
+      await onSnapshot(q, (document) => {
+        setQuoteLists2(
+          document.docs.map((item) => ({ ...item.data(), id: item.id }))
+        );
+      });
 
-      await onSnapshot(favoriteQuotesRef, (document) => {
+      await await onSnapshot(favoriteQuotesRef, (document) => {
         setLikedLists(
           document.docs.map((item) => ({ ...item.data(), id: item.id }))
         );
@@ -71,6 +79,8 @@ function Quote({
     }
     fetch();
   }, []);
+
+  console.log(quoteLists2);
 
   // ADJUSTING FOR RENDERING THE LIST
   quoteLists.forEach((item) => {
