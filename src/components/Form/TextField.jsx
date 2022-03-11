@@ -4,16 +4,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function TextField({ value, required, onChange, placeholder }) {
+function TextField({ value, required, onChange, placeholder, labelName }) {
   return (
-    <input
-      type="text"
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      className="p-2 border-solid border border-black focus:border-primary-orange"
-      required={required}
-    />
+    <label
+      htmlFor={labelName}
+      className="font-bold mb-2 mt-4 flex flex-col w-full"
+    >
+      {labelName}
+      <input
+        type="text"
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className="p-2 border-solid border border-black focus:border-primary-orange"
+        required={required}
+        name={labelName}
+      />
+    </label>
   );
 }
 

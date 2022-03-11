@@ -18,6 +18,7 @@ function InputSuggest({
   onSelectOther,
   onFetchList,
   isCharacter,
+  labelName,
 }) {
   const [showSuggest, setShowSuggest] = useState(false);
   const [list, setList] = useState([]);
@@ -39,22 +40,15 @@ function InputSuggest({
     setShowSuggest(false);
   };
 
-  // console.log(isCharacter);
   return (
-    <div>
-      <input
-        type="text"
+    <>
+      <TextField
         value={value}
         onChange={_onChange}
         placeholder={placeholder}
         required={required}
+        labelName={labelName}
       />
-      {/* <TextField
-        value={value}
-        onChange={_onChange}
-        placeholder={placeholder}
-        required={required}
-      /> */}
 
       {showSuggest && (
         <ul className="suggest-wrapper border-solid border border-gray-500 overflow-auto h-80">
@@ -114,7 +108,7 @@ function InputSuggest({
           </li> */}
         </ul>
       )}
-    </div>
+    </>
   );
 }
 
