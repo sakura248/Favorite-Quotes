@@ -99,7 +99,7 @@ function Form({
           required
           value={tvShow.name}
           onChange={onChangeTvShowTitle}
-          labelName="tvShow"
+          labelName="TV Show Title"
           onFetchList={async () => {
             const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${tvShow.name}&include_adult=false`;
             const result = await fetch(url);
@@ -122,7 +122,7 @@ function Form({
           required
           value={character.name}
           onChange={onChangeCharacter}
-          labelName="character"
+          labelName="Character Name"
           onFetchList={async () => {
             // tvShow.id = 8592;
             const url = `https://api.themoviedb.org/3/tv/${tvShow.id}/credits?api_key=${API_KEY}&language=en-US`;
@@ -159,7 +159,7 @@ function Form({
         <TextField
           value={episodeTitle}
           onChange={onChangeEpisodeTitle}
-          labelName="episode"
+          labelName="Episode Title"
           placeholder="Which episode?"
         />
 
