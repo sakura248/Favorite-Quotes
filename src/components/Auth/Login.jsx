@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
+import AuthInput from "./AuthInput";
 import GoogleAuth from "./GoogleAuth";
 
 function Login() {
@@ -30,22 +31,6 @@ function Login() {
       seterrorMessage(error.message);
       console.log(errorMessage);
     }
-    // const userCredential = await signInWithEmailAndPassword(auth, email, password)
-    // .then((userCredential) => {
-    // Signed in
-    // const user = userCredential.user;
-    // let from = location.state?.from?.pathname || '/'
-    // console.log(from)
-    // navigate(from)
-    // console.log(navigate(from));
-
-    // })
-    // .catch((error) => {
-    //     // const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     console.log(errorMessage)
-    //     // ..
-    //   });
   };
 
   const handleEmail = (e) => {
@@ -60,7 +45,14 @@ function Login() {
       <h1 className="text-4xl">Welcome back!</h1>
 
       <form onSubmit={handleLogin} className="flex flex-col my-8">
-        <label className="font-bold mb-2 mt-4" htmlFor="email">
+        <AuthInput
+          labelName="Email"
+          type="email"
+          name="email"
+          onChange={handleEmail}
+        />
+
+        {/* <label className="font-bold mb-2 mt-4 flex flex-col " htmlFor="email">
           Email
           {errorMessage && <p>something wrong</p>}
           <input
@@ -68,9 +60,8 @@ function Login() {
             type="email"
             name="email"
             onChange={handleEmail}
-            // ref={emailRef}
           />
-        </label>
+        </label> */}
 
         <label className="font-bold mb-2 mt-4" htmlFor="password">
           Password
@@ -80,7 +71,6 @@ function Login() {
             type="password"
             name="password"
             onChange={handlePassword}
-            // ref={emailPassword}
           />
         </label>
 

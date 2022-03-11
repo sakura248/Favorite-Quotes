@@ -122,9 +122,11 @@ function Quote({
     setIsOpen(false);
   }
 
+  console.log(quoteLists.length);
+
   return (
     <div>
-      {quoteLists &&
+      {quoteLists.length > 0 ? (
         quoteLists.map((quoteItem) => (
           <div
             key={quoteItem.id}
@@ -180,7 +182,12 @@ function Quote({
               </button>
             </div>
           </div>
-        ))}
+        ))
+      ) : (
+        <div>
+          <p>There is no quote you posted! Add something!</p>
+        </div>
+      )}
       {modalIsOpen && (
         <Modal
           isOpen={modalIsOpen}
