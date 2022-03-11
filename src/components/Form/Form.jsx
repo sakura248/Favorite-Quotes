@@ -72,25 +72,34 @@ function Form({
   return (
     <div className="add-quote-wrapper">
       <p className="quotation text-7xl">&quot;</p>
-      <form className="quote-form-wrapper" onSubmit={onSubmit}>
-        <textarea
-          name="quote"
-          id="quote"
-          cols="30"
-          rows="10"
-          // defaultValue="Type the quote.."
-          value={quote}
-          onChange={onChangeQuote}
-          className="p-2 border-solid border border-black focus:border-primary"
-          required="required"
-        />
+      <form
+        className="quote-form-wrapper mx-auto w-4/5 flex flex-col items-center"
+        onSubmit={onSubmit}
+      >
+        <label
+          className="font-bold mb-2 mt-4 flex flex-col w-full"
+          htmlFor="quote"
+        >
+          Quote
+          <textarea
+            name="quote"
+            id="quote"
+            cols="30"
+            rows="10"
+            // defaultValue="Type the quote.."
+            value={quote}
+            onChange={onChangeQuote}
+            className="mt-2.5 p-2 border-solid border border-black focus:border-primary"
+            required="required"
+          />
+        </label>
 
         <InputSuggest
           type="text"
           required
           value={tvShow.name}
           onChange={onChangeTvShowTitle}
-          onSelect={onSelectTitle}
+          labelName="tvShow"
           onFetchList={async () => {
             const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${tvShow.name}&include_adult=false`;
             const result = await fetch(url);
@@ -104,6 +113,7 @@ function Form({
             }
           }}
           isCharacter={false}
+          onSelect={onSelectTitle}
           // onSelectOther={() => {}}
           placeholder="Which TV show?"
         />
@@ -112,6 +122,7 @@ function Form({
           required
           value={character.name}
           onChange={onChangeCharacter}
+          labelName="character"
           onFetchList={async () => {
             // tvShow.id = 8592;
             const url = `https://api.themoviedb.org/3/tv/${tvShow.id}/credits?api_key=${API_KEY}&language=en-US`;
@@ -148,6 +159,7 @@ function Form({
         <TextField
           value={episodeTitle}
           onChange={onChangeEpisodeTitle}
+          labelName="episode"
           placeholder="Which episode?"
         />
 

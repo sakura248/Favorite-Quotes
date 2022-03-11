@@ -11,21 +11,12 @@
   text-align: center;
 }
 
-.quote-form-wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 90%;
-  align-items: center;
-}
-
 .quote-form-wrapper textarea {
   height: 100px;
   margin-bottom: 29px;
-  width: 70%;
 }
 
 .quote-form-wrapper input {
-  width: 70%;
   margin-top: 10px;
 }
 

@@ -72,7 +72,7 @@ function UpdateQuoteForm({ closeModal, quoteItem }) {
     <Form
       errorMsg={errorMsg}
       form={form}
-      value="ADD"
+      value="UPDATE"
       onChange={setRegistration}
       onSubmit={updateQuoteHandler}
       titleSuggestList={suggest.titleSuggestList}
