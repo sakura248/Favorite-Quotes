@@ -4,17 +4,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "bg-color": "#edeef5",
-        primary: " #70c88e",
+        "bg-color": "#fffffe",
+        primary: "#f25f4c",
         "primary-hover": "rgb(242, 80, 66,0.6)",
-        secondary: " #f6a541",
-        headline: " #252324",
-        paragraph: "#252324",
-        stroke: "#252324",
-        main: "#F3F3F3",
-        dark: " #252324",
-        "dark-glass": "rgba( 37, 35, 36, 0.6 );",
-        light: "#edeef5",
+        secondary: "#ff8906",
+        headline: "#0f0e17",
+        "sub-headline": "#2e2f3e",
+        "headline-glass": "rgba( 37, 35, 36, 0.6 );",
+        paragraph: "black",
+        stroke: "black",
+        main: "#fffffe",
+        light: "#fffffe",
       },
       boxShadow: {
         shadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 );",

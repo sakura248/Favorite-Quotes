@@ -10,7 +10,8 @@ import MyFavorites from "./components/MyFavorites/MyFavorites";
 import MyFavoriteShows from "./components/MyFavorites/MyFavoriteShows";
 import MyFavoriteQuotes from "./components/MyFavorites/MyFavoriteQuotes";
 import StickFooter from "./components/StickFooter";
-import NotFound from "./components/NotFound/NotFound";
+import Index from "./components/Pages/Index/Index";
+import NotFound from "./components/Pages/NotFound/NotFound";
 
 import PrivateRoute from "./components/routes/PrivateRoute";
 
@@ -22,7 +23,8 @@ function App() {
           <StickFooter />
           <Navigation />
           <Routes>
-            <Route index element={<QuotesList isPrivate={false} />} />
+            <Route index element={<Index />} />
+            <Route element={<QuotesList isPrivate={false} />} />
             <Route path="MyAccount" element={<MyAccount />} />
             <Route path="Login" element={<Login />} />
             <Route path="SignUp" element={<SignUp />} />

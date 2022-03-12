@@ -5,7 +5,7 @@ function GoogleAuth() {
   return (
     // eslint-disable-next-line react/button-has-type
     <button
-      className="bg-black text-white font-bold rounded-full my-8 py-3"
+      className="bg-stroke border border-stroke border-solid hover:bg-transparent text-white hover:text-black font-bold rounded-full font-bold mb-8 mt-6 py-3 px-8"
       onClick={signInWithGoogle}
     >
       Continue with Google

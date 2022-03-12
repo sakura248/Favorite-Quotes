@@ -44,7 +44,7 @@ function Navigation() {
           </div>
         </button>
         <div
-          className={`fixed top-0 left-0 flex overflow-x-hidden flex-col items-start bg-dark-glass backdrop-blur text-light h-screen transition-width duration-500 ${
+          className={`fixed top-0 left-0 flex overflow-x-hidden flex-col items-start bg-headline-glass backdrop-blur text-light h-screen transition-width duration-500 ${
             open ? "w-full" : "w-0"
           }`}
         >
@@ -72,45 +72,10 @@ function Navigation() {
             <Link to="/MyFavorites" className="m-4 hover:underline">
               Favorites
             </Link>
-            {
-              loggedIn && (
-                <Link
-                  className="m-4"
-                  to="/"
-                  onClick={() => {
-                    signOut(auth);
-                    navigate("/");
-                  }}
-                >
-                  Sign Out
-                </Link>
-              )
-              // :
-              // `Logged out`
-            }
-
-            {/* {
-                loggedIn ?
-                (<Link as='div' onClick={() => {auth.signOut();navigate('/')}}> Sign Out </Link>)
-                :
-                <Link to="/Login" className="m-4 hover:underline">Login</Link>
-              } */}
-          </nav>
-        </div>
-      </div>
-      <div className="flex">
-        {/* Desktop */}
-        <nav className="flex items-center">
-          <Link to="/MyAccount" className="m-4 hover:underline">
-            Account
-          </Link>
-          <Link to="/MyFavorites" className="m-4 hover:underline">
-            Favorites
-          </Link>
-          {
-            loggedIn && (
+            {loggedIn && (
               <Link
                 to="/"
+                className="m-4 hover:underline bg-red"
                 onClick={() => {
                   signOut(auth);
                   navigate("/");
@@ -118,17 +83,32 @@ function Navigation() {
               >
                 Sign Out
               </Link>
-            )
-            // :
-            // `Logged out`
-          }
+            )}
+          </nav>
+        </div>
+      </div>
+      {/* Desktop */}
+      <div className="flex justify-between">
+        <nav className="flex items-center">
+          <Link to="/MyAccount" className="m-4 hover:underline">
+            Account
+          </Link>
+          <Link to="/MyFavorites" className="m-4 hover:underline">
+            Favorites
+          </Link>
+          {loggedIn && (
+            <Link
+              to="/"
+              className="m-4 hover:underline"
+              onClick={() => {
+                signOut(auth);
+                navigate("/");
+              }}
+            >
+              Sign Out
+            </Link>
+          )}
 
-          {/* {
-                loggedIn ?
-                (<Link as='div' onClick={() => {auth.signOut();navigate('/')}}> Sign Out </Link>)
-                :
-                <Link to="/Login" className="m-4 hover:underline">Login</Link>
-              } */}
           <form className="flex  items-center">
             <input
               type="text"

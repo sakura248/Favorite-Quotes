@@ -1,35 +1,38 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-// import provider from '../../firebase-config'
-import { useNavigate, useLocation } from "react-router-dom";
+
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import AuthInput from "./AuthInput";
+import AuthBtn from "./AuthBtn";
 import GoogleAuth from "./GoogleAuth";
 import { auth } from "../../firebase-config";
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, seterrorMessage] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      // eslint-disable-next-line no-unused-vars
-      .then((userCredential) => {
-        // Signed in
-        // const user = userCredential.user;
-        setEmail("");
-        setPassword("");
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      if (userCredential) {
+        console.log(userCredential);
         const from = location.state?.from?.pathname || "/";
-        console.log(from);
         navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        console.log(error);
-      });
+      }
+    } catch (error) {
+      seterrorMessage(error);
+      console.log(error, errorMessage);
+    }
   };
+
   const handleEmail = (e) => {
     // console.log(e.target.value)
     setEmail(e.target.value);
@@ -42,43 +45,33 @@ function SignUp() {
   return (
     <div className="flex flex-col items-center w-3/6 mx-auto pt-16">
       <h1 className="text-4xl">Sign up</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col my-8">
-        <label className="font-bold mb-2 mt-4" htmlFor="email">
-          Email
-        <input
-          className="border py-4 px-5 inline-block box-border border-solid border-black bg-transparent"
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center my-8 w-4/5"
+      >
+        <AuthInput
+          labelName="Email"
           type="email"
           name="email"
           onChange={handleEmail}
-          // ref={emailRef}
-          />
-        </label>
-        <label className="font-bold mb-2 mt-4" htmlFor="password">
-          Password
-        <input
-          className="border py-4 px-5 inline-block box-border border-solid border-black bg-bg-color"
+          errorMessage={errorMessage}
+        />
+        <AuthInput
+          labelName="Password"
           type="password"
           name="password"
           onChange={handlePassword}
-          // ref={emailPassword}
-          />
-        </label>
-        <button
-          className="bg-black text-white font-bold rounded-full font-bold mb-8 mt-6 py-3"
-          type="submit"
-        >
-          Submit
-        </button>
-        <hr className="border-black" />
-        {/* <button
-        className="bg-black text-white font-bold rounded-full my-8 py-3"
-      >
-        Continue with Google
-      </button> */}
+          errorMessage={errorMessage}
+        />
+        <AuthBtn />
+        <hr className="border-black w-full" />
       </form>
       <GoogleAuth />
+      <Link to="/Login" className="text-sm text-center hover:underline">
+        Already a member? Login here!
+      </Link>
     </div>
   );
-};
+}
 
 export default SignUp;
