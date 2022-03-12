@@ -8,7 +8,7 @@ function MyAccount() {
   return (
     <div className="container mx-auto">
       <Header header="Your post" />
-      <div className="flex flex-row">
+      <div className="flex flex-row items-end">
         <SearchBar />
         <Filter />
       </div>

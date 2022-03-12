@@ -117,7 +117,7 @@ function Quote({ favHandler, deleteHandler, isPrivate }) {
   }
 
   return (
-    <div>
+    <div className="p-12">
       {quoteLists.length > 0 ? (
         quoteLists.map((quoteItem) => (
           <div
