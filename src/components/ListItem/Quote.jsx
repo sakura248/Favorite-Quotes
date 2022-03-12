@@ -32,25 +32,19 @@ export const customStyles = {
   },
 };
 
-function Quote({
-  // isLiked,
-  favHandler,
-  deleteHandler,
-  isPrivate,
-}) {
+function Quote({ favHandler, deleteHandler, isPrivate }) {
   const [quoteLists, setQuoteLists] = useState([]);
-  // const [quoteLists2, setQuoteLists2] = useState([]);
   const [likedLists, setLikedLists] = useState([]);
   const [tvShowList, setTvShowList] = useState([]);
   const [characterList, setCharacterList] = useState([]);
 
   const { uid } = useAuthStatus();
-  const q = query(quotesRef, where("id_user", "==", uid));
 
   useEffect(() => {
     async function fetch() {
       if (isPrivate) {
-        await onSnapshot(q, (document) => {
+        const q = await query(quotesRef, where("id_user", "==", uid));
+        onSnapshot(q, (document) => {
           setQuoteLists(
             document.docs.map((item) => ({ ...item.data(), id: item.id }))
           );
@@ -121,8 +115,6 @@ function Quote({
   function closeModal() {
     setIsOpen(false);
   }
-
-  console.log(quoteLists.length);
 
   return (
     <div>
