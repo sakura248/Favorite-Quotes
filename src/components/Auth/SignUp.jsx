@@ -1,11 +1,10 @@
-import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-
-import { useNavigate, useLocation, Link } from "react-router-dom";
-import AuthInput from "./AuthInput";
-import AuthBtn from "./AuthBtn";
-import GoogleAuth from "./GoogleAuth";
+import React, { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
+import AuthBtn from "./AuthBtn";
+import AuthInput from "./AuthInput";
+import GoogleAuth from "./GoogleAuth";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -23,7 +22,6 @@ function SignUp() {
         password
       );
       if (userCredential) {
-        console.log(userCredential);
         const from = location.state?.from?.pathname || "/";
         navigate(from, { replace: true });
       }
@@ -34,11 +32,9 @@ function SignUp() {
   };
 
   const handleEmail = (e) => {
-    // console.log(e.target.value)
     setEmail(e.target.value);
   };
   const handlePassword = (e) => {
-    // console.log(e.target.value)
     setPassword(e.target.value);
   };
 

@@ -1,22 +1,22 @@
 /* eslint-disable no-unused-vars */
-import React from "react"; // useState
-import { useDispatch } from "react-redux";
-import PropTypes from "prop-types";
-import Modal from "react-modal";
-import { useNavigate, useLocation } from "react-router-dom";
 import "firebase/firestore";
 import {
   addDoc,
-  setDoc,
-  getDocs,
   deleteDoc,
   doc,
+  getDocs,
   query,
+  setDoc,
   where,
 } from "firebase/firestore";
-import Quote from "./ListItem/Quote";
+import PropTypes from "prop-types";
+import React from "react"; // useState
+import Modal from "react-modal";
+import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { favoriteQuotesRef, quotesRef } from "../firebase-config";
 import useAuthStatus from "../hooks/useAuthStatus";
-import { quotesRef, favoriteQuotesRef } from "../firebase-config";
+import Quote from "./ListItem/Quote";
 
 const appElement = document.getElementById("content");
 Modal.setAppElement(appElement);
@@ -40,8 +40,6 @@ function QuotesList({ isPrivate }) {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-
-  console.log("isPrivate", isPrivate);
 
   const deleteHandler = (id) => {
     if (loggedIn) {
@@ -80,11 +78,6 @@ function QuotesList({ isPrivate }) {
     } else {
       navigate("/Login", { from: location });
     }
-
-    // setIsOpen(true);
-    // } else {
-    //   navigate("/Login", { from: location });
-    // }
   };
 
   return (

@@ -1,19 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-bind */
-import React, { useState, useEffect } from "react";
-import Modal from "react-modal";
-import PropTypes from "prop-types";
 // import ReactLoading from "react-loading";
 import { onSnapshot, query, where } from "firebase/firestore";
-
-import useAuthStatus from "../../hooks/useAuthStatus";
-
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import Modal from "react-modal";
 import {
-  quotesRef,
   favoriteQuotesRef,
-  tvShowRef,
+  quotesRef,
   tvCharacterRef,
+  tvShowRef,
 } from "../../firebase-config";
+import useAuthStatus from "../../hooks/useAuthStatus";
 import UpdateQuoteForm from "../Form/UpdateQuoteForm";
 
 const appElement = document.getElementById("content");
@@ -77,8 +75,6 @@ function Quote({ favHandler, deleteHandler, isPrivate }) {
     }
     fetch();
   }, []);
-
-  console.log("quoteLists", quoteLists);
 
   // ADJUSTING FOR RENDERING THE LIST
   quoteLists.forEach((item) => {

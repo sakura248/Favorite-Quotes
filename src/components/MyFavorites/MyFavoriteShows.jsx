@@ -1,6 +1,6 @@
 import React from "react";
-import SearchBar from "../Filtering/SearchBar/SearchBar";
 import Filter from "../Filtering/Filter/Filter";
+import SearchBar from "../Filtering/SearchBar/SearchBar";
 
 // import { db } from "../../firebase-config";
 
@@ -53,6 +53,6 @@ function MyFavoriteShows() {
       {/* {queryFavTvShow} */}
     </div>
   );
-};
+}
 
 export default MyFavoriteShows;
