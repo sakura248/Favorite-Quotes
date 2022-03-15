@@ -20,9 +20,9 @@ function Navigation() {
   };
 
   return (
-    <div className="">
+    <>
       {/* --- mobile menu --- */}
-      <div className="sm:hidden z-50">
+      <div className="block sm:hidden z-50 h-0">
         <button
           type="button"
           className="w-10 h-10 relative top-3 left-3 cursor-pointer z-50"
@@ -46,8 +46,7 @@ function Navigation() {
         </button>
         <div
           className={`
-          nav
-          fixed top-0 left-0 flex overflow-x-hidden flex-col items-start text-light h-screen transition-width duration-500 ${
+          nav fixed z-40 top-0 left-0 flex overflow-x-hidden flex-col items-start text-light h-screen transition-width duration-500 ${
             open ? "w-full" : "w-0"
           }`}
         >
@@ -86,7 +85,7 @@ function Navigation() {
       </div>
 
       {/* --- desktop menu --- */}
-      <div className="flex justify-between">
+      <div className="hidden sm:flex justify-between">
         <nav className="flex items-center">
           <Link to="/" className="m-4 hover:underline flex items-center">
             <svg
@@ -158,7 +157,7 @@ function Navigation() {
           QUOTES
         </Link>
       </div>
-    </div>
+    </>
   );
 }
 

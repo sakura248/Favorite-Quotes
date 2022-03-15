@@ -6,7 +6,7 @@ import QuotesList from "../../QuotesList";
 
 function MyAccount() {
   return (
-    <div className="container mx-auto">
+    <div className="mt-24 sm:mt-16 mx-auto w-11/12 sm:container">
       <Header header="Your Posts" />
       <div className="flex flex-row items-end">
         <SearchBar />

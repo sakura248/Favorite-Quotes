@@ -4,7 +4,7 @@ import Header from "../../Header/Header";
 
 function MyFavorites() {
   return (
-    <div className="container mx-auto">
+    <div className="mt-24 sm:mt-16 mx-auto w-11/12 sm:container">
       <Header header="Your Favorites" />
       <FavoritesQuotes />
     </div>
