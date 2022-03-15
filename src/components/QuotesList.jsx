@@ -5,16 +5,22 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  onSnapshot,
   query,
   setDoc,
   where,
 } from "firebase/firestore";
 import PropTypes from "prop-types";
-import React from "react"; // useState
+import React, { useEffect, useState } from "react"; // useState
 import Modal from "react-modal";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { favoriteQuotesRef, quotesRef } from "../firebase-config";
+import {
+  favoriteQuotesRef,
+  quotesRef,
+  tvCharacterRef,
+  tvShowRef,
+} from "../firebase-config";
 import useAuthStatus from "../hooks/useAuthStatus";
 import Quote from "./ListItem/Quote";
 
@@ -40,6 +46,51 @@ function QuotesList({ isPrivate }) {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
+  const [quoteLists, setQuoteLists] = useState([]);
+  const [likedLists, setLikedLists] = useState([]);
+  const [tvShowList, setTvShowList] = useState([]);
+  const [characterList, setCharacterList] = useState([]);
+
+  useEffect(() => {
+    async function fetch() {
+      console.log(isPrivate, uid);
+      if (isPrivate) {
+        const q = await query(quotesRef, where("id_user", "==", uid));
+        onSnapshot(q, (document) => {
+          console.log(document.docs);
+          setQuoteLists(
+            document.docs.map((item) => ({ ...item.data(), id: item.id }))
+          );
+        });
+      } else {
+        await onSnapshot(quotesRef, (document) => {
+          setQuoteLists(
+            document.docs.map((item) => ({ ...item.data(), id: item.id }))
+          );
+        });
+      }
+
+      await onSnapshot(favoriteQuotesRef, (document) => {
+        setLikedLists(
+          document.docs.map((item) => ({ ...item.data(), id: item.id }))
+        );
+      });
+
+      await onSnapshot(tvShowRef, (document) => {
+        setTvShowList(
+          document.docs.map((item) => ({ ...item.data(), id: item.id }))
+        );
+      });
+
+      await onSnapshot(tvCharacterRef, (document) => {
+        setCharacterList(
+          document.docs.map((item) => ({ ...item.data(), id: item.id }))
+        );
+      });
+    }
+    fetch();
+  }, [isPrivate, uid]);
 
   const deleteHandler = (id) => {
     if (loggedIn) {
@@ -86,6 +137,10 @@ function QuotesList({ isPrivate }) {
         favHandler={favHandler}
         deleteHandler={deleteHandler}
         isPrivate={isPrivate}
+        quoteLists={quoteLists}
+        likedLists={likedLists}
+        tvShowList={tvShowList}
+        characterList={characterList}
       />
     </div>
   );

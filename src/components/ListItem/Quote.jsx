@@ -1,16 +1,11 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-bind */
 // import ReactLoading from "react-loading";
-import { onSnapshot, query, where } from "firebase/firestore";
+
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
-import {
-  favoriteQuotesRef,
-  quotesRef,
-  tvCharacterRef,
-  tvShowRef,
-} from "../../firebase-config";
 import useAuthStatus from "../../hooks/useAuthStatus";
 import UpdateQuoteForm from "../Form/UpdateQuoteForm";
 
@@ -30,51 +25,15 @@ export const customStyles = {
   },
 };
 
-function Quote({ favHandler, deleteHandler, isPrivate }) {
-  const [quoteLists, setQuoteLists] = useState([]);
-  const [likedLists, setLikedLists] = useState([]);
-  const [tvShowList, setTvShowList] = useState([]);
-  const [characterList, setCharacterList] = useState([]);
-
+function Quote({
+  favHandler,
+  deleteHandler,
+  quoteLists,
+  tvShowList,
+  characterList,
+  likedLists,
+}) {
   const { uid } = useAuthStatus();
-
-  useEffect(() => {
-    async function fetch() {
-      if (isPrivate) {
-        const q = await query(quotesRef, where("id_user", "==", uid));
-        onSnapshot(q, (document) => {
-          setQuoteLists(
-            document.docs.map((item) => ({ ...item.data(), id: item.id }))
-          );
-        });
-      } else {
-        await onSnapshot(quotesRef, (document) => {
-          setQuoteLists(
-            document.docs.map((item) => ({ ...item.data(), id: item.id }))
-          );
-        });
-      }
-
-      await await onSnapshot(favoriteQuotesRef, (document) => {
-        setLikedLists(
-          document.docs.map((item) => ({ ...item.data(), id: item.id }))
-        );
-      });
-
-      await onSnapshot(tvShowRef, (document) => {
-        setTvShowList(
-          document.docs.map((item) => ({ ...item.data(), id: item.id }))
-        );
-      });
-
-      await onSnapshot(tvCharacterRef, (document) => {
-        setCharacterList(
-          document.docs.map((item) => ({ ...item.data(), id: item.id }))
-        );
-      });
-    }
-    fetch();
-  }, []);
 
   // ADJUSTING FOR RENDERING THE LIST
   quoteLists.forEach((item) => {
@@ -192,7 +151,7 @@ function Quote({ favHandler, deleteHandler, isPrivate }) {
 Quote.propTypes = {
   favHandler: PropTypes.func.isRequired,
   deleteHandler: PropTypes.func.isRequired,
-  isPrivate: PropTypes.bool.isRequired,
+  // isPrivate: PropTypes.bool.isRequired,
 };
 
 export default Quote;
