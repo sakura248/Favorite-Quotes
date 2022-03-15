@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 
 function AuthInput({ errorMessage, labelName, type, name, onChange }) {
   return (
@@ -11,7 +11,7 @@ function AuthInput({ errorMessage, labelName, type, name, onChange }) {
       {labelName}
       {errorMessage && <p>something wrong</p>}
       <input
-        className="border py-4 px-5 inline-block box-border border-solid border-black bg-transparent"
+        className="border py-4 px-5 inline-block box-border border-solid border-black bg-main"
         type={type}
         name={name}
         onChange={onChange}

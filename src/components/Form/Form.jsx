@@ -1,15 +1,8 @@
-/* eslint-disable import/default */
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/no-cycle */
-/* eslint-disable react/no-unused-prop-types */
-/* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/require-default-props */
-import React, { useState } from "react";
 import PropTypes from "prop-types";
-import TextField from "./TextField";
-// eslint-disable-next-line import/namespace
+import React from "react";
 import InputSuggest from "./InputSuggest";
+import TextField from "./TextField";
 
 const API_KEY = process.env.REACT_APP_movieApi;
 function Form({

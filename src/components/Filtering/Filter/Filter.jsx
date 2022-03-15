@@ -6,7 +6,7 @@ function Filter() {
       <select
         name="quote-sort"
         placeholder="Sort"
-        className="w-full bg-black text-white p-3 border border-black hover:bg-main hover:text-black"
+        className="w-full bg-black text-white p-3 border border-black hover:bg-main hover:text-black cursor-pointer"
       >
         <option value="1">Newest</option>
         <option value="2">Oldest</option>
