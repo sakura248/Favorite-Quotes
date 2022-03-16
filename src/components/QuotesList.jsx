@@ -54,7 +54,6 @@ function QuotesList({ isPrivate }) {
 
   useEffect(() => {
     async function fetch() {
-      console.log(isPrivate, uid);
       if (isPrivate) {
         const q = await query(quotesRef, where("id_user", "==", uid));
         onSnapshot(q, (document) => {
