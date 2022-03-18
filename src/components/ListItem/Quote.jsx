@@ -1,8 +1,3 @@
-/* eslint-disable react/no-unused-prop-types */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/jsx-no-bind */
 // import ReactLoading from "react-loading";
 
 import PropTypes from "prop-types";
@@ -142,10 +137,13 @@ function Quote({
       {modalIsOpen && (
         <Modal
           isOpen={modalIsOpen}
-          onRequestClose={closeModal}
+          onRequestClose={() => closeModal}
           style={customStyles}
         >
-          <UpdateQuoteForm closeModal={closeModal} quoteItem={modalQuote} />
+          <UpdateQuoteForm
+            closeModal={() => closeModal}
+            quoteItem={modalQuote}
+          />
         </Modal>
       )}
     </div>
@@ -155,7 +153,10 @@ function Quote({
 Quote.propTypes = {
   favHandler: PropTypes.func.isRequired,
   deleteHandler: PropTypes.func.isRequired,
-  // isPrivate: PropTypes.bool.isRequired,
+  quoteList: PropTypes.shape,
+  tvShowList: PropTypes.shape,
+  characterList: PropTypes.shape,
+  likedList: PropTypes.shape,
 };
 
 export default Quote;

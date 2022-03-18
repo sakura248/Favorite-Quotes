@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import PropTypes from "prop-types";
 import React from "react";
 import InputSuggest from "./InputSuggest";
