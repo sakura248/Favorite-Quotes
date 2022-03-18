@@ -1,26 +1,22 @@
-/* eslint-disable no-unused-vars */
-import "firebase/firestore";
 import {
   addDoc,
   deleteDoc,
   doc,
   getDocs,
-  onSnapshot,
   query,
   setDoc,
   where,
 } from "firebase/firestore";
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react"; // useState
+import React, { useEffect } from "react";
 import Modal from "react-modal";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import {
-  favoriteQuotesRef,
-  quotesRef,
-  tvCharacterRef,
-  tvShowRef,
-} from "../firebase-config";
+import FetchCharacterList from "../app/firestore/FetchCharacterList";
+import FetchLikedList from "../app/firestore/FetchLikedList";
+import FetchQuoteList from "../app/firestore/FetchQuoteList";
+import FetchTvShow from "../app/firestore/FetchTvShow";
+import { favoriteQuotesRef, quotesRef } from "../firebase-config";
 import useAuthStatus from "../hooks/useAuthStatus";
 import Quote from "./ListItem/Quote";
 
@@ -47,48 +43,17 @@ function QuotesList({ isPrivate }) {
 
   const dispatch = useDispatch();
 
-  const [quoteLists, setQuoteLists] = useState([]);
-  const [likedLists, setLikedLists] = useState([]);
-  const [tvShowList, setTvShowList] = useState([]);
-  const [characterList, setCharacterList] = useState([]);
+  const { fetchQuoteList, quoteList } = FetchQuoteList();
+  const { fetchTvShow, tvShowList } = FetchTvShow();
+  const { fetchLiked, likedList } = FetchLikedList();
+  const { fetchCharacter, characterList } = FetchCharacterList();
 
   useEffect(() => {
-    async function fetch() {
-      if (isPrivate) {
-        const q = await query(quotesRef, where("id_user", "==", uid));
-        onSnapshot(q, (document) => {
-          console.log(document.docs);
-          setQuoteLists(
-            document.docs.map((item) => ({ ...item.data(), id: item.id }))
-          );
-        });
-      } else {
-        await onSnapshot(quotesRef, (document) => {
-          setQuoteLists(
-            document.docs.map((item) => ({ ...item.data(), id: item.id }))
-          );
-        });
-      }
-
-      await onSnapshot(favoriteQuotesRef, (document) => {
-        setLikedLists(
-          document.docs.map((item) => ({ ...item.data(), id: item.id }))
-        );
-      });
-
-      await onSnapshot(tvShowRef, (document) => {
-        setTvShowList(
-          document.docs.map((item) => ({ ...item.data(), id: item.id }))
-        );
-      });
-
-      await onSnapshot(tvCharacterRef, (document) => {
-        setCharacterList(
-          document.docs.map((item) => ({ ...item.data(), id: item.id }))
-        );
-      });
-    }
-    fetch();
+    fetchQuoteList(isPrivate, uid);
+    fetchLiked();
+    fetchTvShow();
+    fetchCharacter();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPrivate, uid]);
 
   const deleteHandler = (id) => {
@@ -136,8 +101,8 @@ function QuotesList({ isPrivate }) {
         favHandler={favHandler}
         deleteHandler={deleteHandler}
         isPrivate={isPrivate}
-        quoteLists={quoteLists}
-        likedLists={likedLists}
+        quoteList={quoteList}
+        likedList={likedList}
         tvShowList={tvShowList}
         characterList={characterList}
       />

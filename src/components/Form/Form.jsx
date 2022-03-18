@@ -2,14 +2,13 @@
 import PropTypes from "prop-types";
 import React from "react";
 import InputSuggest from "./InputSuggest";
-import TextField from "./TextField";
 
 const API_KEY = process.env.REACT_APP_movieApi;
 function Form({
   // errorMsg,
   onChange,
   form,
-  value,
+  submitTxt,
   onSubmit,
   onClose,
 }) {
@@ -28,17 +27,9 @@ function Form({
   };
 
   const onChangeCharacter = async (e) => {
-    console.log("onChangeCharacter");
     onChange({
       ...form,
       character: { ...form.character, name: e.target.value },
-    });
-  };
-
-  const onChangeEpisodeTitle = (e) => {
-    onChange({
-      ...form,
-      episodeTitle: e.target.value,
     });
   };
 
@@ -60,7 +51,7 @@ function Form({
     }
   };
 
-  const { quote, episodeTitle, tvShow, character } = form;
+  const { quote, tvShow, character } = form;
 
   return (
     <div className="add-quote-wrapper">
@@ -142,25 +133,11 @@ function Form({
           onSelectOther={() => {}}
           placeholder="Which character?"
         />
-
-        {/* <input
-          type="text"
-          value={episodeTitle}
-          onChange={onChangeEpisodeTitle}
-          placeholder="Which episode?"
-        /> */}
-        <TextField
-          value={episodeTitle}
-          onChange={onChangeEpisodeTitle}
-          labelName="Episode Title"
-          placeholder="Which episode?"
-        />
-
         <button
           type="submit"
           className="submit-btn border-none text-white bg-primary text-lg w-2/5 my-4 py-4"
         >
-          {value}
+          {submitTxt}
         </button>
       </form>
       <button type="button" className="close-btn" onClick={onClose}>
@@ -173,8 +150,7 @@ function Form({
 Form.propTypes = {
   onChange: PropTypes.func,
   form: PropTypes.objectOf(PropTypes.any),
-  value: PropTypes.string,
-  // value: PropTypes.objectOf(PropTypes.any),
+  submitTxt: PropTypes.string,
   onSubmit: PropTypes.func,
   onClose: PropTypes.func,
 };
