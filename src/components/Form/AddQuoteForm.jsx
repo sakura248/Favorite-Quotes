@@ -1,26 +1,18 @@
-/* eslint-disable no-undef */
-/* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from "react";
+import { addDoc, doc, setDoc } from "firebase/firestore";
 import PropTypes from "prop-types";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addDoc, setDoc, doc } from "firebase/firestore";
-import Form from "./Form";
-import { quotesRef, db } from "../../firebase-config";
+import { db, quotesRef } from "../../firebase-config";
 import useAuthStatus from "../../hooks/useAuthStatus";
+import Form from "./Form";
 
 function AddQuoteForm({ closeModal }) {
   const [errorMsg] = useState("");
 
   const [form, setRegistration] = useState({
     quote: "",
-    episodeTitle: "",
     tvShow: {},
     character: {},
-  });
-
-  const [suggest] = useState({
-    titleSuggestList: [],
-    characterSuggestList: [],
   });
 
   const { uid } = useAuthStatus();
@@ -34,7 +26,6 @@ function AddQuoteForm({ closeModal }) {
 
     const data = {
       createdDate: new Date(),
-      id_episode: "",
       id_user: uid,
       quoteContent,
       updatedDate: new Date(),
@@ -55,14 +46,6 @@ function AddQuoteForm({ closeModal }) {
       });
     }
 
-    // 🚧 Modifying🚧 FOR IF THERE'S NO CHARACTER DATA IN API
-    // else if (quoteContent && tvShowTitleId) {
-    //   setDoc(doc(db, "tvshow", tvShowTitleId.toString()), {
-    //     title: form.tvShowTitle,
-    //   });
-    //   addDoc(quotesRef, data);
-    // }
-
     dispatch({ type: "ADD_QUOTE", data });
     closeModal();
   };
@@ -71,10 +54,9 @@ function AddQuoteForm({ closeModal }) {
     <Form
       errorMsg={errorMsg}
       form={form}
-      value="ADD"
+      submitTxt="ADD"
       onChange={setRegistration}
       onSubmit={addQuoteHandler}
-      titleSuggestList={suggest.titleSuggestList}
       onClose={closeModal}
     />
   );

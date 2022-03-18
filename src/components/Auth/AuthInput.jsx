@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -22,6 +21,10 @@ function AuthInput({ errorMessage, labelName, type, name, onChange }) {
 
 AuthInput.propTypes = {
   errorMessage: PropTypes.string.isRequired,
+  labelName: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default AuthInput;

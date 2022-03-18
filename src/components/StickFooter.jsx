@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-import "./Form/form.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuthStatus from "../hooks/useAuthStatus";
-
 import AddQuoteForm from "./Form/AddQuoteForm";
+import "./Form/form.css";
 
 const appElement = document.getElementById("root");
 Modal.setAppElement(appElement);
@@ -29,10 +28,6 @@ function StickFooter() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // const redirectLogin = () => {
-  //     return <Navigate to='/Login' state={{ from: location }} />
-  // }
-
   function openModalHandle() {
     if (loggedIn) {
       setIsOpen(true);
@@ -40,16 +35,10 @@ function StickFooter() {
       navigate("/Login", { from: location });
     }
   }
-  // function afterOpenModal() {
-  // references are now sync'd and can be accessed.
-  // subtitle.style.color = '#f00';
-  // }
 
   function closeModal() {
     setIsOpen(false);
   }
-
-  // : <Navigate to='/Login' state={{ from: location }} />
 
   return (
     <>
@@ -64,13 +53,10 @@ function StickFooter() {
 
       <Modal
         isOpen={modalIsOpen}
-        // onAfterOpen={afterOpenModal}
-        // eslint-disable-next-line react/jsx-no-bind
-        onRequestClose={closeModal}
+        onRequestClose={() => closeModal}
         style={customStyles}
       >
-        {/* eslint-disable-next-line react/jsx-no-bind */}
-        <AddQuoteForm closeModal={closeModal} />
+        <AddQuoteForm closeModal={() => closeModal} />
       </Modal>
     </>
   );

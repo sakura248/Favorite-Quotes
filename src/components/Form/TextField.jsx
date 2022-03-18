@@ -1,8 +1,5 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/require-default-props */
-/* eslint-disable react/prop-types */
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 
 function TextField({ value, required, onChange, placeholder, labelName }) {
   return (
@@ -26,10 +23,10 @@ function TextField({ value, required, onChange, placeholder, labelName }) {
 
 TextField.propTypes = {
   value: PropTypes.string,
-  // value: PropTypes.objectOf(PropTypes.any),
   placeholder: PropTypes.string,
   required: PropTypes.bool,
   onChange: PropTypes.func,
+  labelName: PropTypes.string,
 };
 
 export default TextField;

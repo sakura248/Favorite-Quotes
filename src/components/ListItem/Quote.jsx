@@ -1,6 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/jsx-no-bind */
 // import ReactLoading from "react-loading";
 
 import PropTypes from "prop-types";
@@ -28,15 +25,15 @@ export const customStyles = {
 function Quote({
   favHandler,
   deleteHandler,
-  quoteLists,
+  quoteList,
   tvShowList,
   characterList,
-  likedLists,
+  likedList,
 }) {
   const { uid } = useAuthStatus();
 
   // ADJUSTING FOR RENDERING THE LIST
-  quoteLists.forEach((item) => {
+  quoteList.forEach((item) => {
     const element = item;
 
     // TV SHOW
@@ -52,7 +49,7 @@ function Quote({
     element.character = characterData.map((el) => el.name);
 
     // LIKE BUTTON
-    const isLikedData = likedLists.filter(
+    const isLikedData = likedList.filter(
       (fav) => fav.id_quote === item.id && fav.id_user === uid
     );
 
@@ -71,10 +68,12 @@ function Quote({
     setIsOpen(false);
   }
 
+  console.log(quoteList);
+
   return (
     <div className="p-12">
-      {quoteLists.length > 0 ? (
-        quoteLists.map((quoteItem) => (
+      {quoteList.length > 0 ? (
+        quoteList.map((quoteItem) => (
           <div
             key={quoteItem.id}
             className="flex flex-col items-center sm:flex-row sm:justify-between sm:w-10/12 sm:mt-9 sm:mb-9 sm:w-11/12"
@@ -138,10 +137,13 @@ function Quote({
       {modalIsOpen && (
         <Modal
           isOpen={modalIsOpen}
-          onRequestClose={closeModal}
+          onRequestClose={() => closeModal}
           style={customStyles}
         >
-          <UpdateQuoteForm closeModal={closeModal} quoteItem={modalQuote} />
+          <UpdateQuoteForm
+            closeModal={() => closeModal}
+            quoteItem={modalQuote}
+          />
         </Modal>
       )}
     </div>
@@ -151,7 +153,10 @@ function Quote({
 Quote.propTypes = {
   favHandler: PropTypes.func.isRequired,
   deleteHandler: PropTypes.func.isRequired,
-  // isPrivate: PropTypes.bool.isRequired,
+  quoteList: PropTypes.shape,
+  tvShowList: PropTypes.shape,
+  characterList: PropTypes.shape,
+  likedList: PropTypes.shape,
 };
 
 export default Quote;

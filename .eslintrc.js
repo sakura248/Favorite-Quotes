@@ -26,10 +26,9 @@ module.exports = {
   rules: {
     // note you must disable the base rule as it can report incorrect errors
     "no-use-before-define": "off",
-    "no-underscore-dangle": [
-      "error",
-      { allow: ["__REDUX_DEVTOOLS_EXTENSION__"] },
-    ],
+    "react/require-default-props": "off",
+    "no-underscore-dangle": "off",
+    "default-param-last": "off",
     "react/function-component-definition": [
       2,
       {

@@ -1,12 +1,5 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/require-default-props */
-/* eslint-disable import/no-cycle */
-/* eslint-disable react/prop-types */
-/* eslint-disable no-underscore-dangle */
-
-import React, { useState } from "react";
 import PropTypes from "prop-types";
+import React, { useState } from "react";
 import TextField from "./TextField";
 
 function InputSuggest({
@@ -15,7 +8,6 @@ function InputSuggest({
   required,
   onChange,
   onSelect,
-  onSelectOther,
   onFetchList,
   isCharacter,
   labelName,
@@ -32,11 +24,6 @@ function InputSuggest({
 
   const _onSelect = (item) => {
     onSelect(item);
-    setShowSuggest(false);
-  };
-
-  const _onSelectOther = () => {
-    onSelectOther();
     setShowSuggest(false);
   };
 
@@ -97,15 +84,6 @@ function InputSuggest({
 
             //
           )}
-          {/* <li>
-            <button
-              type="submit"
-              onClick={_onSelectOther}
-              className="hover:bg-red-100 flex justify-start items-center w-full"
-            >
-              <p>other than above</p>
-            </button>
-          </li> */}
         </ul>
       )}
     </>
@@ -114,14 +92,13 @@ function InputSuggest({
 
 InputSuggest.propTypes = {
   value: PropTypes.string,
-  // value: PropTypes.objectOf(PropTypes.any),
   placeholder: PropTypes.string,
   required: PropTypes.bool,
   onChange: PropTypes.func,
   onSelect: PropTypes.func,
-  onSelectOther: PropTypes.func,
   onFetchList: PropTypes.func,
   isCharacter: PropTypes.bool.isRequired,
+  labelName: PropTypes.string,
 };
 
 export default InputSuggest;
