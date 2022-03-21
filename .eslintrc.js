@@ -25,6 +25,7 @@ module.exports = {
   plugins: ["@typescript-eslint", "import", "jsx-a11y", "react", "react-hooks"],
   rules: {
     // note you must disable the base rule as it can report incorrect errors
+    "no-nested-ternary": "off",
     "no-use-before-define": "off",
     "react/require-default-props": "off",
     "no-underscore-dangle": "off",

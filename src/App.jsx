@@ -21,7 +21,7 @@ function App() {
           <Navigation />
           <Routes>
             <Route index element={<Index />} />
-            <Route element={<QuotesList isPrivate={false} />} />
+            <Route element={<QuotesList />} />
             <Route path="MyAccount" element={<MyAccount />} />
             <Route path="MyFavorites" element={<MyFavorites />} />
             <Route path="Login" element={<Login />} />

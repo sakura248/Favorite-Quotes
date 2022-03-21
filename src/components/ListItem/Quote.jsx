@@ -151,10 +151,10 @@ function Quote({
 Quote.propTypes = {
   favHandler: PropTypes.func.isRequired,
   deleteHandler: PropTypes.func.isRequired,
-  quoteList: PropTypes.shape,
-  tvShowList: PropTypes.shape,
-  characterList: PropTypes.shape,
-  likedList: PropTypes.shape,
+  quoteList: PropTypes.objectOf(PropTypes.any),
+  tvShowList: PropTypes.objectOf(PropTypes.any),
+  characterList: PropTypes.objectOf(PropTypes.any),
+  likedList: PropTypes.objectOf(PropTypes.any),
 };
 
 export default Quote;

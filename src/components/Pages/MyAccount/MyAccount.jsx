@@ -12,7 +12,7 @@ function MyAccount() {
         <SearchBar />
         <Filter />
       </div>
-      <QuotesList isPrivate />
+      <QuotesList type="account" />
     </div>
   );
 }

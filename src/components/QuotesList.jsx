@@ -38,7 +38,7 @@ export const customStyles = {
   },
 };
 
-function QuotesList({ isPrivate }) {
+function QuotesList({ type }) {
   const { loggedIn, uid } = useAuthStatus();
   const location = useLocation();
   const navigate = useNavigate();
@@ -48,14 +48,17 @@ function QuotesList({ isPrivate }) {
   const { fetchTvShow, tvShowList } = FetchTvShow();
   const { fetchLiked, likedList } = FetchLikedList();
   const { fetchCharacter, characterList } = FetchCharacterList();
+  console.log(type);
 
   useEffect(() => {
-    fetchQuoteList(isPrivate, uid);
+    fetchQuoteList(type, uid);
     fetchLiked();
     fetchTvShow();
     fetchCharacter();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isPrivate, uid]);
+  }, [type, uid]);
+
+  console.log("quoteList", quoteList);
 
   const deleteHandler = (id) => {
     if (loggedIn) {
@@ -102,7 +105,7 @@ function QuotesList({ isPrivate }) {
         loggedIn={loggedIn}
         favHandler={favHandler}
         deleteHandler={deleteHandler}
-        isPrivate={isPrivate}
+        // type={type}
         quoteList={quoteList}
         likedList={likedList}
         tvShowList={tvShowList}
@@ -113,7 +116,7 @@ function QuotesList({ isPrivate }) {
 }
 
 QuotesList.propTypes = {
-  isPrivate: PropTypes.bool.isRequired,
+  type: PropTypes.string,
 };
 
 export default QuotesList;
