@@ -68,8 +68,6 @@ function Quote({
     setIsOpen(false);
   }
 
-  console.log(quoteList);
-
   return (
     <div className="p-12">
       {quoteList.length > 0 ? (
@@ -137,11 +135,11 @@ function Quote({
       {modalIsOpen && (
         <Modal
           isOpen={modalIsOpen}
-          onRequestClose={() => closeModal}
+          onRequestClose={() => closeModal()}
           style={customStyles}
         >
           <UpdateQuoteForm
-            closeModal={() => closeModal}
+            closeModal={() => closeModal()}
             quoteItem={modalQuote}
           />
         </Modal>

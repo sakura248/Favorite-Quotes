@@ -1,6 +1,6 @@
 import { onSnapshot } from "firebase/firestore";
 import { useState } from "react";
-import { favoriteQuotesRef } from "../../firebase-config";
+import { favoriteQuotesRef } from "../../firestore-refs";
 
 function FetchLikedList() {
   const [likedList, setLikedList] = useState([]);

@@ -53,10 +53,10 @@ function StickFooter() {
 
       <Modal
         isOpen={modalIsOpen}
-        onRequestClose={() => closeModal}
+        onRequestClose={() => closeModal()}
         style={customStyles}
       >
-        <AddQuoteForm closeModal={() => closeModal} />
+        <AddQuoteForm closeModal={() => closeModal()} />
       </Modal>
     </>
   );

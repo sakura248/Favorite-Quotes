@@ -1,6 +1,6 @@
 import { onSnapshot } from "firebase/firestore";
 import { useState } from "react";
-import { tvShowRef } from "../../firebase-config";
+import { tvShowRef } from "../../firestore-refs";
 
 function FetchTvShow() {
   const [tvShowList, setTvShowList] = useState([]);

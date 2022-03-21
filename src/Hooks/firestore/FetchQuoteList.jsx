@@ -1,6 +1,6 @@
 import { onSnapshot, query, where } from "firebase/firestore";
 import { useState } from "react";
-import { quotesRef } from "../../firebase-config";
+import { quotesRef } from "../../firestore-refs";
 
 function FetchQuoteList() {
   const [quoteList, setQuoteList] = useState([]);

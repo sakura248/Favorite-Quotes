@@ -12,11 +12,13 @@ import React, { useEffect } from "react";
 import Modal from "react-modal";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import FetchCharacterList from "../app/firestore/FetchCharacterList";
-import FetchLikedList from "../app/firestore/FetchLikedList";
-import FetchQuoteList from "../app/firestore/FetchQuoteList";
-import FetchTvShow from "../app/firestore/FetchTvShow";
-import { favoriteQuotesRef, quotesRef } from "../firebase-config";
+import { favoriteQuotesRef, quotesRef } from "../firestore-refs";
+// import DeleteHandler from "../hooks/firestore/DeleteHandler";
+// import FavHandler from "../hooks/firestore/FavHandler";
+import FetchCharacterList from "../hooks/firestore/FetchCharacterList";
+import FetchLikedList from "../hooks/firestore/FetchLikedList";
+import FetchQuoteList from "../hooks/firestore/FetchQuoteList";
+import FetchTvShow from "../hooks/firestore/FetchTvShow";
 import useAuthStatus from "../hooks/useAuthStatus";
 import Quote from "./ListItem/Quote";
 
@@ -40,7 +42,6 @@ function QuotesList({ isPrivate }) {
   const { loggedIn, uid } = useAuthStatus();
   const location = useLocation();
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
   const { fetchQuoteList, quoteList } = FetchQuoteList();
@@ -98,6 +99,7 @@ function QuotesList({ isPrivate }) {
   return (
     <div className="container mx-auto">
       <Quote
+        loggedIn={loggedIn}
         favHandler={favHandler}
         deleteHandler={deleteHandler}
         isPrivate={isPrivate}
