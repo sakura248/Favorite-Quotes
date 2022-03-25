@@ -8,17 +8,15 @@ import {
   where,
 } from "firebase/firestore";
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
+import React from "react";
 import Modal from "react-modal";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { favoriteQuotesRef, quotesRef } from "../firestore-refs";
-// import DeleteHandler from "../hooks/firestore/DeleteHandler";
-// import FavHandler from "../hooks/firestore/FavHandler";
-import FetchCharacterList from "../hooks/firestore/FetchCharacterList";
-import FetchLikedList from "../hooks/firestore/FetchLikedList";
-import FetchQuoteList from "../hooks/firestore/FetchQuoteList";
-import FetchTvShow from "../hooks/firestore/FetchTvShow";
+import UseCharacterList from "../hooks/firestore/UseCharacterList";
+import UseLikedList from "../hooks/firestore/UseLikedList";
+import UseQuoteList from "../hooks/firestore/UseQuoteList";
+import UseTvShow from "../hooks/firestore/UseTvShow";
 import useAuthStatus from "../hooks/useAuthStatus";
 import Quote from "./ListItem/Quote";
 
@@ -44,19 +42,19 @@ function QuotesList({ type }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { fetchQuoteList, quoteList } = FetchQuoteList();
-  const { fetchTvShow, tvShowList } = FetchTvShow();
-  const { fetchLiked, likedList } = FetchLikedList();
-  const { fetchCharacter, characterList } = FetchCharacterList();
-  console.log(type);
+  const { useQuoteList, quoteList } = UseQuoteList();
+  const { useTvShow, tvShowList } = UseTvShow();
+  const { useLiked, likedList } = UseLikedList();
+  const { useCharacter, characterList } = UseCharacterList();
+  console.log(useQuoteList);
 
-  useEffect(() => {
-    fetchQuoteList(type, uid);
-    fetchLiked();
-    fetchTvShow();
-    fetchCharacter();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [type, uid]);
+  // useEffect(() => {
+  useQuoteList(type, uid);
+  useLiked();
+  useTvShow();
+  useCharacter();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [type, uid]);
 
   console.log("quoteList", quoteList);
 
@@ -105,7 +103,6 @@ function QuotesList({ type }) {
         loggedIn={loggedIn}
         favHandler={favHandler}
         deleteHandler={deleteHandler}
-        // type={type}
         quoteList={quoteList}
         likedList={likedList}
         tvShowList={tvShowList}

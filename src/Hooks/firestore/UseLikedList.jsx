@@ -2,17 +2,17 @@ import { onSnapshot } from "firebase/firestore";
 import { useState } from "react";
 import { favoriteQuotesRef } from "../../firestore-refs";
 
-function FetchLikedList() {
+function UseLikedList() {
   const [likedList, setLikedList] = useState([]);
 
-  const fetchLiked = async () => {
+  const useLiked = async () => {
     await onSnapshot(favoriteQuotesRef, (document) => {
       setLikedList(
         document.docs.map((item) => ({ ...item.data(), id: item.id }))
       );
     });
   };
-  return { fetchLiked, likedList };
+  return { useLiked, likedList };
 }
 
-export default FetchLikedList;
+export default UseLikedList;

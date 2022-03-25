@@ -2,17 +2,17 @@ import { onSnapshot } from "firebase/firestore";
 import { useState } from "react";
 import { tvCharacterRef } from "../../firestore-refs";
 
-function FetchCharacterList() {
+function UseCharacterList() {
   const [characterList, setCharacterList] = useState([]);
 
-  const fetchCharacter = async () => {
+  const useCharacter = async () => {
     await onSnapshot(tvCharacterRef, (document) => {
       setCharacterList(
         document.docs.map((item) => ({ ...item.data(), id: item.id }))
       );
     });
   };
-  return { fetchCharacter, characterList };
+  return { useCharacter, characterList };
 }
 
-export default FetchCharacterList;
+export default UseCharacterList;
