@@ -8,7 +8,7 @@ import {
   where,
 } from "firebase/firestore";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect } from "react";
 import Modal from "react-modal";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -42,19 +42,18 @@ function QuotesList({ type }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { useQuoteList, quoteList } = UseQuoteList();
+  const { fetchQuoteList, quoteList } = UseQuoteList();
   const { useTvShow, tvShowList } = UseTvShow();
   const { useLiked, likedList } = UseLikedList();
   const { useCharacter, characterList } = UseCharacterList();
-  console.log(useQuoteList);
 
-  // useEffect(() => {
-  useQuoteList(type, uid);
-  useLiked();
-  useTvShow();
-  useCharacter();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [type, uid]);
+  useEffect(() => {
+    fetchQuoteList(type, uid);
+    useLiked();
+    useTvShow();
+    useCharacter();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [type, uid]);
 
   console.log("quoteList", quoteList);
 
