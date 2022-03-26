@@ -1,10 +1,12 @@
 import {
   addDoc,
+  arrayRemove,
+  arrayUnion,
   deleteDoc,
   doc,
   getDocs,
   query,
-  setDoc,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import PropTypes from "prop-types";
@@ -43,19 +45,20 @@ function QuotesList({ type }) {
   const dispatch = useDispatch();
 
   const { fetchQuoteList, quoteList } = UseQuoteList();
-  const { useTvShow, tvShowList } = UseTvShow();
-  const { useLiked, likedList } = UseLikedList();
-  const { useCharacter, characterList } = UseCharacterList();
+  const { fetchTvShow, tvShowList } = UseTvShow();
+  const { fetchLiked, likedList } = UseLikedList();
+  const { fetchCharacter, characterList } = UseCharacterList();
 
   useEffect(() => {
     fetchQuoteList(type, uid);
-    useLiked();
-    useTvShow();
-    useCharacter();
+    fetchLiked(uid);
+    fetchTvShow();
+    fetchCharacter();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, uid]);
 
   console.log("quoteList", quoteList);
+  // console.log("favList", favList);
 
   const deleteHandler = (id) => {
     if (loggedIn) {
@@ -72,24 +75,27 @@ function QuotesList({ type }) {
 
   const favHandler = async (quoteItem) => {
     if (loggedIn) {
+      // LIKE
       if (quoteItem.isLiked.length === 0) {
         const data = {
           id_user: uid,
           id_quote: quoteItem.id,
         };
-        addDoc(favoriteQuotesRef, data);
-        setDoc(quotesRef, { isLiked: uid }, { merge: true });
+        await addDoc(favoriteQuotesRef, data);
+        const targetRef = doc(quotesRef, quoteItem.id);
+        await updateDoc(targetRef, { liked: arrayUnion(uid) });
       } else {
+        // DELETE LIKE
         const targetQuery = query(
           favoriteQuotesRef,
           where("id_quote", "==", quoteItem.id)
         );
         const querySnapShot = await getDocs(targetQuery);
         const id = querySnapShot.docs.map((item) => item.id).toString();
-        const targetRef = doc(favoriteQuotesRef, id);
-        await deleteDoc(targetRef);
-
-        setDoc(quotesRef, { isLiked: "" }, { merge: true });
+        const targetFavRef = doc(favoriteQuotesRef, id);
+        await deleteDoc(targetFavRef);
+        const targetRef = doc(quotesRef, quoteItem.id);
+        await updateDoc(targetRef, { liked: arrayRemove(uid) });
       }
     } else {
       navigate("/Login", { from: location });

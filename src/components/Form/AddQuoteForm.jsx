@@ -27,6 +27,7 @@ function AddQuoteForm({ closeModal }) {
     const data = {
       createdDate: new Date(),
       id_user: uid,
+      liked: [],
       quoteContent,
       updatedDate: new Date(),
       id_tvshow: form.tvShow.id,
