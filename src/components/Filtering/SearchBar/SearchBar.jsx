@@ -12,10 +12,7 @@ function SearchBar() {
 
   return (
     <div>
-      <form
-        // onSubmit={searchHandler}
-        className="flex flex-row border-black justify-between border border-stroke p-2 rounded-3xl"
-      >
+      <form className="flex flex-row border-black justify-between border border-stroke p-2 rounded-3xl">
         <svg
           className=""
           xmlns="http://www.w3.org/2000/svg"

@@ -30,6 +30,8 @@ module.exports = {
     "react/require-default-props": "off",
     "no-underscore-dangle": "off",
     "default-param-last": "off",
+    "no-console": "off",
+    "no-alert": "off",
     "react/function-component-definition": [
       2,
       {

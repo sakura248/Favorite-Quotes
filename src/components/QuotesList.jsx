@@ -57,9 +57,6 @@ function QuotesList({ type }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, uid]);
 
-  console.log("quoteList", quoteList);
-  // console.log("favList", favList);
-
   const deleteHandler = (id) => {
     if (loggedIn) {
       if (window.confirm("Are you sure?")) {
