@@ -9,7 +9,6 @@ import {
 } from "firebase/firestore";
 import { useLocation, useNavigate } from "react-router-dom";
 import { favoriteQuotesRef, quotesRef } from "../../firestore-refs";
-// import useAuthStatus from "../../hooks/useAuthStatus";
 
 const FavHandler = async (loggedIn, uid, quoteItem) => {
   // const { loggedIn, uid } = useAuthStatus();
