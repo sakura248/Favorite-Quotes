@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import React, { Navigate, useLocation } from "react-router-dom";
-import useAuthStatus from "../../hooks/useAuthStatus";
+import UseAuthStatus from "../../hooks/UseAuthStatus";
 
 const inPrivatePaths = ["/MyAccount", "/MyFavorites", "NewPrivatePage"];
 
 function PrivateRoute({ children }) {
   const location = useLocation();
-  const { loggedIn } = useAuthStatus();
+  const { loggedIn } = UseAuthStatus();
   const current = location.pathname;
 
   const isPrivate = inPrivatePaths.includes(current);

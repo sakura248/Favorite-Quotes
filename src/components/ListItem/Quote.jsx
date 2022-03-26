@@ -3,7 +3,7 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import Modal from "react-modal";
-import useAuthStatus from "../../hooks/useAuthStatus";
+import UseAuthStatus from "../../hooks/UseAuthStatus";
 import UpdateQuoteForm from "../Form/UpdateQuoteForm";
 
 const appElement = document.getElementById("content");
@@ -30,7 +30,7 @@ function Quote({
   characterList,
   likedList,
 }) {
-  const { uid } = useAuthStatus();
+  const { uid } = UseAuthStatus();
 
   // ADJUSTING FOR RENDERING THE LIST
   quoteList.forEach((item) => {

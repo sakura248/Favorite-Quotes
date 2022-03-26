@@ -2,10 +2,10 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { quotesRef } from "../../firestore-refs";
-import useAuthStatus from "../useAuthStatus";
+import UseAuthStatus from "../UseAuthStatus";
 
 const DeleteHandler = (id) => {
-  const { loggedIn } = useAuthStatus();
+  const { loggedIn } = UseAuthStatus();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
