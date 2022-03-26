@@ -19,7 +19,7 @@ import UseCharacterList from "../hooks/firestore/UseCharacterList";
 import UseLikedList from "../hooks/firestore/UseLikedList";
 import UseQuoteList from "../hooks/firestore/UseQuoteList";
 import UseTvShow from "../hooks/firestore/UseTvShow";
-import useAuthStatus from "../hooks/useAuthStatus";
+import UseAuthStatus from "../hooks/UseAuthStatus";
 import Quote from "./ListItem/Quote";
 
 const appElement = document.getElementById("content");
@@ -39,7 +39,7 @@ export const customStyles = {
 };
 
 function QuotesList({ type }) {
-  const { loggedIn, uid } = useAuthStatus();
+  const { loggedIn, uid } = UseAuthStatus();
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();

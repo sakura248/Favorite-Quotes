@@ -2,12 +2,12 @@ import { signOut } from "firebase/auth";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
-import useAuthStatus from "../../hooks/useAuthStatus";
+import UseAuthStatus from "../../hooks/UseAuthStatus";
 import "./navigation.css";
 
 function Navigation() {
   // const auth = getAuth()
-  const { loggedIn } = useAuthStatus();
+  const { loggedIn } = UseAuthStatus();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 

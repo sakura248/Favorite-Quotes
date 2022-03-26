@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { db, quotesRef } from "../../firestore-refs";
-import useAuthStatus from "../../hooks/useAuthStatus";
+import UseAuthStatus from "../../hooks/UseAuthStatus";
 import Form from "./Form";
 
 function AddQuoteForm({ closeModal }) {
@@ -15,7 +15,7 @@ function AddQuoteForm({ closeModal }) {
     character: {},
   });
 
-  const { uid } = useAuthStatus();
+  const { uid } = UseAuthStatus();
 
   const dispatch = useDispatch();
 

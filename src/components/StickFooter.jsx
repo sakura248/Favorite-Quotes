@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { useLocation, useNavigate } from "react-router-dom";
-import useAuthStatus from "../hooks/useAuthStatus";
+import UseAuthStatus from "../hooks/UseAuthStatus";
 import AddQuoteForm from "./Form/AddQuoteForm";
 import "./Form/form.css";
 
@@ -24,7 +24,7 @@ export const customStyles = {
 
 function StickFooter() {
   const [modalIsOpen, setIsOpen] = useState(false);
-  const { loggedIn } = useAuthStatus();
+  const { loggedIn } = UseAuthStatus();
   const location = useLocation();
   const navigate = useNavigate();
 

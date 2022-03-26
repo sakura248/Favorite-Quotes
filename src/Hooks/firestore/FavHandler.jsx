@@ -11,7 +11,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { favoriteQuotesRef, quotesRef } from "../../firestore-refs";
 
 const FavHandler = async (loggedIn, uid, quoteItem) => {
-  // const { loggedIn, uid } = useAuthStatus();
   const location = useLocation();
   const navigate = useNavigate();
 
