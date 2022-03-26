@@ -1,8 +1,8 @@
 import { onSnapshot } from "firebase/firestore";
 import { useState } from "react";
-import { tvCharacterRef } from "../../firebase-config";
+import { tvCharacterRef } from "../../firestore-refs";
 
-function FetchCharacterList() {
+function UseCharacterList() {
   const [characterList, setCharacterList] = useState([]);
 
   const fetchCharacter = async () => {
@@ -15,4 +15,4 @@ function FetchCharacterList() {
   return { fetchCharacter, characterList };
 }
 
-export default FetchCharacterList;
+export default UseCharacterList;

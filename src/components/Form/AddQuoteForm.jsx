@@ -2,7 +2,7 @@ import { addDoc, doc, setDoc } from "firebase/firestore";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { db, quotesRef } from "../../firebase-config";
+import { db, quotesRef } from "../../firestore-refs";
 import useAuthStatus from "../../hooks/useAuthStatus";
 import Form from "./Form";
 
@@ -27,6 +27,7 @@ function AddQuoteForm({ closeModal }) {
     const data = {
       createdDate: new Date(),
       id_user: uid,
+      liked: [],
       quoteContent,
       updatedDate: new Date(),
       id_tvshow: form.tvShow.id,

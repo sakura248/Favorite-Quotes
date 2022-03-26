@@ -1,40 +1,28 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+#Favorite Quotes
+[LIVE DEMO](https://stupefied-colden-e0851f.netlify.app/) 💬
 
+## Description
 
-# What is my project about
-This is the web site that you can add, edit or delete your favorite quote. 
+Do you have TV quote that you never forget? In this app, you can add/update your own favorite quotes from your favorite TV shows.
 
-# What I am using this project for / What is the purpose of this project
-I wanted to improve my comprehension of React with Redux.
+## Technologies
 
-# Why did you decide to make this project?
-
-I love comedy TV shows and quotes from them, so I've wanted to make a web application that is related to quotes from TV shows. 
-I thought the final project was a good opportunity to give form to my idea.
-
-# What reference did you use?
-
-Lots of articles from Qiita, DEV community, or other blogs.
-(I should have noted their URLs)
-
-# What libraries/technology/ api you used
 - React
-- react-modal
 - Redux
+- Firebase Authentification
+- Firebase Firestore Database
+- The Movie Database (TMDB) API
 - Tailwind CSS
+- Prettier
+- ESlint
+- Iconmonster
+- Figma
 
-## libraries/technology/ api I will implement in the future
-- TypeScript
-- The Movie Database (TMDb) API
-- firebase, firestore
+## Features
 
-
-# What did you learn? What was the most challenging part?
-
-My biggest goal of this project was to understand Redux, but interestingly what I could deepen the knowledge most is about React. 
-The most challenging part is the component which is using Modal and map function. I should have understood well about rendering. 
-
-
-# materials
-
-https://iconmonstr.com/trash-can-1-svg/
+- Sign up, Login (Google Account or own email and password)
+- Posting quotes
+  - Add, Edit and Delete
+  - Suggesting TV show titles when user type, connected with TMDB API
+- Adding favorites
+- Account page where user can see quotes they posted

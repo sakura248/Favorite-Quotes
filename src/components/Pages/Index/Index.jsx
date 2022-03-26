@@ -1,8 +1,8 @@
 import React from "react";
-import Hero from "../../Hero/Hero";
-import QuotesList from "../../QuotesList";
 // import SearchBar from "../../Filtering/SearchBar/SearchBar";
 import Filter from "../../Filtering/Filter/Filter";
+import Hero from "../../Hero/Hero";
+import QuotesList from "../../QuotesList";
 
 function Index() {
   return (
@@ -12,7 +12,7 @@ function Index() {
         {/* <SearchBar /> */}
         <Filter />
       </div>
-      <QuotesList isPrivate={false} />
+      <QuotesList type="all" />
     </div>
   );
 }

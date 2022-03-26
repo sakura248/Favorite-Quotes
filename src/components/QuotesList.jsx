@@ -1,10 +1,12 @@
 import {
   addDoc,
+  arrayRemove,
+  arrayUnion,
   deleteDoc,
   doc,
   getDocs,
   query,
-  setDoc,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import PropTypes from "prop-types";
@@ -12,11 +14,11 @@ import React, { useEffect } from "react";
 import Modal from "react-modal";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import FetchCharacterList from "../app/firestore/FetchCharacterList";
-import FetchLikedList from "../app/firestore/FetchLikedList";
-import FetchQuoteList from "../app/firestore/FetchQuoteList";
-import FetchTvShow from "../app/firestore/FetchTvShow";
-import { favoriteQuotesRef, quotesRef } from "../firebase-config";
+import { favoriteQuotesRef, quotesRef } from "../firestore-refs";
+import UseCharacterList from "../hooks/firestore/UseCharacterList";
+import UseLikedList from "../hooks/firestore/UseLikedList";
+import UseQuoteList from "../hooks/firestore/UseQuoteList";
+import UseTvShow from "../hooks/firestore/UseTvShow";
 import useAuthStatus from "../hooks/useAuthStatus";
 import Quote from "./ListItem/Quote";
 
@@ -36,25 +38,24 @@ export const customStyles = {
   },
 };
 
-function QuotesList({ isPrivate }) {
+function QuotesList({ type }) {
   const { loggedIn, uid } = useAuthStatus();
   const location = useLocation();
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
-  const { fetchQuoteList, quoteList } = FetchQuoteList();
-  const { fetchTvShow, tvShowList } = FetchTvShow();
-  const { fetchLiked, likedList } = FetchLikedList();
-  const { fetchCharacter, characterList } = FetchCharacterList();
+  const { fetchQuoteList, quoteList } = UseQuoteList();
+  const { fetchTvShow, tvShowList } = UseTvShow();
+  const { fetchLiked, likedList } = UseLikedList();
+  const { fetchCharacter, characterList } = UseCharacterList();
 
   useEffect(() => {
-    fetchQuoteList(isPrivate, uid);
-    fetchLiked();
+    fetchQuoteList(type, uid);
+    fetchLiked(uid);
     fetchTvShow();
     fetchCharacter();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isPrivate, uid]);
+  }, [type, uid]);
 
   const deleteHandler = (id) => {
     if (loggedIn) {
@@ -71,24 +72,27 @@ function QuotesList({ isPrivate }) {
 
   const favHandler = async (quoteItem) => {
     if (loggedIn) {
+      // LIKE
       if (quoteItem.isLiked.length === 0) {
         const data = {
           id_user: uid,
           id_quote: quoteItem.id,
         };
-        addDoc(favoriteQuotesRef, data);
-        setDoc(quotesRef, { isLiked: uid }, { merge: true });
+        await addDoc(favoriteQuotesRef, data);
+        const targetRef = doc(quotesRef, quoteItem.id);
+        await updateDoc(targetRef, { liked: arrayUnion(uid) });
       } else {
+        // DELETE LIKE
         const targetQuery = query(
           favoriteQuotesRef,
           where("id_quote", "==", quoteItem.id)
         );
         const querySnapShot = await getDocs(targetQuery);
         const id = querySnapShot.docs.map((item) => item.id).toString();
-        const targetRef = doc(favoriteQuotesRef, id);
-        await deleteDoc(targetRef);
-
-        setDoc(quotesRef, { isLiked: "" }, { merge: true });
+        const targetFavRef = doc(favoriteQuotesRef, id);
+        await deleteDoc(targetFavRef);
+        const targetRef = doc(quotesRef, quoteItem.id);
+        await updateDoc(targetRef, { liked: arrayRemove(uid) });
       }
     } else {
       navigate("/Login", { from: location });
@@ -98,9 +102,9 @@ function QuotesList({ isPrivate }) {
   return (
     <div className="container mx-auto">
       <Quote
+        loggedIn={loggedIn}
         favHandler={favHandler}
         deleteHandler={deleteHandler}
-        isPrivate={isPrivate}
         quoteList={quoteList}
         likedList={likedList}
         tvShowList={tvShowList}
@@ -111,7 +115,7 @@ function QuotesList({ isPrivate }) {
 }
 
 QuotesList.propTypes = {
-  isPrivate: PropTypes.bool.isRequired,
+  type: PropTypes.string,
 };
 
 export default QuotesList;

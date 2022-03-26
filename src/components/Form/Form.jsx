@@ -118,9 +118,7 @@ function Form({
                     .toLowerCase()
                     .indexOf(form.character.name.toLowerCase()) >= 0
               );
-              console.log(newList);
               return newList;
-              // return json.results;
             } catch (err) {
               console.error(err);
               // setErrorMsg("API response error", err);

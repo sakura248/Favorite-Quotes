@@ -1,17 +1,17 @@
 import React from "react";
 import Filter from "../Filtering/Filter/Filter";
-import SearchBar from "../Filtering/SearchBar/SearchBar";
+// import SearchBar from "../Filtering/SearchBar/SearchBar";
 import QuotesList from "../QuotesList";
 
 function MyFavoriteQuotes() {
   return (
-    <div className="container mx-auto bg-white">
+    <div className="container mx-auto">
       <p>favorite quote ...</p>
       <div className="flex flex-row">
-        <SearchBar />
+        {/* <SearchBar /> */}
         <Filter />
       </div>
-      <QuotesList isPrivate />
+      <QuotesList type="fav" />
     </div>
   );
 }
