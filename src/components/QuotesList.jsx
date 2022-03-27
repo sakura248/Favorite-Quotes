@@ -38,7 +38,7 @@ export const customStyles = {
   },
 };
 
-function QuotesList({ type }) {
+function QuotesList({ type, sortNum }) {
   const { loggedIn, uid } = UseAuthStatus();
   const location = useLocation();
   const navigate = useNavigate();
@@ -85,10 +85,18 @@ function QuotesList({ type }) {
         // DELETE LIKE
         const targetQuery = query(
           favoriteQuotesRef,
-          where("id_quote", "==", quoteItem.id)
+          where("id_quote", "==", quoteItem.id),
+          where("id_user", "==", uid)
         );
+        console.log(targetQuery);
         const querySnapShot = await getDocs(targetQuery);
-        const id = querySnapShot.docs.map((item) => item.id).toString();
+        const id = querySnapShot.docs
+          .map((item) => {
+            // item.id;
+            console.log("id", item.id);
+            return item.id;
+          })
+          .toString();
         const targetFavRef = doc(favoriteQuotesRef, id);
         await deleteDoc(targetFavRef);
         const targetRef = doc(quotesRef, quoteItem.id);
@@ -109,6 +117,7 @@ function QuotesList({ type }) {
         likedList={likedList}
         tvShowList={tvShowList}
         characterList={characterList}
+        sortNum={sortNum}
       />
     </div>
   );
@@ -116,6 +125,7 @@ function QuotesList({ type }) {
 
 QuotesList.propTypes = {
   type: PropTypes.string,
+  sortNum: PropTypes.number,
 };
 
 export default QuotesList;

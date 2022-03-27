@@ -22,7 +22,17 @@ function Navigation() {
   return (
     <>
       {/* --- mobile menu --- */}
-      <div className="block sm:hidden z-50 h-0">
+      <Link
+        to="/"
+        className="title text-3xl font-bold text-right absolute right-0 sm:hidden"
+      >
+        FAVORITE
+        <br />
+        QUOTES
+        <br />
+        <span className="text-xs">FROM YOUR FAVORITE TV SHOWS</span>
+      </Link>
+      <div className="block sm:hidden z-50 h-0 sticky top-0">
         <button
           type="button"
           className="w-10 h-10 relative top-3 left-3 cursor-pointer z-50"
@@ -155,6 +165,8 @@ function Navigation() {
           FAVORITE
           <br />
           QUOTES
+          <br />
+          <span className="text-sm">FROM YOUR FAVORITE TV SHOWS</span>
         </Link>
       </div>
     </>

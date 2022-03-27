@@ -1,9 +1,11 @@
+import PropTypes from "prop-types";
 import React from "react";
 
-function Filter() {
+function Sort({ onChange }) {
   return (
     <div className="w-60 ml-6">
       <select
+        onChange={onChange}
         name="quote-sort"
         placeholder="Sort"
         className="w-full bg-black text-white p-3 border border-black hover:bg-main hover:text-black cursor-pointer"
@@ -16,4 +18,8 @@ function Filter() {
   );
 }
 
-export default Filter;
+Sort.propTypes = {
+  onChange: PropTypes.func,
+};
+
+export default Sort;

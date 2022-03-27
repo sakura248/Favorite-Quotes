@@ -1,5 +1,5 @@
 import React from "react";
-import Filter from "../Filtering/Filter/Filter";
+import Sort from "../Filtering/Sort/Sort";
 // import SearchBar from "../Filtering/SearchBar/SearchBar";
 import QuotesList from "../QuotesList";
 
@@ -8,7 +8,7 @@ function MyFavoriteQuotes() {
     <div className="container mx-auto">
       <div className="flex flex-row">
         {/* <SearchBar /> */}
-        <Filter />
+        <Sort />
       </div>
       <QuotesList type="fav" />
     </div>

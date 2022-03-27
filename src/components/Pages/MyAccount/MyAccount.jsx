@@ -1,5 +1,5 @@
 import React from "react";
-import Filter from "../../Filtering/Filter/Filter";
+import Sort from "../../Filtering/Sort/Sort";
 // import SearchBar from "../../Filtering/SearchBar/SearchBar";
 import Header from "../../Header/Header";
 import QuotesList from "../../QuotesList";
@@ -10,7 +10,7 @@ function MyAccount() {
       <Header header="Your Posts" />
       <div className="flex flex-row items-end">
         {/* <SearchBar /> */}
-        <Filter />
+        <Sort />
       </div>
       <QuotesList type="account" />
     </div>
