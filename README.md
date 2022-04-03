@@ -1,6 +1,8 @@
 # Favorite Quotes
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/cf2864db-41fc-463d-a523-bd764de38d74/deploy-status)](https://app.netlify.com/sites/stupefied-colden-e0851f/deploys) 🚀
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cf2864db-41fc-463d-a523-bd764de38d74/deploy-status)](https://app.netlify.com/sites/stupefied-colden-e0851f/deploys)
+
+[VIEW LIVE](https://stupefied-colden-e0851f.netlify.app/) 🚀
 
 ## Description
 
