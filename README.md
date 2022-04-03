@@ -10,7 +10,7 @@ Do you have TV quote that you never forget? In this app, you can add/update your
 
 - React
 - Redux
-- Firebase Authentification
+- Firebase Authentication
 - Firebase Firestore Database
 - The Movie Database (TMDB) API
 - Tailwind CSS
