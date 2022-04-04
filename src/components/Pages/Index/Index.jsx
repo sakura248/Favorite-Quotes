@@ -7,10 +7,10 @@ import QuotesList from "../../QuotesList";
 
 function Index() {
   const [order, setOrder] = useState("newest");
-
   const handleChange = (selectedOrder) => {
     setOrder(selectedOrder.value);
   };
+
   return (
     <div>
       <Hero />
