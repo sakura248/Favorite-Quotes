@@ -26,6 +26,10 @@ function App() {
             <Route path="MyFavorites" element={<MyFavorites />} />
             <Route path="Login" element={<Login />} />
             <Route path="SignUp" element={<SignUp />} />
+            {/* Loading prepare */}
+            {/* <React.Suspense fallback={<>...</>}>
+                  <Dashboard />
+                </React.Suspense> */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
