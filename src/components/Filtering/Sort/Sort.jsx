@@ -15,6 +15,7 @@ function Sort({ onChange }) {
         onChange={onChange}
         name="quote-sort"
         placeholder="Sort"
+        // className="w-full bg-black text-white p-3 border border-black hover:bg-main hover:text-black cursor-pointer"
         options={options}
       />
     </div>

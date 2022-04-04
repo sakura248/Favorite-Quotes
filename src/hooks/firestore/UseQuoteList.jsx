@@ -1,11 +1,12 @@
 import { onSnapshot, query, where } from "firebase/firestore";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { quotesRef } from "../../firestore-refs";
 
 function UseQuoteList() {
   const [quoteList, setQuoteList] = useState([]);
+  // const [favList, setFavList] = useState([]);
 
-  const fetchQuoteList = useMemo(async (type, uid) => {
+  const fetchQuoteList = async (type, uid) => {
     const accountQuery = await query(quotesRef, where("id_user", "==", uid));
     const favQuery = await query(
       quotesRef,
@@ -19,7 +20,13 @@ function UseQuoteList() {
         document.docs.map((item) => ({ ...item.data(), id: item.id }))
       );
     });
-  }, []);
+
+    // await onSnapshot(favQuery, (document) => {
+    //   setFavList(
+    //     document.docs.map((item) => ({ ...item.data(), id: item.id }))
+    //   );
+    // });
+  };
   return { fetchQuoteList, quoteList };
 }
 
