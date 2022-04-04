@@ -65,11 +65,13 @@ function Quote({
       );
     } else if (order === "popular") {
       _sortedList = _sortedList.sort((a, b) =>
-        a.isLiked.length < b.isLiked.length ? 1 : -1
+        a.liked.length < b.liked.length ? 1 : -1
       );
     }
     return _sortedList;
   }, [order, quoteList]);
+
+  console.log(sortedList);
 
   return (
     <div className="p-12">

@@ -15,13 +15,13 @@ const FavHandler = async (loggedIn, uid, quoteItem) => {
   const navigate = useNavigate();
 
   if (loggedIn) {
-    if (quoteItem.isLiked.length === 0) {
+    if (quoteItem.liked.length === 0) {
       const data = {
         id_user: uid,
         id_quote: quoteItem.id,
       };
       addDoc(favoriteQuotesRef, data);
-      setDoc(quotesRef, { isLiked: uid }, { merge: true });
+      setDoc(quotesRef, { liked: uid }, { merge: true });
     } else {
       const targetQuery = query(
         favoriteQuotesRef,
@@ -32,7 +32,7 @@ const FavHandler = async (loggedIn, uid, quoteItem) => {
       const targetRef = doc(favoriteQuotesRef, id);
       await deleteDoc(targetRef);
 
-      setDoc(quotesRef, { isLiked: "" }, { merge: true });
+      setDoc(quotesRef, { liked: "" }, { merge: true });
     }
   } else {
     navigate("/Login", { from: location });

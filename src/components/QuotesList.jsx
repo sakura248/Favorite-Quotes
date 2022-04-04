@@ -21,9 +21,6 @@ import UseTvShow from "../hooks/firestore/UseTvShow";
 import UseAuthStatus from "../hooks/UseAuthStatus";
 import Quote from "./ListItem/Quote";
 
-// const appElement = document.getElementById("content");
-// Modal.setAppElement(appElement);
-
 function QuotesList({ type, order }) {
   const { loggedIn, uid } = UseAuthStatus();
   const location = useLocation();
