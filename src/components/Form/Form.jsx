@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
+import Btn from "./Btn";
 import InputSuggest from "./InputSuggest";
 
 const API_KEY = process.env.REACT_APP_movieApi;
@@ -130,12 +131,7 @@ function Form({
           onSelectOther={() => {}}
           placeholder="Which character?"
         />
-        <button
-          type="submit"
-          className="submit-btn border-none text-white bg-primary text-lg w-2/5 my-4 py-4"
-        >
-          {submitTxt}
-        </button>
+        <Btn btnValue={submitTxt} />
       </form>
       <button type="button" className="close-btn" onClick={onClose}>
         close

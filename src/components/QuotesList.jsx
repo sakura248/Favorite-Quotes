@@ -11,7 +11,6 @@ import {
 } from "firebase/firestore";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
-import Modal from "react-modal";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { favoriteQuotesRef, quotesRef } from "../firestore-refs";
@@ -22,23 +21,10 @@ import UseTvShow from "../hooks/firestore/UseTvShow";
 import UseAuthStatus from "../hooks/UseAuthStatus";
 import Quote from "./ListItem/Quote";
 
-const appElement = document.getElementById("content");
-Modal.setAppElement(appElement);
+// const appElement = document.getElementById("content");
+// Modal.setAppElement(appElement);
 
-export const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    width: "90%",
-    backgroundColor: "#f2f2f2",
-  },
-};
-
-function QuotesList({ type, sortNum }) {
+function QuotesList({ type, order }) {
   const { loggedIn, uid } = UseAuthStatus();
   const location = useLocation();
   const navigate = useNavigate();
@@ -117,7 +103,7 @@ function QuotesList({ type, sortNum }) {
         likedList={likedList}
         tvShowList={tvShowList}
         characterList={characterList}
-        sortNum={sortNum}
+        order={order}
       />
     </div>
   );
@@ -125,7 +111,7 @@ function QuotesList({ type, sortNum }) {
 
 QuotesList.propTypes = {
   type: PropTypes.string,
-  sortNum: PropTypes.number,
+  order: PropTypes.string,
 };
 
 export default QuotesList;

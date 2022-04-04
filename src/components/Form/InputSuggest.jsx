@@ -37,8 +37,8 @@ function InputSuggest({
         labelName={labelName}
       />
 
-      {showSuggest && (
-        <ul className="suggest-wrapper border-solid border border-gray-500 overflow-auto h-80">
+      {showSuggest && list && (
+        <ul className="suggest-wrapper border-solid border border-gray-500 overflow-auto h-80 w-full">
           {list.map(
             (item) =>
               !isCharacter ? (

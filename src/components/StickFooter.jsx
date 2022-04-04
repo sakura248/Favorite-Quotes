@@ -4,23 +4,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import UseAuthStatus from "../hooks/UseAuthStatus";
 import AddQuoteForm from "./Form/AddQuoteForm";
 import "./Form/form.css";
+import customStyles from "./Modal/customStyles";
 
 const appElement = document.getElementById("root");
 Modal.setAppElement(appElement);
-
-// for modal setting
-export const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    width: "90%",
-    backgroundColor: "#f2f2f2",
-  },
-};
 
 function StickFooter() {
   const [modalIsOpen, setIsOpen] = useState(false);
