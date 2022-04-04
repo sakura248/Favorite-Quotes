@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Sort from "../../Filtering/Sort/Sort";
-// import SearchBar from "../../Filtering/SearchBar/SearchBar";
 import Header from "../../Header/Header";
 import QuotesList from "../../QuotesList";
 

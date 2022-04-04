@@ -7,7 +7,7 @@ import {
   getDocs,
   query,
   updateDoc,
-  where,
+  where
 } from "firebase/firestore";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
@@ -35,13 +35,13 @@ function QuotesList({ type, order }) {
   const { fetchLiked, likedList } = UseLikedList();
   const { fetchCharacter, characterList } = UseCharacterList();
 
+  console.log("fetchQuoteList", typeof fetchQuoteList);
   useEffect(() => {
     fetchQuoteList(type, uid);
     fetchLiked(uid);
     fetchTvShow();
     fetchCharacter();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [type, uid]);
+  }, [fetchCharacter, fetchLiked, fetchQuoteList, fetchTvShow, type, uid]);
 
   const deleteHandler = (id) => {
     if (loggedIn) {
