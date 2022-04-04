@@ -5,11 +5,11 @@ import React from "react";
 
 function Hero() {
   return (
-    <div className="flex justify-center mt-40">
+    <div className="flex justify-center mt-4">
       <img
         src={`${process.env.PUBLIC_URL}/assets/Message.png`}
         alt="key"
-        className="w-1/2"
+        className="h-64"
       />
     </div>
   );

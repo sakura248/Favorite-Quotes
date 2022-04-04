@@ -38,7 +38,7 @@ export const customStyles = {
   },
 };
 
-function QuotesList({ type, sortNum }) {
+function QuotesList({ type, order }) {
   const { loggedIn, uid } = UseAuthStatus();
   const location = useLocation();
   const navigate = useNavigate();
@@ -117,7 +117,7 @@ function QuotesList({ type, sortNum }) {
         likedList={likedList}
         tvShowList={tvShowList}
         characterList={characterList}
-        sortNum={sortNum}
+        order={order}
       />
     </div>
   );
@@ -125,7 +125,7 @@ function QuotesList({ type, sortNum }) {
 
 QuotesList.propTypes = {
   type: PropTypes.string,
-  sortNum: PropTypes.number,
+  order: PropTypes.string,
 };
 
 export default QuotesList;
