@@ -59,7 +59,7 @@ function SignUp() {
           onChange={handlePassword}
           errorMessage={errorMessage}
         />
-        <AuthBtn />
+        <AuthBtn btnValue="Sign Up" />
         <hr className="border-black w-full" />
       </form>
       <GoogleAuth />

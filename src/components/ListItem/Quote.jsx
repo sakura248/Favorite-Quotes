@@ -5,22 +5,10 @@ import React, { useMemo, useState } from "react";
 import Modal from "react-modal";
 import UseAuthStatus from "../../hooks/UseAuthStatus";
 import UpdateQuoteForm from "../Form/UpdateQuoteForm";
+import customStyles from "../Modal/customStyles";
 
 const appElement = document.getElementById("content");
 Modal.setAppElement(appElement);
-
-export const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    width: "90%",
-    backgroundColor: "#f2f2f2",
-  },
-};
 
 function Quote({
   favHandler,
@@ -82,8 +70,6 @@ function Quote({
     }
     return _sortedList;
   }, [order, quoteList]);
-
-  console.log(order);
 
   return (
     <div className="p-12">

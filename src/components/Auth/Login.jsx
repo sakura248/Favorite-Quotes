@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
-import AuthInput from "./AuthInput";
 import AuthBtn from "./AuthBtn";
+import AuthInput from "./AuthInput";
 import GoogleAuth from "./GoogleAuth";
 
 function Login() {
@@ -65,7 +65,7 @@ function Login() {
           errorMessage={errorMessage}
         />
 
-        <AuthBtn />
+        <AuthBtn btnValue="Login" />
 
         <hr className="border-black w-full" />
       </form>
